@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<title>ColorDlg control</title>
+<meta name="DESCRIPTION" content="ColorDlg control" />
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+<header>
+<br>
+> ColorControls > <a href="index.html"> Reference</a> > ColorDlg
+<br><br>
+</header>
+<h1>ColorDlg control</h1>
+<p>Color dialog replacement.</p><br>
+<li class="toc1"><a href="#ilink1">Properties</a></li><li class="toc1"><a href="#ilink32">Methods</a></li><li class="toc1"><a href="#ilink39">Events</a></li><br><a name="ilink1" /><h2><p class="section">Properties</p></h2></a>
+<li class="toc1"><a href="#ilink2">BackColor</a><br>
+<li class="toc1"><a href="#ilink3">BasicColorsVisible</a><br>
+<li class="toc1"><a href="#ilink4">Canceled</a><br>
+<li class="toc1"><a href="#ilink5">Changed</a><br>
+<li class="toc1"><a href="#ilink6">Color</a><br>
+<li class="toc1"><a href="#ilink7">ColorSelectionBoxVisible</a><br>
+<li class="toc1"><a href="#ilink8">ColorSystem</a><br>
+<li class="toc1"><a href="#ilink9">ColorSystemControlVisible</a><br>
+<li class="toc1"><a href="#ilink10">ColorValuesSectionVisible</a><br>
+<li class="toc1"><a href="#ilink11">ConfirmationButtonsVisible</a><br>
+<li class="toc1"><a href="#ilink12">Context</a><br>
+<li class="toc1"><a href="#ilink13">DialogCaption</a><br>
+<li class="toc1"><a href="#ilink14">DialogCaptionVisible</a><br>
+<li class="toc1"><a href="#ilink15">EyeDropperVisible</a><br>
+<li class="toc1"><a href="#ilink16">FixedPalette</a><br>
+<li class="toc1"><a href="#ilink17">HexControlVisible</a><br>
+<li class="toc1"><a href="#ilink18">HexFormatVB</a><br>
+<li class="toc1"><a href="#ilink19">HideLabels</a><br>
+<li class="toc1"><a href="#ilink20">Modeless</a><br>
+<li class="toc1"><a href="#ilink21">PaletteTypeControlVisible</a><br>
+<li class="toc1"><a href="#ilink22">PositionLeft</a><br>
+<li class="toc1"><a href="#ilink23">PositionTop</a><br>
+<li class="toc1"><a href="#ilink24">RecentColorsColumns</a><br>
+<li class="toc1"><a href="#ilink25">RememberPosition</a><br>
+<li class="toc1"><a href="#ilink26">RoundedBoxes</a><br>
+<li class="toc1"><a href="#ilink27">SizeBig</a><br>
+<li class="toc1"><a href="#ilink28">SliderOptionsAvailable</a><br>
+<li class="toc1"><a href="#ilink29">SliderParameter</a><br>
+<li class="toc1"><a href="#ilink30">SliderWide</a><br>
+<li class="toc1"><a href="#ilink31">Style</a><br>
+<br><a name="ilink32" /><h2><p class="section">Methods</p></h2></a>
+<li class="toc1"><a href="#ilink33">Hide</a><br>
+<li class="toc1"><a href="#ilink34">Move</a><br>
+<li class="toc1"><a href="#ilink35">SetCompact</a><br>
+<li class="toc1"><a href="#ilink36">SetComplete</a><br>
+<li class="toc1"><a href="#ilink37">SetSimple</a><br>
+<li class="toc1"><a href="#ilink38">Show</a><br>
+<br><a name="ilink39" /><h2><p class="section">Events</p></h2></a>
+<li class="toc1"><a href="#ilink40">Change</a><br>
+<li class="toc1"><a href="#ilink41">ColorSet</a><br>
+<li class="toc1"><a href="#ilink42">GetLocalizedText</a><br>
+<li class="toc1"><a href="#ilink43">Hided</a><br>
+
+<br><br><br><h1>Properties</h1><br><a name="ilink2" /><h2><p class"section">BackColor Property</p></h2></a>
+<p>Type: <b>Long</b></p>
+<h3>Description:</h3>
+<p>Returns/sets the background color.</p><br>
+<a name="ilink3" /><h2><p class"section">BasicColorsVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Determines whether the "Basic colors" section is visible or not.</p><br>
+<a name="ilink4" /><h2><p class"section">Canceled Property</p></h2></a>
+<p>Type: <b>Boolean</b> (Read only)</p>
+<h3>Description:</h3>
+<p>Returns True if the dialog was canceled.</p><br>
+<a name="ilink5" /><h2><p class"section">Changed Property</p></h2></a>
+<p>Type: <b>Boolean</b> (Read only)</p>
+<h3>Description:</h3>
+<p>Returns true if the color was changed.</p><br>
+<a name="ilink6" /><h2><p class"section">Color Property</p></h2></a>
+<p>Type: <b>Long</b> (Default property)</p>
+<h3>Description:</h3>
+<p>Returns/sets the current color value.</p><br>
+<a name="ilink7" /><h2><p class"section">ColorSelectionBoxVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the box showing the selected color is visible.</p><br>
+<a name="ilink8" /><h2><p class"section">ColorSystem Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink1">CDColorSystemConstants</a></b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the color system: HSV or HSL.</p><br>
+<a name="ilink9" /><h2><p class"section">ColorSystemControlVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the user is able to change the color system.</p><br>
+<a name="ilink10" /><h2><p class"section">ColorValuesSectionVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the boxes to enter the color values by hand are visible or not.</p><br>
+<a name="ilink11" /><h2><p class"section">ConfirmationButtonsVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the OK and Cancel buttons are visible.</p><br>
+<a name="ilink12" /><h2><p class"section">Context Property</p></h2></a>
+<p>Type: <b>String</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a context for saving the user settings and states.</p><br>
+<a name="ilink13" /><h2><p class"section">DialogCaption Property</p></h2></a>
+<p>Type: <b>String</b></p>
+<h3>Description:</h3>
+<p>Returns/sets the caption of the dialog's title bar.</p><br>
+<a name="ilink14" /><h2><p class"section">DialogCaptionVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the dialog's title bar is visible. When True, the default BackColor is changed to white.</p><br>
+<a name="ilink15" /><h2><p class"section">EyeDropperVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the 'eye dropper' feature used to pick a color from the entire screen is available.</p><br>
+<a name="ilink16" /><h2><p class"section">FixedPalette Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the color palette (or the slidder in some configurations) colors change with the setting of the third partameter.</p><br>
+<a name="ilink17" /><h2><p class"section">HexControlVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the hexadecimal text box is visible.</p><br>
+<a name="ilink18" /><h2><p class"section">HexFormatVB Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the format of the hexadecimal text box, for web or VB.</p><br>
+<a name="ilink19" /><h2><p class"section">HideLabels Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the labels are visible.</p><br>
+<a name="ilink20" /><h2><p class"section">Modeless Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the dialog is displayed modally or not.</p><br>
+<a name="ilink21" /><h2><p class"section">PaletteTypeControlVisible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if the control for changing the palette type is visible or not.</p><br>
+<a name="ilink22" /><h2><p class"section">PositionLeft Property</p></h2></a>
+<p>Type: <b>Single</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the Left position of the dialog.</p><br>
+<a name="ilink23" /><h2><p class"section">PositionTop Property</p></h2></a>
+<p>Type: <b>Single</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the Top position of the dialog.</p><br>
+<a name="ilink24" /><h2><p class"section">RecentColorsColumns Property</p></h2></a>
+<p>Type: <b>Long</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the number of columns of the 'Recent colors'. Set to 0 for none.</p><br>
+<a name="ilink25" /><h2><p class"section">RememberPosition Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines whether the position of the dialog will be remembered next time.</p><br>
+<a name="ilink26" /><h2><p class"section">RoundedBoxes Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines if some control borders are rounded.</p><br>
+<a name="ilink27" /><h2><p class"section">SizeBig Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the size of the dialog, big or normal.</p><br>
+<a name="ilink28" /><h2><p class"section">SliderOptionsAvailable Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink3">CDSliderOptionsAvailableConstants</a></b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines which parameters for the slider the user will have available to choose from.</p><br>
+<a name="ilink29" /><h2><p class"section">SliderParameter Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink4">CDSliderParameterConstants</a></b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the slidder parameter.</p><br>
+<a name="ilink30" /><h2><p class"section">SliderWide Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink6">CDYesNoAutoConstants</a></b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the width of the slider control between wide or narrow.</p><br>
+<a name="ilink31" /><h2><p class"section">Style Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink5">CDStyleConstants</a></b></p>
+<h3>Description:</h3>
+<p>Returns/sets a value that determines the color palette style, between wheel or box.</p><br>
+
+<br><br><br><h1>Methods</h1><br><a name="ilink33" /><h2><p class"section">Hide Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbspNone.&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspNo parameters.&nbsp&nbsp</td>    </tr>  </tbody></table></p>
+<h3>Description:</h3>
+<p>Hides the dialog when it is displayed modeless.</p><br>
+<a name="ilink34" /><h2><p class"section">Move Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbspNone.&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In&nbsp&nbsp</td>    <td>&nbsp&nbspRequired&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nPositionLeft</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspSingle&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In&nbsp&nbsp</td>    <td>&nbsp&nbspRequired&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nPositionTop</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspSingle&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
+<h3>Description:</h3>
+<p>Sets the initial position of the dialog.</p><br>
+<a name="ilink35" /><h2><p class"section">SetCompact Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbspNone.&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>RecentColorsColumns</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>ColorValuesSectionVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>SliderOptionsAvailable</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbsp<a href="constants.html#ilink3">CDSliderOptionsAvailableConstants</a>&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nDialogCaptionVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nConfirmationButtonsVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nColorSelectionBoxVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nSliderWide</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbsp<a href="constants.html#ilink6">CDYesNoAutoConstants</a>&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nHideLabels</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
+<h3>Description:</h3>
+<p>Helper method to set several properties to get a 'Compact' configuration in one shot.</p><br>
+<a name="ilink36" /><h2><p class"section">SetComplete Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbspNone.&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>SizeBig</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>BasicColorsVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>SliderOptionsAvailable</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbsp<a href="constants.html#ilink3">CDSliderOptionsAvailableConstants</a>&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>PaletteTypeControlVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>ColorSystemControlVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>EyeDropperVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
+<h3>Description:</h3>
+<p>Helper method to set several properties to get a 'Complete' configuration in one shot.</p><br>
+<a name="ilink37" /><h2><p class"section">SetSimple Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbspNone.&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>RecentColorsColumns</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nDialogCaptionVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nConfirmationButtonsVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nColorSelectionBoxVisible</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nSliderWide</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbsp<a href="constants.html#ilink6">CDYesNoAutoConstants</a>&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nHideLabels</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspBoolean&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
+<h3>Description:</h3>
+<p>Helper method to set several properties to get a 'Simple' configuration in one shot.</p><br>
+<a name="ilink38" /><h2><p class"section">Show Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Boolean</b>&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nStyleBox</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspVariant&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
+<h3>Description:</h3>
+<p>Shows the dialog.</p><br>
+
+<br><br><br><h1>Events</h1><br><a name="ilink40" /><h2><p class"section">Change Event</p></h2></a>
+<p>No parameters.</p>
+<h3>Description:</h3>
+<p>Occurs when the selected color changes in the dialog (the color does not need to be accepted).</p><br>
+<a name="ilink41" /><h2><p class"section">ColorSet Event</p></h2></a>
+<p>No parameters.</p>
+<h3>Description:</h3>
+<p>Occurs when a color change was accepted.</p><br>
+<a name="ilink42" /><h2><p class"section">GetLocalizedText Event</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Info&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>LanguageID</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Info&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>SubLanguageID</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Info&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>TextID</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Text</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspString&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
+<h3>Description:</h3>
+<p>Occurs when setting a text for the IU. It allows to customize captions and texts.</p><br>
+<a name="ilink43" /><h2><p class"section">Hided Event</p></h2></a>
+<p>No parameters.</p>
+<h3>Description:</h3>
+<p>Occurs when the dialog was hided (typically used in modeless situations).</p><br>
+</body>
+</html>
