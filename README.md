@@ -1,0 +1,8 @@
+# ColorControls
+The main control is a color dialog. There are two other color controls that are included: ColorSelector and EyeDropper.
+
+[For more information please go to vbForums thread](https://www.vbforums.com/showthread.php?897557-(VB6)-ColorDialog-a-color-dialog-replacement&p=5578901#post5578901)
+
+[Download the OCX file.](https://github.com/EduardoVB/ColorControls/raw/main/control-bin/ClrCtrl1.ocx)
+
+[Open the help documentation online.](https://htmlpreview.github.io/?https://github.com/EduardoVB/ColorControls/blob/main/docs/ColorControls_reference.html)
