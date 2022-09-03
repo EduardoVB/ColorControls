@@ -76,7 +76,9 @@ Private Sub UserControl_InitProperties()
     mDlg.SliderWide = cPropDefault_ColorDialog_SliderWide
     mDlg.Style = cPropDefault_ColorDialog_Style
     If Ambient.UserMode Then
+        On Error Resume Next
         Set mDlg.ActiveForm = UserControl.Parent
+        On Error GoTo 0
     End If
 End Sub
 
@@ -110,7 +112,9 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     mDlg.PositionLeft = PropBag.ReadProperty("PositionLeft", 0)
     mDlg.PositionTop = PropBag.ReadProperty("PositionTop", 0)
     If Ambient.UserMode Then
+        On Error Resume Next
         Set mDlg.ActiveForm = UserControl.Parent
+        On Error GoTo 0
     End If
 End Sub
 

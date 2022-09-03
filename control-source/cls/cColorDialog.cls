@@ -173,6 +173,9 @@ Attribute Show.VB_Description = "Shows the dialog."
             mFrm.Show
         Else
             mFrm.Show , mActiveForm
+            If Err.Number Then
+                mFrm.Show
+            End If
         End If
         Exit Function
     ElseIf Not mConfirmationButtonsVisible Then
