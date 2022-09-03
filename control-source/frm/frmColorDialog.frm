@@ -2088,6 +2088,6 @@ End Function
 
 Private Function GetLocalizedString1(nTextID As CDUserInterfaceTextIDConstants) As String
     GetLocalizedString1 = GetLocalizedString(nTextID)
-    RaiseEvent GetLocalizedText(UILanguage, UISubLanguage, nTextID, GetLocalizedString1)
+    RaiseEvent GetLocalizedText(LanguageWindowsUI, SubLanguageWindowsUI, nTextID, GetLocalizedString1)
 End Function
 

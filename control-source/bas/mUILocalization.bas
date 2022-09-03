@@ -501,12 +501,22 @@ Private Sub Do_FRENCH(ByRef TextID As Long, ByRef Text As String)
     End Select
 End Sub
 
-Public Property Get UILanguage() As Variant
+Public Property Get LanguageWindowsUI() As Variant
+    If mLanguageWindowsUI = bsLang_AUTO_SELECT Then SetUILanguageToWindowsUILanguage
+    LanguageWindowsUI = mLanguageWindowsUI
+End Property
+
+Public Property Get SubLanguageWindowsUI() As Variant
+    If mSubLanguageWindowsUI = bsLang_AUTO_SELECT Then SetUILanguageToWindowsUILanguage
+    SubLanguageWindowsUI = mSubLanguageWindowsUI
+End Property
+
+Private Property Get UILanguage() As Variant
     If mUILanguage = bsLang_AUTO_SELECT Then SetUILanguageToWindowsUILanguage
     UILanguage = mUILanguage
 End Property
 
-Public Property Get UISubLanguage() As Variant
+Private Property Get UISubLanguage() As Variant
     If mUILanguage = bsLang_AUTO_SELECT Then SetUILanguageToWindowsUILanguage
     UISubLanguage = mUISubLanguage
 End Property
