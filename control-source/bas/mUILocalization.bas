@@ -218,6 +218,7 @@ Public Function GetLocalizedString(TextID As CDUserInterfaceTextIDConstants) As 
     On Error Resume Next
     GetLocalizedString = mStringsCache(CStr(TextID))
     If Err.Number = 0 Then Exit Function
+    On Error GoTo 0
     
     Select Case mUILanguage
         Case bsLang_SPANISH
@@ -225,6 +226,7 @@ Public Function GetLocalizedString(TextID As CDUserInterfaceTextIDConstants) As 
         Case Else ' ENGLISH
             Do_ENGLISH TextID, GetLocalizedString
     End Select
+    mStringsCache.Add GetLocalizedString, CStr(TextID)
 End Function
 
 Private Sub Do_ENGLISH(ByRef TextID As Long, ByRef Text As String)
