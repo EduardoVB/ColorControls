@@ -24,6 +24,7 @@ Public Enum BSLanguageIDConstants
     bsLang_AUTO_SELECT = 0
     bsLang_ENGLISH = 9
     bsLang_SPANISH = 10
+    bsLang_FRENCH = 12
     
 ' Full list:
 
@@ -223,6 +224,8 @@ Public Function GetLocalizedString(TextID As CDUserInterfaceTextIDConstants) As 
     Select Case mUILanguage
         Case bsLang_SPANISH
             Do_SPANISH TextID, GetLocalizedString
+        Case bsLang_FRENCH
+            Do_FRENCH TextID, GetLocalizedString
         Case Else ' ENGLISH
             Do_ENGLISH TextID, GetLocalizedString
     End Select
@@ -409,6 +412,95 @@ Private Sub Do_SPANISH(ByRef TextID As Long, ByRef Text As String)
     End Select
 End Sub
 
+Private Sub Do_FRENCH(ByRef TextID As Long, ByRef Text As String)
+    Select Case TextID
+        Case cdUIT_frmColorDialog_Form_Caption
+            Text = "Sélection couleur"
+        Case cdUIT_ColorSelector_chkFixedPalette_Caption
+            Text = "Fixe"
+        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText
+            Text = "Reflète visuellement les changements de couleur dans la palette ou non"
+        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText
+            Text = "Paramètre du control ascenseur"
+        Case cdUIT_ColorSelector_lblMode_Caption
+            Text = "Mode:"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue
+            Text = "Hue"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance
+            Text = "Lum."
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value
+            Text = "Valeur"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation
+            Text = "Sat."
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red
+            Text = "Rouge"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green
+            Text = "Vert"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue
+            Text = "Bleu"
+        Case cdUIT_frmColorDialog_lblBasicColors_Caption
+            Text = "Couleurs de base:"
+        Case cdUIT_frmColorDialog_lblRecent_Caption
+            Text = "Récent:"
+        Case cdUIT_frmColorDialog_Color_Caption
+            Text = "couleur"
+        Case cdUIT_frmColorDialog_ColorNew_Caption
+            Text = "nouvelle"
+        Case cdUIT_frmColorDialog_ColorPrevious_Caption
+            Text = "précédente"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart
+            Text = "Maintenez la touche Control appuyée pour naviguer"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd
+            Text = "avec la molette de la souris, pressez Shift pour defiler doucement"
+        Case cdUIT_frmColorDialog_EyeDropper_ToolTip
+            Text = "Choisir une couleur n'importe-où à l'écran ou presser Échap pour annuler"
+        Case cdUIT_frmColorDialog_lblRed_Caption
+            Text = "Rouge:"
+        Case cdUIT_frmColorDialog_lblGreen_Caption
+            Text = "Vert:"
+        Case cdUIT_frmColorDialog_lblBlue_Caption
+            Text = "Bleu:"
+        Case cdUIT_frmColorDialog_lblHex_Caption
+            Text = "Hex:"
+        Case cdUIT_frmColorDialog_lblHue_Caption
+            Text = "Hue:"
+        Case cdUIT_frmColorDialog_lblSaturation_Caption
+            Text = "Sat.:"
+        Case cdUIT_frmColorDialog_Luminance_Caption
+            Text = "Lum.:"
+        Case cdUIT_frmColorDialog_Value_Caption
+            Text = "Valeur:"
+        Case cdUIT_frmColorDialog_lblColorSystem_Caption
+            Text = "Mode:"
+        Case cdUIT_frmColorDialog_lblPalette_Caption
+            Text = "Palette:"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem1
+            Text = "Molette, fixe"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem2
+            Text = "Boite, fixe"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem3
+            Text = "Molette, dynamique"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem4
+            Text = "Boite, dynamique"
+        Case cdUIT_frmColorDialog_InvalidColorMessage
+            Text = "La couleur n'est pas valide."
+        Case cdUIT_frmColorDialog_ParameterFullName_Hue
+            Text = "Hue"
+        Case cdUIT_frmColorDialog_ParameterFullName_Luminance
+            Text = "Luminance"
+        Case cdUIT_frmColorDialog_ParameterFullName_Saturation
+            Text = "Saturation"
+        Case cdUIT_frmColorDialog_ParameterFullName_Red
+            Text = "Rouge"
+        Case cdUIT_frmColorDialog_ParameterFullName_Green
+            Text = "Vert"
+        Case cdUIT_frmColorDialog_ParameterFullName_Blue
+            Text = "Bleu"
+        Case cdUIT_frmColorDialog_ParameterFullName_Value
+            Text = "Valeur"
+    End Select
+End Sub
+
 Public Property Get UILanguage() As Variant
     If mUILanguage = bsLang_AUTO_SELECT Then SetUILanguageToWindowsUILanguage
     UILanguage = mUILanguage
@@ -432,7 +524,7 @@ Private Sub SetUILanguageToWindowsUILanguage()
     
 #Const TestingLanguages = 0
 #If TestingLanguages Then
-    mUILanguage = bsLang_ENGLISH
+    mUILanguage = bsLang_FRENCH 'bsLang_ENGLISH
 #End If
 End Sub
 
