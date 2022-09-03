@@ -23,6 +23,14 @@ Begin VB.Form frmTestProperties
    ScaleHeight     =   10716
    ScaleWidth      =   11976
    ShowInTaskbar   =   0   'False
+   Begin VB.CommandButton cmdDocs 
+      Caption         =   "Documentation"
+      Height          =   492
+      Left            =   5580
+      TabIndex        =   47
+      Top             =   10020
+      Width           =   1512
+   End
    Begin VB.CheckBox chkHexFormatVB 
       Caption         =   "HexFormatVB"
       Height          =   372
@@ -491,6 +499,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 Private Declare Function CreateRoundRectRgn Lib "gdi32" (ByVal X1 As Long, ByVal Y1 As Long, ByVal X2 As Long, ByVal Y2 As Long, ByVal X3 As Long, ByVal Y3 As Long) As Long
 Private Declare Function SetWindowRgn Lib "user32" (ByVal hWnd As Long, ByVal hRgn As Long, ByVal bRedraw As Boolean) As Long
 Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
@@ -567,6 +576,11 @@ Private Function IsFormLoaded(nForm As Form) As Boolean
         End If
     Next
 End Function
+
+Private Sub cmdDocs_Click()
+    Const SW_SHOWMAXIMIZED = 3
+    ShellExecute 0&, "OPEN", App.Path & "\..\docs\ColorControls_reference.html", "", "", SW_SHOWMAXIMIZED
+End Sub
 
 Private Sub cmdTestEyeDropper_Click()
     picEyeDropper.Tag = picEyeDropper.BackColor
