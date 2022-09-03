@@ -532,7 +532,7 @@ Private Function LanguageIsSupported(nLang As Long) As Boolean
     Dim c As Long
     
     Select Case nLang
-        Case bsLang_ENGLISH, bsLang_SPANISH
+        Case bsLang_ENGLISH, bsLang_SPANISH, bsLang_FRENCH
             LanguageIsSupported = True
     End Select
 End Function
