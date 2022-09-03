@@ -1,1 +1,3 @@
+2022-09-02 added translation to French (thanks Crapahute)
 2022-09-02 first release
+
