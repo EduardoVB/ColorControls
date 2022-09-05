@@ -769,22 +769,29 @@ Private Sub UserControl_KeyDown(KeyCode As Integer, Shift As Integer)
                 End If
             End If
         Else
-            iPointerX = mPointerX
-            iPointerY = mPointerY
-            If KeyCode = vbKeyUp Then
-                iPointerY = iPointerY - 1
-            ElseIf KeyCode = vbKeyDown Then
-                iPointerY = iPointerY + 1
-            ElseIf KeyCode = vbKeyLeft Then
-                iPointerX = iPointerX - 1
-            ElseIf KeyCode = vbKeyRight Then
-                iPointerX = iPointerX + 1
-            End If
-            If PixelIsInPalette(iPointerX, iPointerY) Then
-                mSelectingColor = True
-                picPalette_MouseUp vbLeftButton, 0, iPointerX, iPointerY
-                mSelectingColor = False
-            End If
+            Select Case KeyCode
+                Case vbKeyUp, vbKeyDown, vbKeyLeft, vbKeyRight
+                    iPointerX = mPointerX
+                    iPointerY = mPointerY
+                    If KeyCode = vbKeyUp Then
+                        iPointerY = iPointerY - 1
+                    ElseIf KeyCode = vbKeyDown Then
+                        iPointerY = iPointerY + 1
+                    ElseIf KeyCode = vbKeyLeft Then
+                        iPointerX = iPointerX - 1
+                    ElseIf KeyCode = vbKeyRight Then
+                        iPointerX = iPointerX + 1
+                    End If
+                    If iPointerY < 0 Then iPointerY = 0
+                    If iPointerX < 0 Then iPointerX = 0
+                    If iPointerX > mBMPWidth Then iPointerX = mBMPWidth
+                    If iPointerY > mBMPHeight Then iPointerY = mBMPHeight
+                    If PixelIsInPalette(iPointerX, iPointerY) Then
+                        mSelectingColor = True
+                        picPalette_MouseUp vbLeftButton, 0, iPointerX, iPointerY
+                        mSelectingColor = False
+                    End If
+            End Select
         End If
     End If
 End Sub
@@ -1751,11 +1758,13 @@ Private Function PixelIsInPalette(ByVal X As Single, ByVal Y As Single) As Boole
     Dim i As Long
     
     If mStyleBox Then
-        PixelIsInPalette = True
+        If (X >= 0) And (X < mBMPWidth) And (Y >= 0) And (Y < mBMPHeight) Then
+            PixelIsInPalette = True
+        End If
     Else
         X = Int(X)
         Y = Int(Y)
-        If (X >= 0) And (X <= mBMPWidth) And (Y >= 0) And (Y <= mBMPHeight) Then
+        If (X >= 0) And (X < mBMPWidth) And (Y >= 0) And (Y < mBMPHeight) Then
             i = (Y + 1) * mBMPHeight
             i = i + X
             If (i >= 0) And (i <= UBound(mPixelsAreInPalette)) Then
@@ -2250,7 +2259,8 @@ Private Function GetPaletteColor(ByVal X As Single, ByVal Y As Single) As Long
     Dim i As Long
     
     'Y = Y + 1
-    
+    If Y >= mBMPHeight Then Y = mBMPHeight - 1
+    If X >= mBMPWidth Then Y = mBMPWidth - 1
     X = Int(X)
     Y = Int(Y)
     i = (mBMPHeight - Y - 1) * mBMPHeight
