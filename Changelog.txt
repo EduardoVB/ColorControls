@@ -1,3 +1,4 @@
+2022-09-02 Fixed bug in GetPaletteColor and UserControl_KeyDown
 2022-09-02 added translation to French (thanks Crapahute)
 2022-09-02 first release
 
