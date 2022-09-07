@@ -483,13 +483,13 @@ Begin VB.Form frmColorDialog
       MaxLength       =   11
    End
    Begin ColorControls.ColorSelector ColorSelector1 
-      Height          =   4224
+      Height          =   3888
       Left            =   120
       TabIndex        =   0
       Top             =   144
-      Width           =   5052
-      _ExtentX        =   8467
-      _ExtentY        =   7451
+      Width           =   4716
+      _ExtentX        =   7874
+      _ExtentY        =   6858
    End
    Begin ColorControls.LabelW lblTT2 
       Height          =   204
