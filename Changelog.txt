@@ -1,4 +1,6 @@
-2022-09-02 Fixed bug in GetPaletteColor and UserControl_KeyDown
-2022-09-02 added translation to French (thanks Crapahute)
-2022-09-02 first release
+2022-09-07 Several improvements and some bux fixes.
+2022-09-07 Added Unicode support for captions.
+2022-09-02 Fixed bug regarding navigation with keys, in Sub UserControl_KeyDown and Sub GetPaletteColor.
+2022-09-02 added translation to French (thanks Crapahute).
+2022-09-02 first release.
 

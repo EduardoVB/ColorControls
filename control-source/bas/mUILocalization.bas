@@ -169,6 +169,8 @@ Public Enum CDUserInterfaceTextIDConstants
     cdUIT_ColorSelector_cboSliderParameter_ListItem_Red = 2800
     cdUIT_ColorSelector_cboSliderParameter_ListItem_Green = 2900
     cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue = 3000
+    cdUIT_ColorSelector_cboColorSystem_ListItem_HSV = 3100
+    cdUIT_ColorSelector_cboColorSystem_ListItem_HSL = 3200
     
     ' frmColorDialog
     cdUIT_frmColorDialog_Form_Caption = 4000
@@ -180,28 +182,31 @@ Public Enum CDUserInterfaceTextIDConstants
     cdUIT_frmColorDialog_MouseWheel_ToolTipStart = 4600
     cdUIT_frmColorDialog_MouseWheel_ToolTipEnd = 4700
     cdUIT_frmColorDialog_EyeDropper_ToolTip = 4800
-    cdUIT_frmColorDialog_lblRed_Caption = 4900
-    cdUIT_frmColorDialog_lblGreen_Caption = 5000
-    cdUIT_frmColorDialog_lblBlue_Caption = 5100
-    cdUIT_frmColorDialog_lblHex_Caption = 5200
-    cdUIT_frmColorDialog_lblHue_Caption = 5300
-    cdUIT_frmColorDialog_lblSaturation_Caption = 5400
-    cdUIT_frmColorDialog_Luminance_Caption = 5500
-    cdUIT_frmColorDialog_Value_Caption = 5600
-    cdUIT_frmColorDialog_lblColorSystem_Caption = 5700
-    cdUIT_frmColorDialog_lblPalette_Caption = 5800
-    cdUIT_frmColorDialog_cboPalette_ListItem1 = 5900
-    cdUIT_frmColorDialog_cboPalette_ListItem2 = 6000
-    cdUIT_frmColorDialog_cboPalette_ListItem3 = 6100
-    cdUIT_frmColorDialog_cboPalette_ListItem4 = 6200
-    cdUIT_frmColorDialog_InvalidColorMessage = 6300
-    cdUIT_frmColorDialog_ParameterFullName_Hue = 6400
-    cdUIT_frmColorDialog_ParameterFullName_Luminance = 6401
-    cdUIT_frmColorDialog_ParameterFullName_Saturation = 6402
-    cdUIT_frmColorDialog_ParameterFullName_Red = 6403
-    cdUIT_frmColorDialog_ParameterFullName_Green = 6404
-    cdUIT_frmColorDialog_ParameterFullName_Blue = 6405
-    cdUIT_frmColorDialog_ParameterFullName_Value = 6406
+    cdUIT_frmColorDialog_picEyeDropper_ToolTiptext = 4900
+    cdUIT_frmColorDialog_lblRed_Caption = 5000
+    cdUIT_frmColorDialog_lblGreen_Caption = 5100
+    cdUIT_frmColorDialog_lblBlue_Caption = 5200
+    cdUIT_frmColorDialog_lblHex_Caption = 5300
+    cdUIT_frmColorDialog_lblHue_Caption = 5400
+    cdUIT_frmColorDialog_lblSaturation_Caption = 5500
+    cdUIT_frmColorDialog_Luminance_Caption = 5600
+    cdUIT_frmColorDialog_Value_Caption = 5700
+    cdUIT_frmColorDialog_lblColorSystem_Caption = 5800
+    cdUIT_frmColorDialog_lblPalette_Caption = 5900
+    cdUIT_frmColorDialog_cboPalette_ListItem1 = 6000
+    cdUIT_frmColorDialog_cboPalette_ListItem2 = 6100
+    cdUIT_frmColorDialog_cboPalette_ListItem3 = 6200
+    cdUIT_frmColorDialog_cboPalette_ListItem4 = 6300
+    cdUIT_frmColorDialog_InvalidColorMessage = 6400
+    cdUIT_frmColorDialog_ParameterFullName_Hue = 6500
+    cdUIT_frmColorDialog_ParameterFullName_Luminance = 6501
+    cdUIT_frmColorDialog_ParameterFullName_Saturation = 6502
+    cdUIT_frmColorDialog_ParameterFullName_Red = 6503
+    cdUIT_frmColorDialog_ParameterFullName_Green = 6504
+    cdUIT_frmColorDialog_ParameterFullName_Blue = 6505
+    cdUIT_frmColorDialog_ParameterFullName_Value = 6506
+    cdUIT_frmColorDialog_cmdOK_Caption = 6600
+    cdUIT_frmColorDialog_cmdCancel_Caption = 6700
     
 End Enum
 
@@ -259,6 +264,10 @@ Private Sub Do_ENGLISH(ByRef TextID As Long, ByRef Text As String)
             Text = "Green"
         Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue
             Text = "Blue"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV
+            Text = "HSV"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL
+            Text = "HSL"
         Case cdUIT_frmColorDialog_lblBasicColors_Caption
             Text = "Basic colors:"
         Case cdUIT_frmColorDialog_lblRecent_Caption
@@ -275,6 +284,8 @@ Private Sub Do_ENGLISH(ByRef TextID As Long, ByRef Text As String)
             Text = "with the mouse wheel, press Shift key to go slowly"
         Case cdUIT_frmColorDialog_EyeDropper_ToolTip
             Text = "Choose a color from anywhere on the screen or press the Escape key to cancel"
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTiptext
+            Text = "Choose a color from the screen"
         Case cdUIT_frmColorDialog_lblRed_Caption
             Text = "Red:"
         Case cdUIT_frmColorDialog_lblGreen_Caption
@@ -319,6 +330,10 @@ Private Sub Do_ENGLISH(ByRef TextID As Long, ByRef Text As String)
             Text = "Blue"
         Case cdUIT_frmColorDialog_ParameterFullName_Value
             Text = "Value"
+        Case cdUIT_frmColorDialog_cmdOK_Caption
+            Text = "OK"
+        Case cdUIT_frmColorDialog_cmdCancel_Caption
+            Text = "Cancel"
     End Select
 End Sub
 
@@ -349,6 +364,10 @@ Private Sub Do_SPANISH(ByRef TextID As Long, ByRef Text As String)
             Text = "Verde"
         Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue
             Text = "Azul"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV
+            Text = "HSV"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL
+            Text = "HSL"
         Case cdUIT_frmColorDialog_lblBasicColors_Caption
             Text = "Colores básicos:"
         Case cdUIT_frmColorDialog_lblRecent_Caption
@@ -365,6 +384,8 @@ Private Sub Do_SPANISH(ByRef TextID As Long, ByRef Text As String)
             Text = "con la rueda del mouse, presione la tecla Mayúsculas para ir lento"
         Case cdUIT_frmColorDialog_EyeDropper_ToolTip
             Text = "Elija un color en cualquier lugar de la pantalla o presione la tecla Escape para cancelar"
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTiptext
+            Text = "Elija un color en la pantalla"
         Case cdUIT_frmColorDialog_lblRed_Caption
             Text = "Rojo:"
         Case cdUIT_frmColorDialog_lblGreen_Caption
@@ -409,6 +430,10 @@ Private Sub Do_SPANISH(ByRef TextID As Long, ByRef Text As String)
             Text = "Azul"
         Case cdUIT_frmColorDialog_ParameterFullName_Value
             Text = "Valor"
+        Case cdUIT_frmColorDialog_cmdOK_Caption
+            Text = "Aceptar"
+        Case cdUIT_frmColorDialog_cmdCancel_Caption
+            Text = "Cancelar"
     End Select
 End Sub
 
@@ -438,6 +463,10 @@ Private Sub Do_FRENCH(ByRef TextID As Long, ByRef Text As String)
             Text = "Vert"
         Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue
             Text = "Bleu"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV
+            Text = "HSV"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL
+            Text = "HSL"
         Case cdUIT_frmColorDialog_lblBasicColors_Caption
             Text = "Couleurs de base:"
         Case cdUIT_frmColorDialog_lblRecent_Caption
@@ -454,6 +483,8 @@ Private Sub Do_FRENCH(ByRef TextID As Long, ByRef Text As String)
             Text = "avec la molette de la souris, pressez Shift pour defiler doucement"
         Case cdUIT_frmColorDialog_EyeDropper_ToolTip
             Text = "Choisir une couleur n'importe-où à l'écran ou presser Échap pour annuler"
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTiptext
+            Text = "Choisir une couleur sur l'écran"
         Case cdUIT_frmColorDialog_lblRed_Caption
             Text = "Rouge:"
         Case cdUIT_frmColorDialog_lblGreen_Caption
@@ -498,6 +529,10 @@ Private Sub Do_FRENCH(ByRef TextID As Long, ByRef Text As String)
             Text = "Bleu"
         Case cdUIT_frmColorDialog_ParameterFullName_Value
             Text = "Valeur"
+        Case cdUIT_frmColorDialog_cmdOK_Caption
+            Text = "OK"
+        Case cdUIT_frmColorDialog_cmdCancel_Caption
+            Text = "Annuler"
     End Select
 End Sub
 
@@ -534,7 +569,7 @@ Private Sub SetUILanguageToWindowsUILanguage()
     
 #Const TestingLanguages = 0
 #If TestingLanguages Then
-    mUILanguage = bsLang_FRENCH 'bsLang_ENGLISH
+    mUILanguage = bsLang_ENGLISH ' bsLang_FRENCH 'bsLang_ENGLISH
 #End If
 End Sub
 

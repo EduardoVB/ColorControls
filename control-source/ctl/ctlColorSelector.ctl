@@ -6,8 +6,8 @@ Begin VB.UserControl ColorSelector
    ClientWidth     =   3840
    EditAtDesignTime=   -1  'True
    BeginProperty Font 
-      Name            =   "Tahoma"
-      Size            =   7.8
+      Name            =   "Segoe UI"
+      Size            =   9
       Charset         =   0
       Weight          =   400
       Underline       =   0   'False
@@ -47,26 +47,37 @@ Begin VB.UserControl ColorSelector
       TabStop         =   0   'False
       Top             =   2256
       Width           =   780
-      Begin VB.Label lblMode 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Mode:"
-         Height          =   192
+      Begin ColorControls.LabelW lblMode 
+         Height          =   180
          Left            =   0
          TabIndex        =   5
          Top             =   0
-         Width           =   432
+         Width           =   408
+         _ExtentX        =   720
+         _ExtentY        =   318
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Segoe UI"
+            Size            =   7.2
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         BackStyle       =   0
+         Caption         =   "Mode:"
+         AutoSize        =   -1  'True
       End
    End
-   Begin VB.ComboBox cboColorSystem 
-      Height          =   288
-      ItemData        =   "ctlColorSelector.ctx":0312
+   Begin ColorControls.ComboBoxW cboColorSystem 
+      Height          =   336
       Left            =   72
-      List            =   "ctlColorSelector.ctx":031C
-      Style           =   2  'Dropdown List
       TabIndex        =   6
       Top             =   2496
       Width           =   700
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Style           =   2
    End
    Begin VB.Timer tmrDraw 
       Enabled         =   0   'False
@@ -74,29 +85,31 @@ Begin VB.UserControl ColorSelector
       Left            =   1392
       Top             =   2400
    End
-   Begin VB.ComboBox cboSliderParameter 
-      Height          =   288
-      ItemData        =   "ctlColorSelector.ctx":032A
+   Begin ColorControls.ComboBoxW cboSliderParameter 
+      Height          =   336
       Left            =   2328
-      List            =   "ctlColorSelector.ctx":032C
-      Style           =   2  'Dropdown List
       TabIndex        =   3
       ToolTipText     =   "Select parameter"
       Top             =   2328
       Visible         =   0   'False
       Width           =   900
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Style           =   2
    End
-   Begin VB.CheckBox chkFixedPalette 
-      Caption         =   "Fixed"
+   Begin ColorControls.CheckBoxW chkFixedPalette 
       Height          =   348
       Left            =   96
-      Style           =   1  'Graphical
       TabIndex        =   7
       ToolTipText     =   "Reflects color changes visually or not"
       Top             =   72
-      Value           =   1  'Checked
       Visible         =   0   'False
       Width           =   600
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Value           =   1
+      Caption         =   "Fixed"
+      Style           =   1
    End
    Begin VB.PictureBox picAux 
       AutoRedraw      =   -1  'True
@@ -221,8 +234,6 @@ Private Const cSUBCLASS_IN_IDE As Boolean = True
 
 Public Event Change()
 Attribute Change.VB_Description = "Occurs when the selected color changes."
-Public Event SliderChange()
-Attribute SliderChange.VB_Description = "Occurs when the value of the slider control changes."
 Public Event SliderParameterChange()
 Attribute SliderParameterChange.VB_Description = "Ocurs when the parameter that is controlled by the slider cotnrol changes."
 Public Event FixedPaletteChange()
@@ -483,7 +494,7 @@ Private Sub cboSliderParameter_Click()
 End Sub
 
 Private Sub chkFixedPalette_Click()
-    FixedPalette = (chkFixedPalette.value = 1)
+    FixedPalette = (chkFixedPalette.Value = 1)
 End Sub
 
 Private Function IBSSubclass_MsgResponse(ByVal hWnd As Long, ByVal iMsg As Long) As Long
@@ -672,7 +683,7 @@ Private Sub DoSliderChange()
     End If
         
     If Not SetColor(GetShadedColor) Then
-        RaiseEvent SliderChange
+        RaiseEvent Change
     End If
     
     If mSliderParameter = cdParameterLuminance Then
@@ -861,9 +872,9 @@ Private Sub DoSubclass()
     End If
 End Sub
 
-Private Function MakeTrue(value As Boolean) As Boolean
+Private Function MakeTrue(Value As Boolean) As Boolean
     MakeTrue = True
-    value = True
+    Value = True
 End Function
 
 Private Sub UserControl_Resize()
@@ -1031,7 +1042,7 @@ Private Sub Init()
     picColorSystem.Visible = mColorSystemControlVisible And (Not mStyleBox)
     cboColorSystem.Visible = mColorSystemControlVisible And (Not mStyleBox)
     chkFixedPalette.Visible = mFixedPaletteControlVisible And (Not mStyleBox)
-    chkFixedPalette.value = Abs(CLng(mFixedPalette))
+    chkFixedPalette.Value = Abs(CLng(mFixedPalette))
     
     iColor = mColor
     mColor = -1
@@ -1882,7 +1893,7 @@ Public Property Let Color(ByVal nValue As OLE_COLOR)
     mChangingParameter = False
 End Property
 
-Private Function SetColor(value As Long) As Boolean
+Private Function SetColor(Value As Long) As Boolean
     Dim iPrev As Long
     Dim iColor As Long
     Dim iH1 As Double
@@ -1890,10 +1901,10 @@ Private Function SetColor(value As Long) As Boolean
     Dim iS1 As Double
     Dim iRGB As RGBQuad
     
-    If value = -1 Then Exit Function
+    If Value = -1 Then Exit Function
     
     iPrev = mColor
-    mColor = value
+    mColor = Value
     If (mColor <> iPrev) Or mChangingColorSystemOrInitializing Then
         mSettingColor = True
         TranslateColor mColor, 0, iColor
@@ -1966,7 +1977,6 @@ Private Function SetColor(value As Long) As Boolean
         If mInitialized Then
             If mRaiseEvents Then RaiseEvent Change
         End If
-        If mRaiseEvents Then RaiseEvent SliderChange
         If mInitialized Then PropertyChanged "Color"
     End If
 End Function
@@ -2009,7 +2019,7 @@ Public Property Let H(ByVal nValue As Integer)
             DrawPalette
             DrawShades
             ShowSelectedColor
-            RaiseEvent SliderChange
+            RaiseEvent Change
         End If
         mChangingParameter = False
         mChangingHue = False
@@ -2038,7 +2048,7 @@ Public Property Let L(ByVal nValue As Integer)
             DrawPalette
             DrawShades
             ShowSelectedColor
-            RaiseEvent SliderChange
+            RaiseEvent Change
         End If
         mChangingParameter = False
         mChangingLuminance = False
@@ -2077,7 +2087,7 @@ Public Property Let S(ByVal nValue As Integer)
             DrawPalette
             DrawShades
             ShowSelectedColor
-            RaiseEvent SliderChange
+            RaiseEvent Change
         End If
         mChangingParameter = False
         mChangingSaturation = False
@@ -2641,7 +2651,7 @@ Public Property Let FixedPalette(ByVal nValue As Boolean)
     If nValue <> mFixedPalette Then
         mFixedPalette = nValue
         If mInitialized Then PropertyChanged "FixedPalette"
-        chkFixedPalette.value = Abs(CLng(mFixedPalette))
+        chkFixedPalette.Value = Abs(CLng(mFixedPalette))
         DrawPalette
         DrawShades
         If mRaiseEvents Then RaiseEvent FixedPaletteChange
@@ -3431,6 +3441,10 @@ Private Sub SetCaptions()
     mParametersCaptions(3) = GetLocalizedString1(cdUIT_ColorSelector_cboSliderParameter_ListItem_Red)
     mParametersCaptions(4) = GetLocalizedString1(cdUIT_ColorSelector_cboSliderParameter_ListItem_Green)
     mParametersCaptions(5) = GetLocalizedString1(cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue)
+    
+    cboColorSystem.Clear
+    cboColorSystem.AddItem GetLocalizedString1(cdUIT_ColorSelector_cboColorSystem_ListItem_HSV)
+    cboColorSystem.AddItem GetLocalizedString1(cdUIT_ColorSelector_cboColorSystem_ListItem_HSL)
 End Sub
 
 Private Function GetLocalizedString1(nTextID As CDUserInterfaceTextIDConstants) As String

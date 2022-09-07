@@ -7,8 +7,8 @@ Begin VB.Form frmColorDialog
    ClientTop       =   2076
    ClientWidth     =   7668
    BeginProperty Font 
-      Name            =   "Tahoma"
-      Size            =   7.8
+      Name            =   "Segoe UI"
+      Size            =   9
       Charset         =   0
       Weight          =   400
       Underline       =   0   'False
@@ -77,41 +77,44 @@ Begin VB.Form frmColorDialog
          ScaleWidth      =   324
          TabIndex        =   33
          TabStop         =   0   'False
-         Top             =   240
+         Top             =   276
          Width           =   324
       End
-      Begin VB.Label lblBasicColors 
-         Alignment       =   2  'Center
-         AutoSize        =   -1  'True
-         Caption         =   "Basic colors:"
+      Begin ColorControls.LabelW lblBasicColors 
          Height          =   192
          Left            =   180
          TabIndex        =   34
          Top             =   0
          Width           =   864
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Alignment       =   2
+         BackStyle       =   0
+         Caption         =   "Basic colors:"
+         AutoSize        =   -1  'True
       End
    End
-   Begin VB.ComboBox cboPalette 
-      Height          =   288
-      ItemData        =   "frmColorDialog.frx":10CA
+   Begin ColorControls.ComboBoxW cboPalette 
+      Height          =   336
       Left            =   4740
-      List            =   "frmColorDialog.frx":10DA
-      Style           =   2  'Dropdown List
       TabIndex        =   18
       Top             =   5352
       Visible         =   0   'False
-      Width           =   1400
+      Width           =   2560
+      _ExtentX        =   4509
+      _ExtentY        =   593
+      Style           =   2
    End
-   Begin VB.ComboBox cboColorSystem 
-      Height          =   288
-      ItemData        =   "frmColorDialog.frx":1112
+   Begin ColorControls.ComboBoxW cboColorSystem 
+      Height          =   336
       Left            =   2640
-      List            =   "frmColorDialog.frx":111C
-      Style           =   2  'Dropdown List
       TabIndex        =   16
       Top             =   5340
       Visible         =   0   'False
-      Width           =   800
+      Width           =   900
+      _ExtentX        =   1588
+      _ExtentY        =   593
+      Style           =   2
    End
    Begin VB.Timer tmrCheckToDrag 
       Enabled         =   0   'False
@@ -142,127 +145,221 @@ Begin VB.Form frmColorDialog
       Top             =   3900
       Visible         =   0   'False
       Width           =   732
-      Begin VB.Label lblParameter 
-         AutoSize        =   -1  'True
-         Caption         =   "Lum."
+      Begin ColorControls.LabelW lblParameter 
          Height          =   192
          Left            =   180
          TabIndex        =   30
          Top             =   0
          Width           =   348
+         _ExtentX        =   0
+         _ExtentY        =   0
+         BackStyle       =   0
+         Caption         =   "Lum."
+         AutoSize        =   -1  'True
       End
    End
    Begin VB.PictureBox picColorValuesSection 
+      AutoSize        =   -1  'True
       BorderStyle     =   0  'None
       Height          =   1040
       Left            =   120
       ScaleHeight     =   1044
-      ScaleWidth      =   3000
+      ScaleWidth      =   3204
       TabIndex        =   28
       TabStop         =   0   'False
       Top             =   4272
-      Width           =   3000
-      Begin VB.TextBox txtLum 
+      Width           =   3200
+      Begin ColorControls.TextBoxW txtLum 
          Height          =   300
-         Left            =   2184
-         MaxLength       =   3
+         Left            =   2284
          TabIndex        =   12
          Top             =   720
-         Width           =   800
-      End
-      Begin VB.TextBox txtSat 
-         Height          =   300
-         Left            =   2184
+         Width           =   900
+         _ExtentX        =   1588
+         _ExtentY        =   529
+         AllowOnlyNumbers=   -1  'True
          MaxLength       =   3
+      End
+      Begin ColorControls.TextBoxW txtSat 
+         Height          =   300
+         Left            =   2284
          TabIndex        =   8
          Top             =   360
-         Width           =   800
-      End
-      Begin VB.TextBox txtHue 
-         Height          =   300
-         Left            =   2184
+         Width           =   900
+         _ExtentX        =   1588
+         _ExtentY        =   529
+         AllowOnlyNumbers=   -1  'True
          MaxLength       =   3
+      End
+      Begin ColorControls.TextBoxW txtHue 
+         Height          =   300
+         Left            =   2284
          TabIndex        =   4
          Top             =   0
-         Width           =   800
+         Width           =   900
+         _ExtentX        =   1588
+         _ExtentY        =   529
+         AllowOnlyNumbers=   -1  'True
+         MaxLength       =   3
       End
-      Begin VB.TextBox txtBlue 
+      Begin ColorControls.TextBoxW txtBlue 
          Height          =   300
          Left            =   624
-         MaxLength       =   3
          TabIndex        =   10
          Top             =   720
-         Width           =   800
+         Width           =   900
+         _ExtentX        =   1588
+         _ExtentY        =   529
+         AllowOnlyNumbers=   -1  'True
+         MaxLength       =   3
       End
-      Begin VB.TextBox txtGreen 
+      Begin ColorControls.TextBoxW txtGreen 
          Height          =   300
          Left            =   624
-         MaxLength       =   3
          TabIndex        =   6
          Top             =   360
-         Width           =   800
+         Width           =   900
+         _ExtentX        =   1588
+         _ExtentY        =   529
+         AllowOnlyNumbers=   -1  'True
+         MaxLength       =   3
       End
-      Begin VB.TextBox txtRed 
+      Begin ColorControls.TextBoxW txtRed 
          Height          =   300
          Left            =   624
-         MaxLength       =   3
          TabIndex        =   2
          Top             =   0
-         Width           =   800
+         Width           =   900
+         _ExtentX        =   1588
+         _ExtentY        =   529
+         AllowOnlyNumbers=   -1  'True
+         MaxLength       =   3
       End
-      Begin VB.Label lblLum 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Lum.:"
-         Height          =   300
-         Left            =   1536
+      Begin ColorControls.LabelW lblLum 
+         Height          =   204
+         Left            =   1864
          TabIndex        =   11
          Top             =   768
-         Width           =   588
+         Width           =   360
+         _ExtentX        =   635
+         _ExtentY        =   360
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Segoe UI"
+            Size            =   7.8
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Alignment       =   1
+         Caption         =   "Lum.:"
+         AutoSize        =   -1  'True
       End
-      Begin VB.Label lblSat 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Sat.:"
-         Height          =   300
-         Left            =   1536
+      Begin ColorControls.LabelW lblSat 
+         Height          =   204
+         Left            =   1936
          TabIndex        =   7
          Top             =   408
-         Width           =   588
+         Width           =   288
+         _ExtentX        =   508
+         _ExtentY        =   360
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Segoe UI"
+            Size            =   7.8
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Alignment       =   1
+         Caption         =   "Sat.:"
+         AutoSize        =   -1  'True
       End
-      Begin VB.Label lblHue 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Hue:"
-         Height          =   300
-         Left            =   1536
+      Begin ColorControls.LabelW lblHue 
+         Height          =   204
+         Left            =   1912
          TabIndex        =   3
          Top             =   48
-         Width           =   588
+         Width           =   312
+         _ExtentX        =   550
+         _ExtentY        =   360
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Segoe UI"
+            Size            =   7.8
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Alignment       =   1
+         Caption         =   "Hue:"
+         AutoSize        =   -1  'True
       End
-      Begin VB.Label lblBlue 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Blue:"
-         Height          =   300
-         Left            =   0
+      Begin ColorControls.LabelW lblBlue 
+         Height          =   204
+         Left            =   264
          TabIndex        =   9
          Top             =   768
-         Width           =   588
+         Width           =   324
+         _ExtentX        =   572
+         _ExtentY        =   360
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Segoe UI"
+            Size            =   7.8
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Alignment       =   1
+         Caption         =   "Blue:"
+         AutoSize        =   -1  'True
       End
-      Begin VB.Label lblGreen 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Green:"
-         Height          =   300
-         Left            =   0
+      Begin ColorControls.LabelW lblGreen 
+         Height          =   204
+         Left            =   132
          TabIndex        =   5
          Top             =   408
-         Width           =   588
+         Width           =   456
+         _ExtentX        =   804
+         _ExtentY        =   360
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Segoe UI"
+            Size            =   7.8
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Alignment       =   1
+         Caption         =   "Green:"
+         AutoSize        =   -1  'True
       End
-      Begin VB.Label lblRed 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Red:"
-         Height          =   300
-         Left            =   0
+      Begin ColorControls.LabelW lblRed 
+         Height          =   204
+         Left            =   276
          TabIndex        =   1
          Top             =   48
-         Width           =   588
+         Width           =   312
+         _ExtentX        =   550
+         _ExtentY        =   360
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Segoe UI"
+            Size            =   7.8
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Alignment       =   1
+         Caption         =   "Red:"
+         AutoSize        =   -1  'True
       End
    End
    Begin VB.PictureBox picRecentContainer 
@@ -287,37 +384,44 @@ Begin VB.Form frmColorDialog
          ScaleWidth      =   444
          TabIndex        =   26
          TabStop         =   0   'False
-         Top             =   240
+         Top             =   276
          Width           =   444
       End
-      Begin VB.Label lblRecent 
-         Alignment       =   2  'Center
-         AutoSize        =   -1  'True
-         Caption         =   "Recent:"
+      Begin ColorControls.LabelW lblRecent 
          Height          =   192
          Left            =   132
          TabIndex        =   27
          Top             =   0
          Width           =   540
+         _ExtentX        =   0
+         _ExtentY        =   0
+         Alignment       =   2
+         BackStyle       =   0
+         Caption         =   "Recent:"
+         AutoSize        =   -1  'True
       End
    End
-   Begin VB.CommandButton cmdCancel 
+   Begin ColorControls.CommandButtonW cmdCancel 
       Cancel          =   -1  'True
-      Caption         =   "Cancel"
       Height          =   372
       Left            =   3888
       TabIndex        =   20
       Top             =   5700
       Width           =   1284
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "Cancel"
    End
-   Begin VB.CommandButton cmdOK 
-      Caption         =   "OK"
+   Begin ColorControls.CommandButtonW cmdOK 
       Default         =   -1  'True
       Height          =   372
       Left            =   2496
       TabIndex        =   19
       Top             =   5700
       Width           =   1284
+      _ExtentX        =   0
+      _ExtentY        =   0
+      Caption         =   "OK"
    End
    Begin VB.PictureBox picSelection 
       Appearance      =   0  'Flat
@@ -340,116 +444,164 @@ Begin VB.Form frmColorDialog
       Left            =   144
       Top             =   5616
    End
-   Begin VB.TextBox txtHex 
+   Begin ColorControls.TextBoxW txtHex 
       Height          =   300
       Left            =   744
-      MaxLength       =   11
       TabIndex        =   14
       Top             =   5352
-      Width           =   800
+      Width           =   900
+      _ExtentX        =   1588
+      _ExtentY        =   529
+      MaxLength       =   11
    End
    Begin ColorControls.ColorSelector ColorSelector1 
-      Height          =   3888
+      Height          =   3936
       Left            =   120
       TabIndex        =   0
       Top             =   144
-      Width           =   4716
-      _ExtentX        =   7874
-      _ExtentY        =   6858
+      Width           =   4764
+      _ExtentX        =   7959
+      _ExtentY        =   6943
    End
-   Begin VB.Label lblTT2 
-      Alignment       =   2  'Center
-      AutoSize        =   -1  'True
-      BackColor       =   &H80000018&
-      Caption         =   "Press Escape key to cancel"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   7.2
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H80000017&
-      Height          =   168
+   Begin ColorControls.LabelW lblTT2 
+      Height          =   204
       Left            =   108
       TabIndex        =   35
       Top             =   5760
       Visible         =   0   'False
       Width           =   2496
-      WordWrap        =   -1  'True
-   End
-   Begin VB.Label lblPalette 
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "Palette:"
-      Height          =   192
-      Left            =   3780
-      TabIndex        =   17
-      Top             =   5400
-      Visible         =   0   'False
-      Width           =   528
-   End
-   Begin VB.Label lblColorSystem 
-      AutoSize        =   -1  'True
-      BackStyle       =   0  'Transparent
-      Caption         =   "Mode:"
-      Height          =   192
-      Left            =   1680
-      TabIndex        =   15
-      Top             =   5400
-      Visible         =   0   'False
-      Width           =   432
-   End
-   Begin VB.Label lblTT 
-      Alignment       =   2  'Center
-      BackColor       =   &H80000018&
-      Caption         =   "Hold the Control key down to navigate Saturation with the mouse wheel"
-      BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   7.2
+      _ExtentX        =   4403
+      _ExtentY        =   360
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Segoe UI"
+         Size            =   7.8
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H80000017&
+      BackColor       =   -2147483624
+      ForeColor       =   -2147483625
+      Alignment       =   2
+      Caption         =   "Press Escape key to cancel"
+      AutoSize        =   -1  'True
+      WordWrap        =   -1  'True
+   End
+   Begin ColorControls.LabelW lblPalette 
+      Height          =   204
+      Left            =   3780
+      TabIndex        =   17
+      Top             =   5400
+      Visible         =   0   'False
+      Width           =   504
+      _ExtentX        =   889
+      _ExtentY        =   360
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Segoe UI"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      BackStyle       =   0
+      Caption         =   "Palette:"
+      AutoSize        =   -1  'True
+   End
+   Begin ColorControls.LabelW lblColorSystem 
+      Height          =   204
+      Left            =   1680
+      TabIndex        =   15
+      Top             =   5400
+      Visible         =   0   'False
+      Width           =   456
+      _ExtentX        =   804
+      _ExtentY        =   360
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Segoe UI"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      BackStyle       =   0
+      Caption         =   "Mode:"
+      AutoSize        =   -1  'True
+   End
+   Begin ColorControls.LabelW lblTT 
       Height          =   420
       Left            =   168
       TabIndex        =   31
       Top             =   5736
       Visible         =   0   'False
       Width           =   2532
+      _ExtentX        =   0
+      _ExtentY        =   0
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Segoe UI"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      BackColor       =   -2147483624
+      ForeColor       =   -2147483625
+      Alignment       =   2
+      Caption         =   "Hold the Control key down to navigate Saturation with the mouse wheel"
       WordWrap        =   -1  'True
    End
-   Begin VB.Label lblPrevious 
-      Alignment       =   2  'Center
-      Caption         =   "previous"
-      Height          =   228
-      Left            =   3888
+   Begin ColorControls.LabelW lblPrevious 
+      Height          =   240
+      Left            =   3979
       TabIndex        =   23
       Top             =   5110
-      Width           =   854
+      Width           =   672
+      _ExtentX        =   1185
+      _ExtentY        =   423
+      Alignment       =   2
+      BackStyle       =   0
+      Caption         =   "previous"
+      AutoSize        =   -1  'True
    End
-   Begin VB.Label lblNew 
-      Alignment       =   2  'Center
-      Caption         =   "new"
-      Height          =   228
-      Left            =   3888
+   Begin ColorControls.LabelW lblNew 
+      Height          =   240
+      Left            =   4153
       TabIndex        =   22
       Top             =   4104
-      Width           =   854
+      Width           =   324
+      _ExtentX        =   572
+      _ExtentY        =   423
+      Alignment       =   2
+      BackStyle       =   0
+      Caption         =   "new"
+      AutoSize        =   -1  'True
    End
-   Begin VB.Label lblHex 
-      Alignment       =   1  'Right Justify
-      Caption         =   "Hex:"
-      Height          =   228
-      Left            =   120
+   Begin ColorControls.LabelW lblHex 
+      Height          =   204
+      Left            =   408
       TabIndex        =   13
       Top             =   5400
-      Width           =   588
+      Width           =   300
+      _ExtentX        =   529
+      _ExtentY        =   360
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Segoe UI"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Alignment       =   1
+      Caption         =   "Hex:"
+      AutoSize        =   -1  'True
    End
    Begin VB.Menu mnuPopupRecent 
       Caption         =   "mnuPopupRecent"
@@ -536,6 +688,8 @@ Private Enum CDCaptionsIDConstants
     cdCWCaptionMode = 10 ' Mode
 End Enum
 
+Private Const cTxtSeparation As Single = 1.22
+
 Private mPreviousColor As Long
 Private mSelectedColor As Long
 Private mSettingCurrent As Boolean
@@ -557,7 +711,6 @@ Private mSliderParameter As CDSliderParameterConstants
 Private mSelectionDrawHorizontal As Boolean
 Private mInvalidColorMessage As String
 Private mCaptionColor As String
-Private mCaptionColorSet As Boolean
 Private mSettingParameters As Boolean
 Private mNavigatedRadially As Boolean
 Private mToolTipMouseWheelFirstPart As String
@@ -580,6 +733,7 @@ Private mEyeDropperVisible As Boolean
 Private mSubclassed As Boolean
 Private mFormHwnd As Long
 Private mEyeDropping As Boolean
+Private mLoading As Boolean
 
 Private Sub cboColorSystem_Click()
     ColorSelector1.ColorSystem = cboColorSystem.ListIndex
@@ -609,10 +763,6 @@ Private Sub cmdOK_Click()
     Else
         LoadRecentColors
     End If
-End Sub
-
-Private Sub ColorSelector1_Change()
-    RaiseEvent Change
 End Sub
 
 Private Sub ColorSelector1_DblClickOnColor()
@@ -684,7 +834,7 @@ Private Sub SetMouseWheelTTText()
     If txtHex.Visible Then
         If (lblTT.Height + 120) > (Me.ScaleHeight - (txtHex.Top + txtHex.Height + 30)) Then
             lblTT.Width = cmdOK.Left - 150
-            lblTT.FontSize = 6.5
+            lblTT.Font.Size = 6.5
             lblTT.AutoSize = False
             lblTT.AutoSize = True
             iMove = True
@@ -692,7 +842,7 @@ Private Sub SetMouseWheelTTText()
     ElseIf mSelectionDrawHorizontal Then
         If (lblTT.Height + 120) > (Me.ScaleHeight - (picSelection.Top + picSelection.Height + 30)) Then
             lblTT.Width = cmdOK.Left - 150
-            lblTT.FontSize = 6.5
+            lblTT.Font.Size = 6.5
             lblTT.AutoSize = False
             lblTT.AutoSize = True
             iMove = True
@@ -705,35 +855,53 @@ Private Sub SetMouseWheelTTText()
     End If
 End Sub
 
-Private Sub ColorSelector1_SliderChange()
+Private Sub ColorSelector1_Change()
     Dim iStr As String
-    Dim iSS As Long
-    Dim iSL As Long
         
     mSettingParameters = True
     mSelectedColor = ColorSelector1.Color
     
-    iSS = txtHex.SelStart
-    iSL = txtHex.SelLength
-    
-    txtHex.Text = GetHexColor(ColorSelector1.Color)
-    
-    On Error Resume Next
-    txtHex.SelStart = iSS
-    txtHex.SelLength = iSL
-    On Error GoTo 0
-    
-    txtRed.Text = ColorSelector1.R
-    txtGreen.Text = ColorSelector1.G
-    txtBlue.Text = ColorSelector1.B
-    txtHue.Text = Round(ColorSelector1.H)
-    txtSat.Text = Round(ColorSelector1.S)
-    txtLum.Text = Round(ColorSelector1.L)
+    ChangeTextPreservingSelection txtHex, GetHexColor(ColorSelector1.Color)
+    ChangeTextPreservingSelection txtRed, CStr(ColorSelector1.R)
+    ChangeTextPreservingSelection txtGreen, CStr(ColorSelector1.G)
+    ChangeTextPreservingSelection txtBlue, CStr(ColorSelector1.B)
+    ChangeTextPreservingSelection txtHue, CStr(Round(ColorSelector1.H))
+    ChangeTextPreservingSelection txtSat, CStr(Round(ColorSelector1.S))
+    ChangeTextPreservingSelection txtLum, CStr(Round(ColorSelector1.L))
     
     mSettingParameters = False
     
     If Not mSettingCurrent Then
         ShowSelection
+    End If
+    If (Not mLoading) And (Not mSettingCurrent) Then
+        RaiseEvent Change
+    End If
+End Sub
+
+Private Sub ChangeTextPreservingSelection(nTxt As Object, nNewText As String)
+    Dim iSS As Long
+    Dim iSL As Long
+    Dim iPrev As String
+    
+    If nTxt.Text = "" Then
+        nTxt.Text = nNewText
+    Else
+        iSS = nTxt.SelStart
+        iSL = nTxt.SelLength
+        
+        iPrev = nTxt.Text
+        If (Val(nNewText) <> Val(nTxt.Text)) Or (Not IsNumeric(nTxt.Text)) Or (Not IsNumeric(nNewText)) Then
+            nTxt.SelStart = 0
+            nTxt.SelLength = Len(nTxt.Text)
+            nTxt.SelText = nNewText
+        End If
+        nTxt.Tag = nNewText
+        
+        On Error Resume Next
+        nTxt.SelStart = iSS
+        nTxt.SelLength = iSL
+        On Error GoTo 0
     End If
 End Sub
 
@@ -790,9 +958,11 @@ End Sub
 Private Sub Form_Load()
     Dim iLeft As Single
     
+    mLoading = True
     Set Me.Icon = Nothing
     SetBackColor
     SetCaptions
+    SetTxtHeights
     If (Not mDialogCaptionVisible) Then SetWindowLong Me.hWnd, GWL_STYLE, GetWindowLong(Me.hWnd, GWL_STYLE) And Not (WS_CAPTION Or WS_THICKFRAME)
     If Not mConfirmationButtonsVisible Then
         cmdOK.Visible = False
@@ -822,7 +992,7 @@ Private Sub Form_Load()
     ColorSelector1.SliderWide = mSliderWide
     LoadBasicColors
     PositionControls
-    ColorSelector1_SliderChange
+    ColorSelector1_Change
     mOKPressed = False
     LoadRecentColors
     'If mRememberPosition And (mActiveFormName <> "") Then
@@ -842,6 +1012,7 @@ Private Sub Form_Load()
     mFormHwnd = Me.hWnd
     AttachMessage Me, mFormHwnd, WM_NCACTIVATE
     mSubclassed = True
+    mLoading = False
 End Sub
 
 Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -940,6 +1111,7 @@ Private Sub StartDropper()
     Else
         lblTT2.Width = cmdOK.Left - 200
     End If
+    
     mEyeDropping = True
     lblTT2.Caption = GetLocalizedString1(cdUIT_frmColorDialog_EyeDropper_ToolTip)
     
@@ -1103,6 +1275,18 @@ Private Sub txtBlue_GotFocus()
     SelectTxtOnGotFocus txtBlue
 End Sub
 
+Private Sub txtBlue_LostFocus()
+    If (txtBlue.Tag <> "") And (txtBlue.Tag <> txtBlue.Text) Then
+        ChangeTextPreservingSelection txtBlue, txtBlue.Tag
+    End If
+End Sub
+
+Private Sub txtGreen_LostFocus()
+    If (txtGreen.Tag <> "") And (txtGreen.Tag <> txtGreen.Text) Then
+        ChangeTextPreservingSelection txtGreen, txtGreen.Tag
+    End If
+End Sub
+
 Private Sub txtHex_Change()
     tmrHexChange.Enabled = False
     tmrHexChange.Enabled = True
@@ -1186,8 +1370,20 @@ Private Sub txtHue_GotFocus()
     SelectTxtOnGotFocus txtHue
 End Sub
 
+Private Sub txtHue_LostFocus()
+    If (txtHue.Tag <> "") And (txtHue.Tag <> txtHue.Text) Then
+        ChangeTextPreservingSelection txtHue, txtHue.Tag
+    End If
+End Sub
+
 Private Sub txtLum_GotFocus()
     SelectTxtOnGotFocus txtLum
+End Sub
+
+Private Sub txtLum_LostFocus()
+    If (txtLum.Tag <> "") And (txtLum.Tag <> txtLum.Text) Then
+        ChangeTextPreservingSelection txtLum, txtLum.Tag
+    End If
 End Sub
 
 Private Sub txtRed_Change()
@@ -1243,6 +1439,12 @@ Private Sub txtRed_GotFocus()
     SelectTxtOnGotFocus txtRed
 End Sub
 
+Private Sub txtRed_LostFocus()
+    If (txtRed.Tag <> "") And (txtRed.Tag <> txtRed.Text) Then
+        ChangeTextPreservingSelection txtRed, txtRed.Tag
+    End If
+End Sub
+
 Private Sub txtSat_Change()
     Dim iVal As Long
     
@@ -1293,11 +1495,11 @@ Public Property Let CurrentColor(nColor As Long)
         Exit Property
     End If
     mSettingCurrent = True
+    mPreviousColorSet = True
     ColorSelector1.Redraw = False
     mPreviousColor = nColor
     ColorSelector1.Color = mPreviousColor
     mSettingCurrent = False
-    mPreviousColorSet = True
     ShowSelection
     
     If (mSliderOptionsAvailable <> cdSliderOptionsNone) Or mPaletteTypeControlVisible Or mColorSystemControlVisible Then
@@ -1329,6 +1531,7 @@ Public Property Let CurrentColor(nColor As Long)
         SaveSetting RegKey, "Initialize", "LastColor", mPreviousColor
     End If
     ColorSelector1.Redraw = True
+    ClearAllUndo
 End Property
 
 Public Property Let Context(nContext As String)
@@ -1337,7 +1540,7 @@ End Property
 
 Private Sub ShowSelection()
     picSelection.Cls
-
+    
     If mPreviousColorSet And (Not mModeless) Then
         If mSelectionDrawHorizontal Then
             picSelection.Line (0, 0)-(picSelection.ScaleWidth / 2, picSelection.ScaleHeight), mPreviousColor, BF
@@ -1346,11 +1549,12 @@ Private Sub ShowSelection()
             picSelection.Line (0, 0)-(picSelection.ScaleWidth, picSelection.ScaleHeight / 2), mSelectedColor, BF
             picSelection.Line (0, picSelection.ScaleHeight / 2)-(picSelection.ScaleWidth, picSelection.ScaleHeight), mPreviousColor, BF
         End If
+        
         If mSelectedColor = mPreviousColor Then
+            If mCaptionColor = "" Then
+                mCaptionColor = GetLocalizedString1(cdUIT_frmColorDialog_Color_Caption)
+            End If
             If lblPrevious.Visible Then
-                If mCaptionColor = "" Then
-                    mCaptionColor = GetLocalizedString1(cdUIT_frmColorDialog_Color_Caption)
-                End If
                 If mSelectionDrawHorizontal Then
                     lblNew.Caption = ""
                     lblPrevious.Caption = mCaptionColor
@@ -1358,12 +1562,16 @@ Private Sub ShowSelection()
                     lblNew.Caption = mCaptionColor
                     lblPrevious.Caption = ""
                 End If
-                mCaptionColorSet = True
+            Else
+                lblNew.Caption = ""
+                lblPrevious.Caption = mCaptionColor
             End If
         Else
             If lblPrevious.Visible Then
                 lblPrevious.Caption = GetLocalizedString1(cdUIT_frmColorDialog_ColorPrevious_Caption)
                 lblNew.Caption = GetLocalizedString1(cdUIT_frmColorDialog_ColorNew_Caption)
+            Else
+                lblNew.Caption = mCaptionColor
             End If
         End If
     Else
@@ -1371,7 +1579,6 @@ Private Sub ShowSelection()
             mCaptionColor = GetLocalizedString1(cdUIT_frmColorDialog_Color_Caption)
         End If
         lblNew.Caption = mCaptionColor
-        mCaptionColorSet = True
         lblPrevious.Visible = False
         picSelection.Line (0, 0)-(picSelection.ScaleWidth, picSelection.ScaleHeight), mSelectedColor, BF
     End If
@@ -1618,11 +1825,10 @@ Private Sub PositionControls()
     If mSizeBig Then
         ColorSelector1.Height = 5000
         picColorValuesSection.Top = ColorSelector1.Height + 420
-        txtHex.Top = picColorValuesSection.Top + picColorValuesSection.Height + 40
-        lblHex.Top = txtHex.Top + 50
     End If
+    txtHex.Top = picColorValuesSection.Top + txtBlue.Top + txtBlue.Height * cTxtSeparation
+
     cboColorSystem.Top = txtHex.Top + Screen.TwipsPerPixelY
-    lblColorSystem.Top = lblHex.Top
     
     iFormHeight = Me.Height
     If mDialogCaptionVisible Then
@@ -1642,7 +1848,11 @@ Private Sub PositionControls()
                 picSelection.Left = 3900
             End If
         Else
-            picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + (ColorSelector1.SliderControlWidth - picSelection.Width) / 2
+            If (mRecentColorsColumns > 0) Or (Not mEyeDropperVisible) Then
+                picSelection.Left = picBasicColorsContainer.Left + (picBasicColorsContainer.Width - picSelection.Width) / 2
+            Else
+                picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + (ColorSelector1.SliderControlWidth - picSelection.Width) / 2
+            End If
         End If
     Else
         If (mSliderOptionsAvailable <> cdSliderOptionsNone) Then
@@ -1675,8 +1885,6 @@ Private Sub PositionControls()
         End If
     End If
     
-    lblNew.Left = picSelection.Left
-    lblPrevious.Left = picSelection.Left
     
     If Not mColorValuesSectionVisible Then
         picColorValuesSection.Visible = False
@@ -1687,13 +1895,10 @@ Private Sub PositionControls()
         picSelection.Move ColorSelector1.Left + 100 + ColorSelector1.PaletteCenterX - 1000 / 2, ColorSelector1.Height + 350, 1000, 440
         lblNew.Alignment = vbLeftJustify
         lblPrevious.Alignment = vbRightJustify
-        lblPrevious.Move picSelection.Left - lblNew.Width - 60, picSelection.Top + picSelection.Height / 2 - lblNew.Height / 2
-        lblNew.Move picSelection.Left + picSelection.Width + 60, lblPrevious.Top
         mSelectionDrawHorizontal = True
     Else
+        mSelectionDrawHorizontal = False
         picSelection.Top = (iFormHeight - iTitleBarHeight) - 1932 + IIf(mHexControlVisible Or mColorSystemControlVisible Or mPaletteTypeControlVisible, 0, 200)
-        lblNew.Top = picSelection.Top - 220
-        lblPrevious.Top = picSelection.Top + picSelection.Height + 10
     End If
     If Not mColorSelectionBoxVisible Then
         picSelection.Visible = False
@@ -1708,21 +1913,18 @@ Private Sub PositionControls()
         If mColorSystemControlVisible Or mPaletteTypeControlVisible Then
             If mColorSystemControlVisible Then
                 cboColorSystem.Left = txtHex.Left
-                lblColorSystem.Left = cboColorSystem.Left - lblColorSystem.Width - 60
                 cboColorSystem.ListIndex = mColorSystem
                 lblColorSystem.Visible = True
                 cboColorSystem.Visible = True
                 ColorSelector1.ColorSystemControlVisible = False
                 If mPaletteTypeControlVisible Then
-                    cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height + 75
-                    lblPalette.Top = lblColorSystem.Top + cboColorSystem.Height + 75
+                    cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height * cTxtSeparation
                     cboPalette.Left = txtHex.Left
                     lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
                     iCboPaletteVisible = True
                 End If
             ElseIf mPaletteTypeControlVisible Then
                 cboPalette.Top = cboColorSystem.Top
-                lblPalette.Top = lblColorSystem.Top
                 cboPalette.Left = txtHex.Left ' lblPalette.Left + lblPalette.Width + 60
                 lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
                 iCboPaletteVisible = True
@@ -1730,22 +1932,19 @@ Private Sub PositionControls()
         End If
     ElseIf mColorSystemControlVisible Or mPaletteTypeControlVisible Then
         If mColorSystemControlVisible Then
-            cboColorSystem.Left = picColorValuesSection.Left + txtLum.Left ' lblColorSystem.Left + lblColorSystem.Width + 60
-            lblColorSystem.Left = cboColorSystem.Left - lblColorSystem.Width - 60
+            cboColorSystem.Left = picColorValuesSection.Left + txtLum.Left
             cboColorSystem.ListIndex = mColorSystem
             lblColorSystem.Visible = True
             cboColorSystem.Visible = True
             ColorSelector1.ColorSystemControlVisible = False
             If mPaletteTypeControlVisible Then
-                cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height + 75
-                lblPalette.Top = lblColorSystem.Top + cboColorSystem.Height + 75
+                cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height * cTxtSeparation
                 cboPalette.Left = txtHex.Left ' lblPalette.Left + lblPalette.Width + 60
                 lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
                 iCboPaletteVisible = True
             End If
         ElseIf mPaletteTypeControlVisible Then
-            cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height + 75
-            lblPalette.Top = lblColorSystem.Top + cboColorSystem.Height + 75
+            cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height * cTxtSeparation
             cboPalette.Left = txtHex.Left ' lblPalette.Left + lblPalette.Width + 60
             lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
             iCboPaletteVisible = True
@@ -1790,8 +1989,8 @@ Private Sub PositionControls()
                     picEyeDropper.Move (picColorValuesSection.Left + picColorValuesSection.Width + picSelection.Left - picEyeDropper.Width) / 2, picSelection.Top + (picSelection.Height - picEyeDropper.Height) / 2
                 Else
                     picSelection.Top = picSelection.Top + 700
-                    lblNew.Top = picSelection.Top - 220
-                    lblPrevious.Top = picSelection.Top + picSelection.Height + 10
+                  '  lblNew.Top = picSelection.Top - 220
+                   ' lblPrevious.Top = picSelection.Top + picSelection.Height + 10
                     picEyeDropper.Move picSelection.Left + (picSelection.Width - picEyeDropper.Width) / 2, (ColorSelector1.Top + ColorSelector1.Height + picSelection.Top - picEyeDropper.Height) / 2
                 End If
             Else
@@ -1799,6 +1998,17 @@ Private Sub PositionControls()
             End If
         End If
         picEyeDropper.Visible = True
+    End If
+    
+    If mColorSelectionBoxVisible Then
+        If mColorValuesSectionVisible Then
+            lblNew.Move picSelection.Left + (picSelection.Width - lblNew.Width) / 2, picSelection.Top - lblNew.Height - 30
+            lblPrevious.Move picSelection.Left + (picSelection.Width - lblPrevious.Width) / 2, picSelection.Top + picSelection.Height '+ 15
+        Else
+            lblPrevious.Move picSelection.Left - lblPrevious.Width - 90, picSelection.Top + picSelection.Height / 2 - lblPrevious.Height / 2
+            lblNew.Move picSelection.Left + picSelection.Width + 90, lblPrevious.Top
+        End If
+        ShowSelection
     End If
     
     If mRoundedBoxes Then
@@ -1809,6 +2019,10 @@ Private Sub PositionControls()
         SetWindowRgn picEyeDropper.hWnd, iRgn, True
         DeleteObject iRgn
     End If
+    
+    lblHex.Move txtHex.Left - lblHex.Width - 36, txtHex.Top + (txtHex.Height - lblHex.Height) / 2
+    lblColorSystem.Move cboColorSystem.Left - lblColorSystem.Width - 36, cboColorSystem.Top + (cboColorSystem.Height - lblColorSystem.Height) / 2
+    lblPalette.Move cboPalette.Left - lblPalette.Width - 36, cboPalette.Top + (cboPalette.Height - lblPalette.Height) / 2
     
     If mColorValuesSectionVisible Then HandleLastTopValue iLastTop, picColorValuesSection
     If mHexControlVisible Then HandleLastTopValue iLastTop, txtHex
@@ -1825,9 +2039,9 @@ Private Sub PositionControls()
     End If
     If mConfirmationButtonsVisible Then
         If mDialogCaptionVisible Then
-            iLastTop = iLastTop + 1120
+            iLastTop = iLastTop + 1240
         Else
-            iLastTop = iLastTop + 720
+            iLastTop = iLastTop + 840
         End If
         If Not mColorValuesSectionVisible Then
             iLastTop = iLastTop + 120
@@ -1836,10 +2050,14 @@ Private Sub PositionControls()
         If mDialogCaptionVisible Then
             iLastTop = iLastTop + 700
         Else
-            iLastTop = iLastTop + 200
+            iLastTop = iLastTop + 100
         End If
     End If
     
+    
+    If mRecentColorsColumns > 0 Then
+        If (picRecentContainer.Left + lblRecent.Left + lblRecent.Width + 160) > iFormWidth Then iFormWidth = picRecentContainer.Left + lblRecent.Left + lblRecent.Width + 160
+    End If
     If mConfirmationButtonsVisible Then
         Me.Move Me.Left, Me.Top, iFormWidth, iLastTop
         If (Not mSizeBig) And (mRecentColorsColumns = 0) And mColorValuesSectionVisible And mHexControlVisible Then
@@ -1847,7 +2065,7 @@ Private Sub PositionControls()
         Else
             cmdOK.Left = Me.ScaleWidth - 3030
         End If
-        cmdOK.Top = (iLastTop - iTitleBarHeight) - cmdOK.Height - 200
+        cmdOK.Top = (iLastTop - iTitleBarHeight) - cmdOK.Height - 260
         cmdCancel.Move cmdOK.Left + 1400, cmdOK.Top
     Else
         Me.Move Me.Left, Me.Top, iFormWidth, iLastTop
@@ -1873,7 +2091,7 @@ Private Sub PositionlblParameter()
     End If
     lblParameter.AutoSize = False
     lblParameter.AutoSize = True
-    picParameterLabel.Move ColorSelector1.Left + ColorSelector1.SliderControlLeft + ColorSelector1.SliderControlWidth / 2 - lblParameter.Width / 2, ColorSelector1.Height + 60, lblParameter.Width
+    picParameterLabel.Move ColorSelector1.Left + ColorSelector1.SliderControlLeft + ColorSelector1.SliderControlWidth / 2 - lblParameter.Width / 2, ColorSelector1.Height + 10, lblParameter.Width
 End Sub
 
 Private Function EnsureEnding(nText As Variant, nEnding As String)
@@ -2080,6 +2298,14 @@ Private Sub SetCaptions()
     cboPalette.AddItem GetLocalizedString1(cdUIT_frmColorDialog_cboPalette_ListItem2)
     cboPalette.AddItem GetLocalizedString1(cdUIT_frmColorDialog_cboPalette_ListItem3)
     cboPalette.AddItem GetLocalizedString1(cdUIT_frmColorDialog_cboPalette_ListItem4)
+    
+    cboColorSystem.Clear
+    cboColorSystem.AddItem GetLocalizedString1(cdUIT_ColorSelector_cboColorSystem_ListItem_HSV)
+    cboColorSystem.AddItem GetLocalizedString1(cdUIT_ColorSelector_cboColorSystem_ListItem_HSL)
+    cmdOK.Caption = GetLocalizedString1(cdUIT_frmColorDialog_cmdOK_Caption)
+    cmdCancel.Caption = GetLocalizedString1(cdUIT_frmColorDialog_cmdCancel_Caption)
+    picEyeDropper.ToolTipText = GetLocalizedString1(cdUIT_frmColorDialog_picEyeDropper_ToolTiptext)
+    picEyeDropperIcon.ToolTipText = GetLocalizedString1(cdUIT_frmColorDialog_picEyeDropper_ToolTiptext)
 End Sub
 
 Private Function GetParameterFullName(nID As Long) As String
@@ -2091,3 +2317,44 @@ Private Function GetLocalizedString1(nTextID As CDUserInterfaceTextIDConstants) 
     RaiseEvent GetLocalizedText(LanguageWindowsUI, SubLanguageWindowsUI, nTextID, GetLocalizedString1)
 End Function
 
+Private Sub txtSat_LostFocus()
+    If (txtSat.Tag <> "") And (txtSat.Tag <> txtSat.Text) Then
+        ChangeTextPreservingSelection txtSat, txtSat.Tag
+    End If
+End Sub
+
+Private Sub ClearAllUndo()
+    Dim ctl As Control
+    Const EM_EMPTYUNDOBUFFER As Long = &HCD
+    
+    For Each ctl In Me.Controls
+        If TypeOf ctl Is TextBoxW Then
+            SendMessage ctl.hWnd, EM_EMPTYUNDOBUFFER, 0&, 0&
+        End If
+    Next
+End Sub
+
+Private Sub SetTxtHeights()
+    Dim ctl As Control
+    
+    For Each ctl In Me.Controls
+        If TypeOf ctl Is TextBoxW Then
+            ctl.Height = cboColorSystem.Height
+        End If
+    Next
+    
+    txtGreen.Top = txtRed.Top + txtRed.Height * cTxtSeparation
+    txtBlue.Top = txtGreen.Top + txtGreen.Height * cTxtSeparation
+    
+    txtSat.Top = txtGreen.Top
+    txtLum.Top = txtBlue.Top
+    
+    picColorValuesSection.Height = txtBlue.Top + txtBlue.Height
+    
+    lblRed.Move txtRed.Left - lblRed.Width - 36, txtRed.Top + (txtRed.Height - lblRed.Height) / 2
+    lblGreen.Move txtGreen.Left - lblGreen.Width - 36, txtGreen.Top + (txtGreen.Height - lblGreen.Height) / 2
+    lblBlue.Move txtBlue.Left - lblBlue.Width - 36, txtBlue.Top + (txtBlue.Height - lblBlue.Height) / 2
+    lblHue.Move txtHue.Left - lblHue.Width - 36, txtHue.Top + (txtHue.Height - lblHue.Height) / 2
+    lblSat.Move txtSat.Left - lblSat.Width - 36, txtSat.Top + (txtSat.Height - lblSat.Height) / 2
+    lblLum.Move txtLum.Left - lblLum.Width - 36, txtLum.Top + (txtLum.Height - lblLum.Height) / 2
+End Sub

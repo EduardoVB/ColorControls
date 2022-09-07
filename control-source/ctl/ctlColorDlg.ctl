@@ -571,9 +571,9 @@ Attribute SetCompact.VB_Description = "Helper method to set several properties t
     mDlg.SetCompact RecentColorsColumns, ColorValuesSectionVisible, SliderOptionsAvailable, nDialogCaptionVisible, nConfirmationButtonsVisible, nColorSelectionBoxVisible, nSliderWide, nHideLabels
 End Sub
 
-Public Sub SetComplete(Optional SizeBig As Boolean = False, Optional BasicColorsVisible As Boolean = True, Optional SliderOptionsAvailable As CDSliderOptionsAvailableConstants = cdSliderOptionsAll, Optional PaletteTypeControlVisible As Boolean = True, Optional ColorSystemControlVisible As Boolean = True, Optional EyeDropperVisible As Boolean = True)
+Public Sub SetComplete(Optional SizeBig As Boolean = False, Optional BasicColorsVisible As Boolean = True, Optional nRecentColorsColumns As Long = 2, Optional SliderOptionsAvailable As CDSliderOptionsAvailableConstants = cdSliderOptionsAll, Optional PaletteTypeControlVisible As Boolean = True, Optional ColorSystemControlVisible As Boolean = True, Optional EyeDropperVisible As Boolean = True)
 Attribute SetComplete.VB_Description = "Helper method to set several properties to get a 'Complete' configuration in one shot."
-    mDlg.SetComplete SizeBig, BasicColorsVisible, SliderOptionsAvailable, PaletteTypeControlVisible, ColorSystemControlVisible
+    mDlg.SetComplete SizeBig, BasicColorsVisible, nRecentColorsColumns, SliderOptionsAvailable, PaletteTypeControlVisible, ColorSystemControlVisible
 End Sub
 
 Public Sub SetSimple(Optional RecentColorsColumns As Long = 2, Optional nDialogCaptionVisible As Boolean = False, Optional nConfirmationButtonsVisible As Boolean, Optional nColorSelectionBoxVisible As Boolean, Optional nSliderWide As CDYesNoAutoConstants = cdYNAuto, Optional nHideLabels As Boolean = False)

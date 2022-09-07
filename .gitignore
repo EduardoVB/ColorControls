@@ -1,5 +1,4 @@
 
-control-bin/ClrCtrl1.oca
-control-bin/ClrCtrl1.lib
-control-bin/ClrCtrl1.exp
-CommonControls/
+*.oca
+*.lib
+*.exp

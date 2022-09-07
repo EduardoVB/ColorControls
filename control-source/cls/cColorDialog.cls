@@ -183,7 +183,7 @@ Attribute Show.VB_Description = "Shows the dialog."
         If mActiveForm Is Nothing Then
             iActiveWindowHwnd = GetActiveWindow
             If iActiveWindowHwnd <> 0 Then
-                SetOwner iActiveWindowHwnd, mFrm.hWnd
+                SetOwner mFrm.hWnd, iActiveWindowHwnd
             End If
             mFrm.Show
         Else
@@ -621,10 +621,11 @@ Private Sub Class_Initialize()
     mPositionTop = 0
 End Sub
 
-Public Sub SetComplete(Optional SizeBig As Boolean = False, Optional BasicColorsVisible As Boolean = True, Optional SliderOptionsAvailable As CDSliderOptionsAvailableConstants = cdSliderOptionsAll, Optional PaletteTypeControlVisible As Boolean = True, Optional ColorSystemControlVisible As Boolean = True, Optional EyeDropperVisible As Boolean = True)
+Public Sub SetComplete(Optional SizeBig As Boolean = False, Optional BasicColorsVisible As Boolean = True, Optional nRecentColorsColumns As Long = 2, Optional SliderOptionsAvailable As CDSliderOptionsAvailableConstants = cdSliderOptionsAll, Optional PaletteTypeControlVisible As Boolean = True, Optional ColorSystemControlVisible As Boolean = True, Optional EyeDropperVisible As Boolean = True)
 Attribute SetComplete.VB_Description = "Helper method to set several properties to get a 'Compplete' configuration in one shot."
     mSizeBig = SizeBig
     mBasicColorsVisible = BasicColorsVisible
+    mRecentColorsColumns = nRecentColorsColumns
     mEyeDropperVisible = EyeDropperVisible
     mSliderOptionsAvailable = SliderOptionsAvailable
     mPaletteTypeControlVisible = PaletteTypeControlVisible
