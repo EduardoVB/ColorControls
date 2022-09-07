@@ -22,6 +22,7 @@ Private Const SUBLANG_PORTUGUESE_BRAZILIAN As Long = &H1
 
 Public Enum BSLanguageIDConstants
     bsLang_AUTO_SELECT = 0
+    bsLang_CHINESE_SIMPLIFIED = 4
     bsLang_ENGLISH = 9
     bsLang_SPANISH = 10
     bsLang_FRENCH = 12
@@ -182,7 +183,7 @@ Public Enum CDUserInterfaceTextIDConstants
     cdUIT_frmColorDialog_MouseWheel_ToolTipStart = 4600
     cdUIT_frmColorDialog_MouseWheel_ToolTipEnd = 4700
     cdUIT_frmColorDialog_EyeDropper_ToolTip = 4800
-    cdUIT_frmColorDialog_picEyeDropper_ToolTiptext = 4900
+    cdUIT_frmColorDialog_picEyeDropper_ToolTipText = 4900
     cdUIT_frmColorDialog_lblRed_Caption = 5000
     cdUIT_frmColorDialog_lblGreen_Caption = 5100
     cdUIT_frmColorDialog_lblBlue_Caption = 5200
@@ -228,6 +229,8 @@ Public Function GetLocalizedString(TextID As CDUserInterfaceTextIDConstants) As 
     On Error GoTo 0
     
     Select Case mUILanguage
+        Case bsLang_CHINESE_SIMPLIFIED
+            Do_CHINESE_SIMPLIFIED TextID, GetLocalizedString
         Case bsLang_SPANISH
             Do_SPANISH TextID, GetLocalizedString
         Case bsLang_FRENCH
@@ -241,101 +244,125 @@ End Function
 Private Sub Do_ENGLISH(ByRef TextID As Long, ByRef Text As String)
     ' Microsoft teminology search: https://www.microsoft.com/en-us/language/search
     Select Case TextID
-        Case cdUIT_frmColorDialog_Form_Caption
-            Text = "Color selection"
-        Case cdUIT_ColorSelector_chkFixedPalette_Caption
+        Case cdUIT_frmColorDialog_Form_Caption ' English: "Color selection"
+            If mUISubLanguage = SUBLANG_ENGLISH_UK Then
+                Text = "Colour selection"
+            Else
+                Text = "Color selection"
+            End If
+        Case cdUIT_ColorSelector_chkFixedPalette_Caption ' English: "Fixed"
             Text = "Fixed"
-        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText
-            Text = "Reflects color changes visually in the palette or not"
-        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText
-            Text = "Parameter of the slidder control"
-        Case cdUIT_ColorSelector_lblMode_Caption
+        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText ' English: "Reflects color changes visually in the palette or not"
+            If mUISubLanguage = SUBLANG_ENGLISH_UK Then
+                Text = "Reflects colour changes visually in the palette or not"
+            Else
+                Text = "Reflects color changes visually in the palette or not"
+            End If
+        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText ' English: "Parameter of the slider control"
+            Text = "Parameter of the slider control"
+        Case cdUIT_ColorSelector_lblMode_Caption ' English: "Mode:"
             Text = "Mode:"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue ' English: "Hue"
             Text = "Hue"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance ' English: "Lum."
             Text = "Lum."
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value ' English: "Value"
             Text = "Value"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation ' English: "Sat."
             Text = "Sat."
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red ' English: "Red"
             Text = "Red"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green ' English: "Green"
             Text = "Green"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue ' English: "Blue"
             Text = "Blue"
-        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV ' English: "HSV"
             Text = "HSV"
-        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL ' English: "HSL"
             Text = "HSL"
-        Case cdUIT_frmColorDialog_lblBasicColors_Caption
+        Case cdUIT_frmColorDialog_lblBasicColors_Caption ' English: "Basic colors:"
             Text = "Basic colors:"
-        Case cdUIT_frmColorDialog_lblRecent_Caption
+        Case cdUIT_frmColorDialog_lblRecent_Caption ' English: "Recent:"
             Text = "Recent:"
-        Case cdUIT_frmColorDialog_Color_Caption
-            Text = "color"
-        Case cdUIT_frmColorDialog_ColorNew_Caption
+        Case cdUIT_frmColorDialog_Color_Caption ' English: "color"
+            If mUISubLanguage = SUBLANG_ENGLISH_UK Then
+                Text = "colour"
+            Else
+                Text = "color"
+            End If
+        Case cdUIT_frmColorDialog_ColorNew_Caption ' English: "new"
             Text = "new"
-        Case cdUIT_frmColorDialog_ColorPrevious_Caption
+        Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = "previous"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold the Control key down to navigate"
             Text = "Hold the Control key down to navigate"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = "with the mouse wheel, press Shift key to go slowly"
-        Case cdUIT_frmColorDialog_EyeDropper_ToolTip
-            Text = "Choose a color from anywhere on the screen or press the Escape key to cancel"
-        Case cdUIT_frmColorDialog_picEyeDropper_ToolTiptext
-            Text = "Choose a color from the screen"
-        Case cdUIT_frmColorDialog_lblRed_Caption
+        Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
+            If mUISubLanguage = SUBLANG_ENGLISH_UK Then
+                Text = "Choose a colour from anywhere on the screen or press the Escape key to cancel"
+            Else
+                Text = "Choose a color from anywhere on the screen or press the Escape key to cancel"
+            End If
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTipText ' English: "Choose a color from the screen"
+            If mUISubLanguage = SUBLANG_ENGLISH_UK Then
+                Text = "Choose a colour from the screen"
+            Else
+                Text = "Choose a color from the screen"
+            End If
+        Case cdUIT_frmColorDialog_lblRed_Caption ' English: "Red:"
             Text = "Red:"
-        Case cdUIT_frmColorDialog_lblGreen_Caption
+        Case cdUIT_frmColorDialog_lblGreen_Caption ' English: "Green:"
             Text = "Green:"
-        Case cdUIT_frmColorDialog_lblBlue_Caption
+        Case cdUIT_frmColorDialog_lblBlue_Caption ' English: "Blue:"
             Text = "Blue:"
-        Case cdUIT_frmColorDialog_lblHex_Caption
+        Case cdUIT_frmColorDialog_lblHex_Caption ' English: "Hex:"
             Text = "Hex:"
-        Case cdUIT_frmColorDialog_lblHue_Caption
+        Case cdUIT_frmColorDialog_lblHue_Caption ' English: "Hue:"
             Text = "Hue:"
-        Case cdUIT_frmColorDialog_lblSaturation_Caption
+        Case cdUIT_frmColorDialog_lblSaturation_Caption ' English: "Sat.:"
             Text = "Sat.:"
-        Case cdUIT_frmColorDialog_Luminance_Caption
+        Case cdUIT_frmColorDialog_Luminance_Caption ' English: "Lum.:"
             Text = "Lum.:"
-        Case cdUIT_frmColorDialog_Value_Caption
+        Case cdUIT_frmColorDialog_Value_Caption ' English: "Value:"
             Text = "Value:"
-        Case cdUIT_frmColorDialog_lblColorSystem_Caption
+        Case cdUIT_frmColorDialog_lblColorSystem_Caption ' English: "Mode:"
             Text = "Mode:"
-        Case cdUIT_frmColorDialog_lblPalette_Caption
+        Case cdUIT_frmColorDialog_lblPalette_Caption ' English: "Palette:"
             Text = "Palette:"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem1
+        Case cdUIT_frmColorDialog_cboPalette_ListItem1 ' English: "Wheel, fixed"
             Text = "Wheel, fixed"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem2
+        Case cdUIT_frmColorDialog_cboPalette_ListItem2 ' English: "Box, fixed"
             Text = "Box, fixed"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem3
+        Case cdUIT_frmColorDialog_cboPalette_ListItem3 ' English: "Wheel, dynamic"
             Text = "Wheel, dynamic"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem4
+        Case cdUIT_frmColorDialog_cboPalette_ListItem4 ' English: "Box, dynamic"
             Text = "Box, dynamic"
-        Case cdUIT_frmColorDialog_InvalidColorMessage
-            Text = "The color is not valid."
-        Case cdUIT_frmColorDialog_ParameterFullName_Hue
+        Case cdUIT_frmColorDialog_InvalidColorMessage ' English: "The color is not valid."
+            If mUISubLanguage = SUBLANG_ENGLISH_UK Then
+                Text = "The colour is not valid."
+            Else
+                Text = "The color is not valid."
+            End If
+        Case cdUIT_frmColorDialog_ParameterFullName_Hue ' English: "Hue"
             Text = "Hue"
-        Case cdUIT_frmColorDialog_ParameterFullName_Luminance
+        Case cdUIT_frmColorDialog_ParameterFullName_Luminance ' English: "Luminance"
             Text = "Luminance"
-        Case cdUIT_frmColorDialog_ParameterFullName_Saturation
+        Case cdUIT_frmColorDialog_ParameterFullName_Saturation ' English: "Saturation"
             Text = "Saturation"
-        Case cdUIT_frmColorDialog_ParameterFullName_Red
+        Case cdUIT_frmColorDialog_ParameterFullName_Red ' English: "Red"
             Text = "Red"
-        Case cdUIT_frmColorDialog_ParameterFullName_Green
+        Case cdUIT_frmColorDialog_ParameterFullName_Green ' English: "Green"
             Text = "Green"
-        Case cdUIT_frmColorDialog_ParameterFullName_Blue
+        Case cdUIT_frmColorDialog_ParameterFullName_Blue ' English: "Blue"
             Text = "Blue"
-        Case cdUIT_frmColorDialog_ParameterFullName_Value
+        Case cdUIT_frmColorDialog_ParameterFullName_Value ' English: "Value"
             Text = "Value"
-        Case cdUIT_frmColorDialog_OK
+        Case cdUIT_frmColorDialog_OK ' English: "OK"
             Text = "OK"
-        Case cdUIT_frmColorDialog_Cancel
+        Case cdUIT_frmColorDialog_Cancel ' English: "Cancel"
             Text = "Cancel"
-        Case cdUIT_frmColorDialog_Close
+        Case cdUIT_frmColorDialog_Close ' English: "Close"
             Text = "Close"
     End Select
 End Sub
@@ -343,203 +370,305 @@ End Sub
 Private Sub Do_SPANISH(ByRef TextID As Long, ByRef Text As String)
     ' Microsoft teminology search: https://www.microsoft.com/en-us/language/search
     Select Case TextID
-        Case cdUIT_frmColorDialog_Form_Caption
+        Case cdUIT_frmColorDialog_Form_Caption ' English: "Color selection"
             Text = "Selección de color"
-        Case cdUIT_ColorSelector_chkFixedPalette_Caption
+        Case cdUIT_ColorSelector_chkFixedPalette_Caption ' English: "Fixed"
             Text = "Fija"
-        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText
+        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText ' English: "Reflects color changes visually in the palette or not"
             Text = "Refleja o no los cambios de colores en la paleta"
-        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText
+        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText ' English: "Parameter of the slider control"
             Text = "Parámetro del control deslizante"
-        Case cdUIT_ColorSelector_lblMode_Caption
+        Case cdUIT_ColorSelector_lblMode_Caption ' English: "Mode:"
             Text = "Modo:"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue ' English: "Hue"
             Text = "Matiz"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance ' English: "Lum."
             Text = "Lum."
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value ' English: "Value"
             Text = "Valor"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation ' English: "Sat."
             Text = "Sat."
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red ' English: "Red"
             Text = "Rojo"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green ' English: "Green"
             Text = "Verde"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue ' English: "Blue"
             Text = "Azul"
-        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV ' English: "HSV"
             Text = "HSV"
-        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL ' English: "HSL"
             Text = "HSL"
-        Case cdUIT_frmColorDialog_lblBasicColors_Caption
+        Case cdUIT_frmColorDialog_lblBasicColors_Caption ' English: "Basic colors:"
             Text = "Colores básicos:"
-        Case cdUIT_frmColorDialog_lblRecent_Caption
+        Case cdUIT_frmColorDialog_lblRecent_Caption ' English: "Recent:"
             Text = "Recientes:"
-        Case cdUIT_frmColorDialog_Color_Caption
+        Case cdUIT_frmColorDialog_Color_Caption ' English: "color"
             Text = "color"
-        Case cdUIT_frmColorDialog_ColorNew_Caption
+        Case cdUIT_frmColorDialog_ColorNew_Caption ' English: "new"
             Text = "nuevo"
-        Case cdUIT_frmColorDialog_ColorPrevious_Caption
+        Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = "previo"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold the Control key down to navigate"
             Text = "Mantenga presionada la tecla Control para cambiar"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = "con la rueda del mouse, presione la tecla Mayúsculas para ir lento"
-        Case cdUIT_frmColorDialog_EyeDropper_ToolTip
+        Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
             Text = "Elija un color en cualquier lugar de la pantalla o presione la tecla Escape para cancelar"
-        Case cdUIT_frmColorDialog_picEyeDropper_ToolTiptext
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTipText ' English: "Choose a color from the screen"
             Text = "Elija un color en la pantalla"
-        Case cdUIT_frmColorDialog_lblRed_Caption
+        Case cdUIT_frmColorDialog_lblRed_Caption ' English: "Red:"
             Text = "Rojo:"
-        Case cdUIT_frmColorDialog_lblGreen_Caption
+        Case cdUIT_frmColorDialog_lblGreen_Caption ' English: "Green:"
             Text = "Verde:"
-        Case cdUIT_frmColorDialog_lblBlue_Caption
+        Case cdUIT_frmColorDialog_lblBlue_Caption ' English: "Blue:"
             Text = "Azul:"
-        Case cdUIT_frmColorDialog_lblHex_Caption
+        Case cdUIT_frmColorDialog_lblHex_Caption ' English: "Hex:"
             Text = "Hex:"
-        Case cdUIT_frmColorDialog_lblHue_Caption
+        Case cdUIT_frmColorDialog_lblHue_Caption ' English: "Hue:"
             Text = "Matiz:"
-        Case cdUIT_frmColorDialog_lblSaturation_Caption
+        Case cdUIT_frmColorDialog_lblSaturation_Caption ' English: "Sat.:"
             Text = "Sat.:"
-        Case cdUIT_frmColorDialog_Luminance_Caption
+        Case cdUIT_frmColorDialog_Luminance_Caption ' English: "Lum.:"
             Text = "Lum.:"
-        Case cdUIT_frmColorDialog_Value_Caption
+        Case cdUIT_frmColorDialog_Value_Caption ' English: "Value:"
             Text = "Valor:"
-        Case cdUIT_frmColorDialog_lblColorSystem_Caption
+        Case cdUIT_frmColorDialog_lblColorSystem_Caption ' English: "Mode:"
             Text = "Modo:"
-        Case cdUIT_frmColorDialog_lblPalette_Caption
+        Case cdUIT_frmColorDialog_lblPalette_Caption ' English: "Palette:"
             Text = "Paleta:"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem1
+        Case cdUIT_frmColorDialog_cboPalette_ListItem1 ' English: "Wheel, fixed"
             Text = "Rueda, fijo"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem2
+        Case cdUIT_frmColorDialog_cboPalette_ListItem2 ' English: "Box, fixed"
             Text = "Caja, fijo"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem3
+        Case cdUIT_frmColorDialog_cboPalette_ListItem3 ' English: "Wheel, dynamic"
             Text = "Rueda, dinámico"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem4
+        Case cdUIT_frmColorDialog_cboPalette_ListItem4 ' English: "Box, dynamic"
             Text = "Caja, dinámico"
-        Case cdUIT_frmColorDialog_InvalidColorMessage
+        Case cdUIT_frmColorDialog_InvalidColorMessage ' English: "The color is not valid."
             Text = "El color no es válido."
-        Case cdUIT_frmColorDialog_ParameterFullName_Hue
+        Case cdUIT_frmColorDialog_ParameterFullName_Hue ' English: "Hue"
             Text = "Matiz"
-        Case cdUIT_frmColorDialog_ParameterFullName_Luminance
+        Case cdUIT_frmColorDialog_ParameterFullName_Luminance ' English: "Luminance"
             Text = "Luminancia"
-        Case cdUIT_frmColorDialog_ParameterFullName_Saturation
+        Case cdUIT_frmColorDialog_ParameterFullName_Saturation ' English: "Saturation"
             Text = "Saturación"
-        Case cdUIT_frmColorDialog_ParameterFullName_Red
+        Case cdUIT_frmColorDialog_ParameterFullName_Red ' English: "Red"
             Text = "Rojo"
-        Case cdUIT_frmColorDialog_ParameterFullName_Green
+        Case cdUIT_frmColorDialog_ParameterFullName_Green ' English: "Green"
             Text = "Verde"
-        Case cdUIT_frmColorDialog_ParameterFullName_Blue
+        Case cdUIT_frmColorDialog_ParameterFullName_Blue ' English: "Blue"
             Text = "Azul"
-        Case cdUIT_frmColorDialog_ParameterFullName_Value
+        Case cdUIT_frmColorDialog_ParameterFullName_Value ' English: "Value"
             Text = "Valor"
-        Case cdUIT_frmColorDialog_OK
+        Case cdUIT_frmColorDialog_OK ' English: "OK"
             Text = "Aceptar"
-        Case cdUIT_frmColorDialog_Cancel
+        Case cdUIT_frmColorDialog_Cancel ' English: "Cancel"
             Text = "Cancelar"
-        Case cdUIT_frmColorDialog_Close
+        Case cdUIT_frmColorDialog_Close ' English: "Close"
             Text = "Cerrar"
     End Select
 End Sub
 
 Private Sub Do_FRENCH(ByRef TextID As Long, ByRef Text As String)
     Select Case TextID
-        Case cdUIT_frmColorDialog_Form_Caption
+        Case cdUIT_frmColorDialog_Form_Caption ' English: "Color selection"
             Text = "Sélection couleur"
-        Case cdUIT_ColorSelector_chkFixedPalette_Caption
+        Case cdUIT_ColorSelector_chkFixedPalette_Caption ' English: "Fixed"
             Text = "Fixe"
-        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText
+        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText ' English: "Reflects color changes visually in the palette or not"
             Text = "Reflète visuellement les changements de couleur dans la palette ou non"
-        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText
+        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText ' English: "Parameter of the slider control"
             Text = "Paramètre du control ascenseur"
-        Case cdUIT_ColorSelector_lblMode_Caption
+        Case cdUIT_ColorSelector_lblMode_Caption ' English: "Mode:"
             Text = "Mode:"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue ' English: "Hue"
             Text = "Hue"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance ' English: "Lum."
             Text = "Lum."
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value ' English: "Value"
             Text = "Valeur"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation ' English: "Sat."
             Text = "Sat."
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red ' English: "Red"
             Text = "Rouge"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green ' English: "Green"
             Text = "Vert"
-        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue ' English: "Blue"
             Text = "Bleu"
-        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV ' English: "HSV"
             Text = "HSV"
-        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL ' English: "HSL"
             Text = "HSL"
-        Case cdUIT_frmColorDialog_lblBasicColors_Caption
+        Case cdUIT_frmColorDialog_lblBasicColors_Caption ' English: "Basic colors:"
             Text = "Couleurs de base:"
-        Case cdUIT_frmColorDialog_lblRecent_Caption
+        Case cdUIT_frmColorDialog_lblRecent_Caption ' English: "Recent:"
             Text = "Récent:"
-        Case cdUIT_frmColorDialog_Color_Caption
+        Case cdUIT_frmColorDialog_Color_Caption ' English: "color"
             Text = "couleur"
-        Case cdUIT_frmColorDialog_ColorNew_Caption
+        Case cdUIT_frmColorDialog_ColorNew_Caption ' English: "new"
             Text = "nouvelle"
-        Case cdUIT_frmColorDialog_ColorPrevious_Caption
+        Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = "précédente"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold the Control key down to navigate"
             Text = "Maintenez la touche Control appuyée pour naviguer"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = "avec la molette de la souris, pressez Shift pour defiler doucement"
-        Case cdUIT_frmColorDialog_EyeDropper_ToolTip
+        Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
             Text = "Choisir une couleur n'importe-où à l'écran ou presser Échap pour annuler"
-        Case cdUIT_frmColorDialog_picEyeDropper_ToolTiptext
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTipText ' English: "Choose a color from the screen"
             Text = "Choisir une couleur sur l'écran"
-        Case cdUIT_frmColorDialog_lblRed_Caption
+        Case cdUIT_frmColorDialog_lblRed_Caption ' English: "Red:"
             Text = "Rouge:"
-        Case cdUIT_frmColorDialog_lblGreen_Caption
+        Case cdUIT_frmColorDialog_lblGreen_Caption ' English: "Green:"
             Text = "Vert:"
-        Case cdUIT_frmColorDialog_lblBlue_Caption
+        Case cdUIT_frmColorDialog_lblBlue_Caption ' English: "Blue:"
             Text = "Bleu:"
-        Case cdUIT_frmColorDialog_lblHex_Caption
+        Case cdUIT_frmColorDialog_lblHex_Caption ' English: "Hex:"
             Text = "Hex:"
-        Case cdUIT_frmColorDialog_lblHue_Caption
+        Case cdUIT_frmColorDialog_lblHue_Caption ' English: "Hue:"
             Text = "Hue:"
-        Case cdUIT_frmColorDialog_lblSaturation_Caption
+        Case cdUIT_frmColorDialog_lblSaturation_Caption ' English: "Sat.:"
             Text = "Sat.:"
-        Case cdUIT_frmColorDialog_Luminance_Caption
+        Case cdUIT_frmColorDialog_Luminance_Caption ' English: "Lum.:"
             Text = "Lum.:"
-        Case cdUIT_frmColorDialog_Value_Caption
+        Case cdUIT_frmColorDialog_Value_Caption ' English: "Value:"
             Text = "Valeur:"
-        Case cdUIT_frmColorDialog_lblColorSystem_Caption
+        Case cdUIT_frmColorDialog_lblColorSystem_Caption ' English: "Mode:"
             Text = "Mode:"
-        Case cdUIT_frmColorDialog_lblPalette_Caption
+        Case cdUIT_frmColorDialog_lblPalette_Caption ' English: "Palette:"
             Text = "Palette:"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem1
+        Case cdUIT_frmColorDialog_cboPalette_ListItem1 ' English: "Wheel, fixed"
             Text = "Molette, fixe"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem2
+        Case cdUIT_frmColorDialog_cboPalette_ListItem2 ' English: "Box, fixed"
             Text = "Boite, fixe"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem3
+        Case cdUIT_frmColorDialog_cboPalette_ListItem3 ' English: "Wheel, dynamic"
             Text = "Molette, dynamique"
-        Case cdUIT_frmColorDialog_cboPalette_ListItem4
+        Case cdUIT_frmColorDialog_cboPalette_ListItem4 ' English: "Box, dynamic"
             Text = "Boite, dynamique"
-        Case cdUIT_frmColorDialog_InvalidColorMessage
+        Case cdUIT_frmColorDialog_InvalidColorMessage ' English: "The color is not valid."
             Text = "La couleur n'est pas valide."
-        Case cdUIT_frmColorDialog_ParameterFullName_Hue
+        Case cdUIT_frmColorDialog_ParameterFullName_Hue ' English: "Hue"
             Text = "Hue"
-        Case cdUIT_frmColorDialog_ParameterFullName_Luminance
+        Case cdUIT_frmColorDialog_ParameterFullName_Luminance ' English: "Luminance"
             Text = "Luminance"
-        Case cdUIT_frmColorDialog_ParameterFullName_Saturation
+        Case cdUIT_frmColorDialog_ParameterFullName_Saturation ' English: "Saturation"
             Text = "Saturation"
-        Case cdUIT_frmColorDialog_ParameterFullName_Red
+        Case cdUIT_frmColorDialog_ParameterFullName_Red ' English: "Red"
             Text = "Rouge"
-        Case cdUIT_frmColorDialog_ParameterFullName_Green
+        Case cdUIT_frmColorDialog_ParameterFullName_Green ' English: "Green"
             Text = "Vert"
-        Case cdUIT_frmColorDialog_ParameterFullName_Blue
+        Case cdUIT_frmColorDialog_ParameterFullName_Blue ' English: "Blue"
             Text = "Bleu"
-        Case cdUIT_frmColorDialog_ParameterFullName_Value
+        Case cdUIT_frmColorDialog_ParameterFullName_Value ' English: "Value"
             Text = "Valeur"
-        Case cdUIT_frmColorDialog_OK
+        Case cdUIT_frmColorDialog_OK ' English: "OK"
             Text = "OK"
-        Case cdUIT_frmColorDialog_Cancel
+        Case cdUIT_frmColorDialog_Cancel ' English: "Cancel"
             Text = "Annuler"
-        Case cdUIT_frmColorDialog_Close
+        Case cdUIT_frmColorDialog_Close ' English: "Close"
             Text = "Fermer"
+    End Select
+End Sub
+
+Private Sub Do_CHINESE_SIMPLIFIED(ByRef TextID As Long, ByRef Text As String)
+    ' Microsoft teminology search: https://www.microsoft.com/en-us/language/search
+    Select Case TextID
+        Case cdUIT_frmColorDialog_Form_Caption ' English: "Color selection"
+            Text = StrFromArray(156, 152, 114, 130, 9, 144, 233, 98) ' ANSI: "ÑÕÉ«Ñ¡Ôñ"
+        Case cdUIT_ColorSelector_chkFixedPalette_Caption ' English: "Fixed"
+            Text = StrFromArray(250, 86, 154, 91) ' ANSI: "¹Ì¶¨"
+        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText ' English: "Reflects color changes visually in the palette or not"
+            Text = StrFromArray(47, 102, 38, 84, 40, 87, 3, 140, 114, 130, 127, 103, 45, 78, 244, 118, 194, 137, 48, 87, 205, 83, 32, 102, 156, 152, 114, 130, 216, 83, 22, 83) ' ANSI: "ÊÇ·ñÔÚµ÷É«°åÖÐÖ±¹ÛµØ·´Ó³ÑÕÉ«±ä»¯"
+        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText ' English: "Parameter of the slider control"
+            Text = StrFromArray(209, 110, 87, 87, 167, 99, 246, 78, 132, 118, 194, 83, 112, 101) ' ANSI: "»¬¿é¿Ø¼þµÄ²ÎÊý"
+        Case cdUIT_ColorSelector_lblMode_Caption ' English: "Mode:"
+            Text = StrFromArray(33, 106, 15, 95) ' ANSI: "Ä£Ê½"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue ' English: "Hue"
+            Text = StrFromArray(114, 130, 3, 140) ' ANSI: "É«µ÷"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance ' English: "Lum."
+            Text = StrFromArray(174, 78, 166, 94) ' ANSI: "ÁÁ¶È"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value ' English: "Value"
+            Text = StrFromArray(60, 80) ' ANSI: "Öµ"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation ' English: "Sat."
+            Text = StrFromArray(113, 153, 140, 84, 166, 94) ' ANSI: "±¥ºÍ¶È"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red ' English: "Red"
+            Text = StrFromArray(162, 126, 114, 130) ' ANSI: "ºìÉ«"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green ' English: "Green"
+            Text = StrFromArray(255, 126, 114, 130) ' ANSI: "ÂÌÉ«"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue ' English: "Blue"
+            Text = StrFromArray(221, 132, 114, 130) ' ANSI: "À¶É«"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV ' English: "HSV"
+            Text = "HSV"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL ' English: "HSL"
+            Text = "HSL"
+        Case cdUIT_frmColorDialog_lblBasicColors_Caption ' English: "Basic colors:"
+            Text = StrFromArray(250, 87, 44, 103, 156, 152, 114, 130, 58, 0) ' ANSI: "»ù±¾ÑÕÉ«:"
+        Case cdUIT_frmColorDialog_lblRecent_Caption ' English: "Recent:"
+            Text = StrFromArray(0, 103, 209, 143, 58, 0) ' ANSI: "×î½ü:"
+        Case cdUIT_frmColorDialog_Color_Caption ' English: "color"
+            Text = StrFromArray(156, 152, 114, 130) ' ANSI: "ÑÕÉ«"
+        Case cdUIT_frmColorDialog_ColorNew_Caption ' English: "new"
+            Text = StrFromArray(176, 101, 250, 94) ' ANSI: "ÐÂ½¨"
+        Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
+            Text = StrFromArray(10, 78, 0, 78, 42, 78) ' ANSI: "ÉÏÒ»¸ö"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold the Control key down to navigate"
+            Text = StrFromArray(9, 99, 79, 79, 32, 0, 67, 0, 116, 0, 114, 0, 108, 0, 32, 0, 46, 149, 219, 143, 76, 136, 252, 91, 42, 130) ' ANSI: "°´×¡ Ctrl ¼ü½øÐÐµ¼º½"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
+            Text = StrFromArray(127, 79, 40, 117, 32, 159, 7, 104, 218, 110, 110, 143, 22, 98, 9, 99, 32, 0, 83, 0, 104, 0, 105, 0, 102, 0, 116, 0, 32, 0, 46, 149, 19, 127, 98, 97, 251, 121, 168, 82) ' ANSI: "Ê¹ÓÃÊó±ê¹öÂÖ»ò°´ Shift ¼ü»ºÂýÒÆ¶¯"
+        Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
+            Text = StrFromArray(206, 78, 79, 92, 85, 94, 10, 78, 132, 118, 251, 78, 15, 97, 77, 79, 110, 127, 9, 144, 233, 98, 0, 78, 205, 121, 156, 152, 114, 130, 22, 98, 9, 99, 32, 0, 69, 0, 115, 0, 99, 0, 32, 0, 46, 149, 214, 83, 136, 109) ' ANSI: "´ÓÆÁÄ»ÉÏµÄÈÎÒâÎ»ÖÃÑ¡ÔñÒ»ÖÖÑÕÉ«»ò°´ Esc ¼üÈ¡Ïû"
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTipText ' English: "Choose a color from the screen"
+            Text = StrFromArray(206, 78, 79, 92, 85, 94, 45, 78, 9, 144, 233, 98, 0, 78, 205, 121, 156, 152, 114, 130) ' ANSI: "´ÓÆÁÄ»ÖÐÑ¡ÔñÒ»ÖÖÑÕÉ«"
+        Case cdUIT_frmColorDialog_lblRed_Caption ' English: "Red:"
+            Text = StrFromArray(162, 126, 114, 130, 58, 0) ' ANSI: "ºìÉ«:"
+        Case cdUIT_frmColorDialog_lblGreen_Caption ' English: "Green:"
+            Text = StrFromArray(255, 126, 114, 130, 58, 0) ' ANSI: "ÂÌÉ«:"
+        Case cdUIT_frmColorDialog_lblBlue_Caption ' English: "Blue:"
+            Text = StrFromArray(221, 132, 114, 130, 58, 0) ' ANSI: "À¶É«:"
+        Case cdUIT_frmColorDialog_lblHex_Caption ' English: "Hex:"
+            Text = StrFromArray(65, 83, 109, 81, 219, 143, 54, 82, 58, 0) ' ANSI: "Ê®Áù½øÖÆ:"
+        Case cdUIT_frmColorDialog_lblHue_Caption ' English: "Hue:"
+            Text = StrFromArray(114, 130, 3, 140, 58, 0) ' ANSI: "É«µ÷:"
+        Case cdUIT_frmColorDialog_lblSaturation_Caption ' English: "Sat.:"
+            Text = StrFromArray(113, 153, 140, 84, 166, 94, 58, 0) ' ANSI: "±¥ºÍ¶È:"
+        Case cdUIT_frmColorDialog_Luminance_Caption ' English: "Lum.:"
+            Text = StrFromArray(174, 78, 166, 94, 58, 0) ' ANSI: "ÁÁ¶È:"
+        Case cdUIT_frmColorDialog_Value_Caption ' English: "Value:"
+            Text = StrFromArray(60, 80, 58, 0) ' ANSI: "Öµ:"
+        Case cdUIT_frmColorDialog_lblColorSystem_Caption ' English: "Mode:"
+            Text = StrFromArray(33, 106, 15, 95, 58, 0) ' ANSI: "Ä£Ê½:"
+        Case cdUIT_frmColorDialog_lblPalette_Caption ' English: "Palette:"
+            Text = StrFromArray(3, 140, 114, 130, 127, 103, 58, 0) ' ANSI: "µ÷É«°å:"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem1 ' English: "Wheel, fixed"
+            Text = StrFromArray(216, 118, 44, 0, 32, 0, 250, 86, 154, 91) ' ANSI: "ÅÌ, ¹Ì¶¨"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem2 ' English: "Box, fixed"
+            Text = StrFromArray(70, 104, 44, 0, 32, 0, 250, 86, 154, 91) ' ANSI: "¿ò, ¹Ì¶¨"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem3 ' English: "Wheel, dynamic"
+            Text = StrFromArray(216, 118, 44, 0, 32, 0, 168, 82, 1, 96, 132, 118) ' ANSI: "ÅÌ, ¶¯Ì¬µÄ"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem4 ' English: "Box, dynamic"
+            Text = StrFromArray(70, 104, 44, 0, 32, 0, 168, 82, 1, 96, 132, 118) ' ANSI: "¿ò, ¶¯Ì¬µÄ"
+        Case cdUIT_frmColorDialog_InvalidColorMessage ' English: "The color is not valid."
+            Text = StrFromArray(156, 152, 114, 130, 224, 101, 72, 101) ' ANSI: "ÑÕÉ«ÎÞÐ§"
+        Case cdUIT_frmColorDialog_ParameterFullName_Hue ' English: "Hue"
+            Text = StrFromArray(114, 130, 3, 140) ' ANSI: "É«µ÷"
+        Case cdUIT_frmColorDialog_ParameterFullName_Luminance ' English: "Luminance"
+            Text = StrFromArray(174, 78, 166, 94) ' ANSI: "ÁÁ¶È"
+        Case cdUIT_frmColorDialog_ParameterFullName_Saturation ' English: "Saturation"
+            Text = StrFromArray(113, 153, 140, 84, 166, 94) ' ANSI: "±¥ºÍ¶È"
+        Case cdUIT_frmColorDialog_ParameterFullName_Red ' English: "Red"
+            Text = StrFromArray(162, 126, 114, 130) ' ANSI: "ºìÉ«"
+        Case cdUIT_frmColorDialog_ParameterFullName_Green ' English: "Green"
+            Text = StrFromArray(255, 126, 114, 130) ' ANSI: "ÂÌÉ«"
+        Case cdUIT_frmColorDialog_ParameterFullName_Blue ' English: "Blue"
+            Text = StrFromArray(221, 132, 114, 130) ' ANSI: "À¶É«"
+        Case cdUIT_frmColorDialog_ParameterFullName_Value ' English: "Value"
+            Text = StrFromArray(60, 80) ' ANSI: "Öµ"
+        Case cdUIT_frmColorDialog_OK ' English: "OK"
+            Text = StrFromArray(110, 120, 154, 91) ' ANSI: "È·¶¨"
+        Case cdUIT_frmColorDialog_Cancel ' English: "Cancel"
+            Text = StrFromArray(214, 83, 136, 109) ' ANSI: "È¡Ïû"
+        Case cdUIT_frmColorDialog_Close ' English: "Close"
+            Text = StrFromArray(115, 81, 237, 149) ' ANSI: "¹Ø±Õ"
     End Select
 End Sub
 
@@ -574,9 +703,9 @@ Private Sub SetUILanguageToWindowsUILanguage()
     End If
     mUIRightToLeft = IsLanguagueRightToLeft(MAKELANGID(mUILanguage, mUISubLanguage))
     
-#Const TestingLanguages = 0
+#Const TestingLanguages = 1
 #If TestingLanguages Then
-    mUILanguage = bsLang_ENGLISH ' bsLang_FRENCH 'bsLang_ENGLISH
+    mUILanguage = bsLang_CHINESE_SIMPLIFIED ' bsLang_FRENCH 'bsLang_ENGLISH
 #End If
 End Sub
 
@@ -584,7 +713,7 @@ Private Function LanguageIsSupported(nLang As Long) As Boolean
     Dim c As Long
     
     Select Case nLang
-        Case bsLang_ENGLISH, bsLang_SPANISH, bsLang_FRENCH
+        Case bsLang_CHINESE_SIMPLIFIED, bsLang_ENGLISH, bsLang_SPANISH, bsLang_FRENCH
             LanguageIsSupported = True
     End Select
 End Function
@@ -593,6 +722,8 @@ Public Property Get LanguageIsUnicode() As Boolean
     Select Case mUILanguage
         'Case bsLang_CHINESE_SIMPLIFIED, bsLang_HEBREW, bsLang_ARABIC, bsLang_GREEK
         '    LanguageIsUnicode = True
+        Case bsLang_CHINESE_SIMPLIFIED
+            LanguageIsUnicode = True
     End Select
 End Property
 

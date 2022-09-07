@@ -1160,14 +1160,14 @@ Private Function IsHwndOfCodeWindowWatched(nHwnd As Long) As Boolean
 End Function
 
 Private Function GetWindowClassName(nHwnd As Long) As String
-    Dim iClassName As String
+    Dim iClassname As String
     Dim iSize As Long
     
     If nHwnd = 0 Then Exit Function
     
-    iClassName = Space(64)
-    iSize = GetClassName(nHwnd, iClassName, Len(iClassName))
-    GetWindowClassName = Left$(iClassName, iSize)
+    iClassname = Space(64)
+    iSize = GetClassName(nHwnd, iClassname, Len(iClassname))
+    GetWindowClassName = Left$(iClassname, iSize)
 End Function
 
 Private Function GetWindowCaption(nHwnd As Long) As String

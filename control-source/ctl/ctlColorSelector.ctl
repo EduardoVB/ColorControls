@@ -89,7 +89,6 @@ Begin VB.UserControl ColorSelector
       Height          =   336
       Left            =   2328
       TabIndex        =   3
-      ToolTipText     =   "Select parameter"
       Top             =   2328
       Visible         =   0   'False
       Width           =   900
@@ -101,7 +100,6 @@ Begin VB.UserControl ColorSelector
       Height          =   348
       Left            =   96
       TabIndex        =   7
-      ToolTipText     =   "Reflects color changes visually or not"
       Top             =   72
       Visible         =   0   'False
       Width           =   600
@@ -219,6 +217,12 @@ Begin VB.UserControl ColorSelector
          Y2              =   68
       End
    End
+   Begin ColorControls.ToolTipHandler ToolTipHandler1 
+      Left            =   3240
+      Top             =   1620
+      _ExtentX        =   720
+      _ExtentY        =   720
+   End
 End
 Attribute VB_Name = "ColorSelector"
 Attribute VB_GlobalNameSpace = False
@@ -334,7 +338,7 @@ Private Type POINTAPI
     Y As Long
 End Type
 
-Private Declare Function Polygon Lib "gdi32" (ByVal hDC As Long, lpPoint As POINTAPI, ByVal nCount As Long) As Long
+Private Declare Function Polygon Lib "gdi32" (ByVal HDC As Long, lpPoint As POINTAPI, ByVal nCount As Long) As Long
 Private Declare Sub ClipCursor Lib "user32" (lpRect As Any)
 Private Declare Sub GetClientRect Lib "user32" (ByVal hWnd As Long, lpRect As RECT)
 Private Declare Sub ClientToScreen Lib "user32" (ByVal hWnd As Long, lpPoint As POINTAPI)
@@ -371,7 +375,7 @@ End Type
 
 Private Declare Function GetDIBits Lib "gdi32" (ByVal aHDC As Long, ByVal hBitmap As Long, ByVal nStartScan As Long, ByVal nNumScans As Long, lpBits As Any, lpBI As BITMAPINFOHEADER, ByVal wUsage As Long) As Long
 Private Declare Function GetObject Lib "gdi32" Alias "GetObjectA" (ByVal hObject As Long, ByVal nCount As Long, lpObject As Any) As Long
-Private Declare Function SetDIBitsToDevice Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, ByVal dx As Long, ByVal dy As Long, ByVal SrcX As Long, ByVal SrcY As Long, ByVal Scan As Long, ByVal NumScans As Long, Bits As Any, BitsInfo As BITMAPINFOHEADER, ByVal wUsage As Long) As Long
+Private Declare Function SetDIBitsToDevice Lib "gdi32" (ByVal HDC As Long, ByVal X As Long, ByVal Y As Long, ByVal dX As Long, ByVal dY As Long, ByVal SrcX As Long, ByVal SrcY As Long, ByVal Scan As Long, ByVal NumScans As Long, Bits As Any, BitsInfo As BITMAPINFOHEADER, ByVal wUsage As Long) As Long
 
 Private WithEvents mForm As Form
 Attribute mForm.VB_VarHelpID = -1
@@ -759,7 +763,7 @@ Private Sub UserControl_InitProperties()
     End If
     If mForm Is Nothing Then mDrawEnabled = True
     mPropertiesAreSet = True
-    Init
+    init
     mRaiseEvents = True
     DoSubclass
 End Sub
@@ -854,7 +858,7 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     If mForm Is Nothing Then mDrawEnabled = True
     On Error GoTo 0
     mPropertiesAreSet = True
-    Init
+    init
     mRaiseEvents = True
     DoSubclass
 End Sub
@@ -1016,7 +1020,7 @@ Private Sub SetPicShades()
     End If
 End Sub
 
-Private Sub Init()
+Private Sub init()
     Dim iColor As Long
     Dim iRedrawPrev As Boolean
     
@@ -1117,7 +1121,7 @@ Private Sub InitPalette()
         .biSizeImage = ((.biWidth * 4 + 3) And &HFFFFFFFC) * .biHeight
     End With
     ReDim mPixelsBytes(Len(mBMPiH) + mBMPiH.biSizeImage)
-    GetDIBits picAux.hDC, IPic.Handle, 0, iBMP.bmHeight, mPixelsBytes(0), mBMPiH, DIB_RGB_COLORS
+    GetDIBits picAux.HDC, IPic.Handle, 0, iBMP.bmHeight, mPixelsBytes(0), mBMPiH, DIB_RGB_COLORS
     
     mBMPHeight = iBMP.bmHeight
     mBMPWidth = iBMP.bmWidth
@@ -1160,7 +1164,7 @@ Private Sub InitPalette()
         .biSizeImage = ((.biWidth * 4 + 3) And &HFFFFFFFC) * .biHeight
     End With
     ReDim iPixelsBytes(Len(iBMPiH) + iBMPiH.biSizeImage)
-    GetDIBits picAux.hDC, IPic.Handle, 0, iBMP.bmHeight, iPixelsBytes(0), iBMPiH, DIB_RGB_COLORS
+    GetDIBits picAux.HDC, IPic.Handle, 0, iBMP.bmHeight, iPixelsBytes(0), iBMPiH, DIB_RGB_COLORS
     
     iCenterX = mCx * 100 - 50
     iCenterY = mCy * 100 - 50
@@ -1760,7 +1764,7 @@ Private Sub DrawPalette()
         Next t
     End If
     
-    SetDIBitsToDevice picPalette.hDC, 0, 0, mBMPWidth, mBMPHeight, 0, 0, 0, mBMPHeight, mPixelsBytes2(0), mBMPiH, DIB_RGB_COLORS
+    SetDIBitsToDevice picPalette.HDC, 0, 0, mBMPWidth, mBMPHeight, 0, 0, 0, mBMPHeight, mPixelsBytes2(0), mBMPiH, DIB_RGB_COLORS
     picPalette.Refresh
     SetPointer
 End Sub
@@ -2789,7 +2793,7 @@ Public Property Let BackColor(ByVal nValue As OLE_COLOR)
         mBackColor = nValue
         SetBackColor
         mDiameter = 0
-        Init
+        init
     End If
 End Property
 
@@ -3239,7 +3243,7 @@ Private Sub DrawSliderGrip()
     picSlider.DrawStyle = vbSolid
     picSlider.DrawWidth = 1
     picSlider.Cls
-    Polygon picSlider.hDC, iPoints(0), UBound(iPoints) + 1
+    Polygon picSlider.HDC, iPoints(0), UBound(iPoints) + 1
     picSlider.Refresh
 End Sub
 
@@ -3430,8 +3434,10 @@ End Function
 
 Private Sub SetCaptions()
     chkFixedPalette.Caption = GetLocalizedString1(cdUIT_ColorSelector_chkFixedPalette_Caption)
-    chkFixedPalette.ToolTipText = GetLocalizedString1(cdUIT_ColorSelector_chkFixedPalette_ToolTipText)
-    cboSliderParameter.ToolTipText = GetLocalizedString1(cdUIT_ColorSelector_cboSliderParameter_ToolTipText)
+    'chkFixedPalette.ToolTipText = GetLocalizedString1(cdUIT_ColorSelector_chkFixedPalette_ToolTipText)
+    'cboSliderParameter.ToolTipText = GetLocalizedString1(cdUIT_ColorSelector_cboSliderParameter_ToolTipText)
+    ToolTipHandler1.Add "chkFixedPalette", GetLocalizedString1(cdUIT_ColorSelector_chkFixedPalette_ToolTipText)
+    ToolTipHandler1.Add "cboSliderParameter", GetLocalizedString1(cdUIT_ColorSelector_cboSliderParameter_ToolTipText)
     lblMode.Caption = GetLocalizedString1(cdUIT_ColorSelector_lblMode_Caption)
     
     mParametersCaptions(0) = GetLocalizedString1(cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue)
@@ -3451,3 +3457,8 @@ Private Function GetLocalizedString1(nTextID As CDUserInterfaceTextIDConstants) 
     GetLocalizedString1 = GetLocalizedString(nTextID)
     RaiseEvent GetLocalizedText(LanguageWindowsUI, SubLanguageWindowsUI, nTextID, GetLocalizedString1)
 End Function
+
+Public Property Get Controls() As Object
+Attribute Controls.VB_MemberFlags = "40"
+    Set Controls = UserControl.Controls
+End Property

@@ -1,12 +1,17 @@
 Attribute VB_Name = "mAuxFunctions"
 Option Explicit
 
+Private Type POINTAPI
+    X As Long
+    Y As Long
+End Type
+
 Private Type OSVERSIONINFO 'for GetVersionEx API call
     dwOSVersionInfoSize As Long
     dwMajorVersion As Long
     dwMinorVersion As Long
     dwBuildNumber As Long
-    dwPlatformId As Long
+    dwPlatformID As Long
     szCSDVersion As String * 128
 End Type
 
@@ -21,6 +26,13 @@ Private Declare Function Process32First Lib "kernel32" (ByVal hSnapshot As Long,
 Private Declare Function Process32Next Lib "kernel32" (ByVal hSnapshot As Long, lppe As Any) As Long
 Private Declare Function CloseHandle Lib "kernel32" (ByVal hObject As Long) As Long
 Private Declare Function GetVersionEx Lib "kernel32" Alias "GetVersionExA" (lpVersionInformation As OSVERSIONINFO) As Long
+Private Declare Function GetActiveWindow Lib "user32" () As Long
+Private Declare Function GetCursorPos Lib "user32" (lpPoint As POINTAPI) As Long
+Private Declare Function ScreenToClient Lib "user32" (ByVal hWnd As Long, lpPoint As POINTAPI) As Long
+Private Declare Function WindowFromPoint Lib "user32" (ByVal xPoint As Long, ByVal yPoint As Long) As Long
+Private Declare Function GetWindowThreadProcessId Lib "user32" (ByVal hWnd As Long, lpdwProcessId As Long) As Long
+Private Declare Function GetClassName Lib "user32" Alias "GetClassNameA" (ByVal hWnd As Long, ByVal lpClassName As String, ByVal nMaxCount As Long) As Long
+Private Declare Function GetParent Lib "user32" (ByVal hWnd As Long) As Long
 
 Private Const MAX_PATH = 260
 
@@ -53,6 +65,7 @@ Private Const gstrSEP_DIRALT$ = "/"                      ' Alternate directory s
 'Private Const gstrSEP_EXT$ = "."                         ' Filename extension separator character
 Private Const gstrSEP_URLDIR$ = "/"                      ' Separator for dividing directories in URL addresses.
 
+Private mToolTipExCollection As New cToolTipExCollection
 
 Public Property Get ClientProductName() As String
     Static sAlreadySet As Boolean
@@ -194,7 +207,7 @@ Private Function IsWindowsNT() As Boolean
         osinfo.dwOSVersionInfoSize = 148
         osinfo.szCSDVersion = Space$(128)
         retvalue = GetVersionEx(osinfo)
-        If osinfo.dwPlatformId = 2 Then
+        If osinfo.dwPlatformID = 2 Then
             sValue = 2
         Else
             sValue = 1
@@ -245,4 +258,188 @@ Private Sub SeparatePathAndFileName(FullPath As String, _
         FileName = Mid$(FullPath, nSepPos + 1)
     End If
 End Sub
+
+Public Function ShowToolTipEx(nTipText As String, Optional nTitle As String, Optional nStyle As vbExBalloonTooltipStyleConstants = vxTTBalloon, Optional nCloseButton As Boolean, Optional nIcon As vbExBalloonTooltipIconConstants = vxTTNoIcon, Optional nDelayTimeSeconds As Variant, Optional nVisibleTimeSeconds As Variant, Optional nPositionX As Variant, Optional nPositionY As Variant, Optional nPositionIsRelative As Boolean, Optional nWidth As Variant, Optional nBackColor As Variant, Optional nForeColor As Variant, Optional nClosePrevious As Boolean = True, Optional nRestrictMouseMoveToTwips As Long = 300, Optional nRightToLeft As Boolean) As cToolTipEx
+    Dim iPt As POINTAPI
+    Dim iDelayTimeSeconds As Variant
+    Dim iVisibleTimeSeconds As Variant
+    Dim iPositionX As Variant
+    Dim iPositionY As Variant
+    Dim iWidth As Variant
+    Dim iBackColor As Variant
+    Dim iForeColor As Variant
+    Dim iCBT As cToolTipEx
+    Dim iParentHwnd As Long
+    
+    iParentHwnd = GetFormUnderMouseHwnd
+    If (iParentHwnd = 0) Then
+        iParentHwnd = GetActiveWindow
+    ElseIf Not IsWindowLocal(iParentHwnd) Then
+        iParentHwnd = GetActiveWindow
+    End If
+    If iParentHwnd = 0 Then Exit Function
+    
+    If nPositionIsRelative Then
+        GetCursorPos iPt
+        ScreenToClient iParentHwnd, iPt
+        
+        If Not IsMissing(nPositionX) Then
+            iPositionX = (iPt.X * Screen.TwipsPerPixelX) + nPositionX
+        End If
+        If Not IsMissing(nPositionY) Then
+            iPositionY = (iPt.Y * Screen.TwipsPerPixelY) + nPositionY
+        End If
+    Else
+        If Not IsMissing(nPositionX) Then
+            iPositionX = nPositionX
+        End If
+        If Not IsMissing(nPositionY) Then
+            iPositionY = nPositionY
+        End If
+    End If
+    If Not IsMissing(nDelayTimeSeconds) Then
+        iDelayTimeSeconds = nDelayTimeSeconds
+    End If
+    If Not IsMissing(nVisibleTimeSeconds) Then
+        iVisibleTimeSeconds = nVisibleTimeSeconds
+    End If
+    If Not IsMissing(nWidth) Then
+        iWidth = nWidth
+    End If
+    If Not IsMissing(nBackColor) Then
+        iBackColor = nBackColor
+    End If
+    If Not IsMissing(nForeColor) Then
+        iForeColor = nForeColor
+    End If
+    
+    For Each iCBT In mToolTipExCollection.GetCollection
+        If iCBT.ParentHwnd = iParentHwnd Then
+            If iCBT.TipText = nTipText Then
+                If iCBT.Title = nTitle Then
+                    If iCBT.BackColor = iBackColor Then
+                        If iCBT.ForeColor = iForeColor Then
+                            If iCBT.CloseButton = nCloseButton Then
+                                If iCBT.DelayTimeSeconds = iDelayTimeSeconds Then
+                                    If iCBT.VisibleTimeSeconds = iVisibleTimeSeconds Then
+                                        If iCBT.Icon = nIcon Then
+                                            If iCBT.PositionX = iPositionX Then
+                                                If iCBT.PositionY = iPositionY Then
+                                                    If iCBT.Style = nStyle Then
+                                                        If iCBT.RightToLeft = nRightToLeft Then
+                                                            If iCBT.Width = iWidth Then
+                                                                If iCBT.RestrictMouseMoveToTwips = nRestrictMouseMoveToTwips Then
+                                                                    iCBT.Reset
+                                                                    Set ShowToolTipEx = iCBT
+                                                                    Exit For
+                                                                End If
+                                                            End If
+                                                        End If
+                                                    End If
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    Next
+    
+    If ShowToolTipEx Is Nothing Then
+        If nClosePrevious Then
+            For Each iCBT In mToolTipExCollection.GetCollection
+                If iCBT.ParentHwnd = iParentHwnd Then
+                    iCBT.CloseTip
+                End If
+            Next
+        End If
+        Set iCBT = New cToolTipEx
+        iCBT.TipText = nTipText
+        iCBT.Title = nTitle
+        iCBT.BackColor = iBackColor
+        iCBT.ForeColor = iForeColor
+        iCBT.CloseButton = nCloseButton
+        iCBT.DelayTimeSeconds = iDelayTimeSeconds
+        iCBT.VisibleTimeSeconds = iVisibleTimeSeconds
+        iCBT.Icon = nIcon
+        iCBT.PositionX = iPositionX
+        iCBT.PositionY = iPositionY
+        iCBT.Style = nStyle
+        iCBT.Width = iWidth
+        iCBT.RightToLeft = nRightToLeft
+        iCBT.RestrictMouseMoveToTwips = nRestrictMouseMoveToTwips
+        Set iCBT.TTCollection = mToolTipExCollection
+        iCBT.Create iParentHwnd
+        
+        mToolTipExCollection.Add iCBT, iCBT.ToolTipHwnd
+        
+        Set ShowToolTipEx = iCBT
+    End If
+End Function
+
+Public Function GetFormUnderMouseHwnd() As Long
+    GetFormUnderMouseHwnd = WindowUnderMouseHwnd
+    If Not IsWindowAForm(GetFormUnderMouseHwnd) Then
+        GetFormUnderMouseHwnd = GetParentFormHwnd(GetFormUnderMouseHwnd)
+        If Not IsWindowAForm(GetFormUnderMouseHwnd) Then
+            GetFormUnderMouseHwnd = 0
+        End If
+    End If
+End Function
+
+Public Function WindowUnderMouseHwnd() As Long
+    Dim iP As POINTAPI
+    
+    GetCursorPos iP
+    WindowUnderMouseHwnd = WindowFromPoint(iP.X, iP.Y)
+    
+End Function
+
+Public Function IsWindowLocal(ByVal hWnd As Long) As Boolean
+    Dim idWnd As Long
+    Call GetWindowThreadProcessId(hWnd, idWnd)
+    IsWindowLocal = (idWnd = GetCurrentProcessId())
+End Function
+
+Public Function IsWindowAForm(nHwnd As Long) As Boolean
+    Dim iClassname As String
+    
+    If nHwnd = 0 Then Exit Function
+    
+    iClassname = GetWindowClassName(nHwnd)
+    IsWindowAForm = (iClassname = "ThunderRT6FormDC") Or (iClassname = "ThunderFormDC") Or (iClassname = "ThunderForm")
+    
+End Function
+
+Public Function GetWindowClassName(nHwnd As Long) As String
+    Dim iClassname As String
+    Dim iSize As Long
+
+    If nHwnd = 0 Then Exit Function
+
+    iClassname = Space$(64)
+    iSize = GetClassName(nHwnd, iClassname, Len(iClassname))
+    GetWindowClassName = Left$(iClassname, iSize)
+
+End Function
+
+Public Function GetParentFormHwnd(nControlHwnd As Long) As Long
+    Dim lPar As Long
+    Dim iHwnd As Long
+    
+    iHwnd = nControlHwnd
+    lPar = GetParent(iHwnd)
+    While lPar <> 0
+        
+        If IsWindowAForm(lPar) Then
+            iHwnd = lPar
+        End If
+        lPar = GetParent(lPar)
+    Wend
+    GetParentFormHwnd = iHwnd
+End Function
 
