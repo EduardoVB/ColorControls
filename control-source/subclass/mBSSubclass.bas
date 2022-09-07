@@ -295,7 +295,7 @@ Sub AttachMessage(iwp As IBSSubclass, ByVal hWnd As Long, ByVal iMsg As Long)
     Dim msgClass As Long
     Dim iLng As Long
 
-'    If InIDE Then Exit Sub
+    If InIDE Then Exit Sub
     If Not mPropsDatabaseChecked Then
          CheckPropsDatabase
     End If

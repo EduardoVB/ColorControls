@@ -1841,33 +1841,6 @@ Private Sub PositionControls()
     iLastTop = ColorSelector1.Top + ColorSelector1.Height
     
     If mBasicColorsVisible Then
-        If mSizeBig Then
-            If mBasicColorsVisible Then
-                picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + (ColorSelector1.SliderControlWidth - picSelection.Width) / 2
-            Else
-                picSelection.Left = 3900
-            End If
-        Else
-            If (mRecentColorsColumns > 0) Or (Not mEyeDropperVisible) Then
-                picSelection.Left = picBasicColorsContainer.Left + (picBasicColorsContainer.Width - picSelection.Width) / 2
-            Else
-                picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + (ColorSelector1.SliderControlWidth - picSelection.Width) / 2
-            End If
-        End If
-    Else
-        If (mSliderOptionsAvailable <> cdSliderOptionsNone) Then
-            If ColorSelector1.Style = cdStyleWheel Then
-                picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderParameterControlLeft + ColorSelector1.SliderParameterControlWidth / 2 - ColorSelector1.SliderParameterControlWidth / 2
-                picSelection.Width = ColorSelector1.SliderParameterControlWidth
-            Else
-                picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + ColorSelector1.SliderControlWidth / 2 - picSelection.Width / 2
-            End If
-        Else
-            picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + ColorSelector1.SliderControlWidth / 2 - picSelection.Width / 2
-        End If
-    End If
-    
-    If mBasicColorsVisible Then
         picBasicColorsContainer.Left = ColorSelector1.Width + 170
         picBasicColorsContainer.Visible = True
         If mRecentColorsColumns = 0 Then
@@ -1885,6 +1858,44 @@ Private Sub PositionControls()
         End If
     End If
     
+    If mBasicColorsVisible Then
+        If mSizeBig Then
+            If mBasicColorsVisible Then
+                If (mRecentColorsColumns > 0) Or (Not mEyeDropperVisible) Then
+                    picSelection.Left = picBasicColorsContainer.Left + (picBasicColorsContainer.Width - picSelection.Width) / 2
+                Else
+                    picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + (ColorSelector1.SliderControlWidth - picSelection.Width) / 2
+                End If
+            Else
+                picSelection.Left = 3900
+            End If
+        Else
+            If (mRecentColorsColumns > 0) Or (Not mEyeDropperVisible) Then
+                picSelection.Left = picBasicColorsContainer.Left + (picBasicColorsContainer.Width - picSelection.Width) / 2
+            Else
+                picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + (ColorSelector1.SliderControlWidth - picSelection.Width) / 2
+            End If
+        End If
+    Else
+        If (mSliderOptionsAvailable <> cdSliderOptionsNone) Then
+            If mRecentColorsColumns > 1 Then
+                If mRecentColorsColumns < IIf(mSizeBig, 8, 5) Then
+                    picSelection.Left = picRecentContainer.Left + (picRecentContainer.Width - picSelection.Width) / 2
+                Else
+                    picSelection.Left = picRecentContainer.Left + 300
+                End If
+            Else
+                If ColorSelector1.Style = cdStyleWheel Then
+                    picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderParameterControlLeft + ColorSelector1.SliderParameterControlWidth / 2 - ColorSelector1.SliderParameterControlWidth / 2
+                    picSelection.Width = ColorSelector1.SliderParameterControlWidth
+                Else
+                    picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + ColorSelector1.SliderControlWidth / 2 - picSelection.Width / 2
+                End If
+            End If
+        Else
+            picSelection.Left = ColorSelector1.Left + ColorSelector1.SliderControlLeft + ColorSelector1.SliderControlWidth / 2 - picSelection.Width / 2
+        End If
+    End If
     
     If Not mColorValuesSectionVisible Then
         picColorValuesSection.Visible = False
@@ -1972,7 +1983,11 @@ Private Sub PositionControls()
                 
    '             End If
                 If mColorSelectionBoxVisible Then
-                    picEyeDropper.Move picRecentContainer.Left + (picRecentContainer.Width - picEyeDropper.Width) / 2, picSelection.Top + (picSelection.Height - picEyeDropper.Height) / 2
+                    If mRecentColorsColumns < IIf(mSizeBig, 6, 4) Then
+                        picEyeDropper.Move picRecentContainer.Left + (picRecentContainer.Width - picEyeDropper.Width) / 2, picSelection.Top + (picSelection.Height - picEyeDropper.Height) / 2
+                    Else
+                        picEyeDropper.Move picRecentContainer.Left + 480, picSelection.Top + (picSelection.Height - picEyeDropper.Height) / 2
+                    End If
                 Else
                     If mColorValuesSectionVisible Then
                         picEyeDropper.Move picRecentContainer.Left + (picRecentContainer.Width - picEyeDropper.Width) / 2, picColorValuesSection.Top + (picColorValuesSection.Height - picEyeDropper.Height) / 2
