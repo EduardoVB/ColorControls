@@ -2,10 +2,10 @@ VERSION 5.00
 Begin VB.Form frmColorDialog 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Color selection"
-   ClientHeight    =   6324
-   ClientLeft      =   5796
-   ClientTop       =   2076
-   ClientWidth     =   7668
+   ClientHeight    =   6312
+   ClientLeft      =   3948
+   ClientTop       =   900
+   ClientWidth     =   7656
    BeginProperty Font 
       Name            =   "Segoe UI"
       Size            =   9
@@ -17,12 +17,44 @@ Begin VB.Form frmColorDialog
    EndProperty
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
-   LockControls    =   -1  'True
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6324
-   ScaleWidth      =   7668
+   ScaleHeight     =   6312
+   ScaleWidth      =   7656
    ShowInTaskbar   =   0   'False
+   Begin VB.PictureBox picAuxEyeDrpperIcon24 
+      Height          =   372
+      Left            =   6660
+      Picture         =   "frmColorDialog.frx":0000
+      ScaleHeight     =   324
+      ScaleWidth      =   324
+      TabIndex        =   39
+      Top             =   5820
+      Visible         =   0   'False
+      Width           =   372
+   End
+   Begin VB.PictureBox picAuxEyeDrpperIcon20 
+      Height          =   372
+      Left            =   6180
+      Picture         =   "frmColorDialog.frx":128C
+      ScaleHeight     =   324
+      ScaleWidth      =   324
+      TabIndex        =   38
+      Top             =   5820
+      Visible         =   0   'False
+      Width           =   372
+   End
+   Begin VB.PictureBox picAuxEyeDrpperIcon16 
+      Height          =   372
+      Left            =   5700
+      Picture         =   "frmColorDialog.frx":1ED0
+      ScaleHeight     =   324
+      ScaleWidth      =   324
+      TabIndex        =   37
+      Top             =   5820
+      Visible         =   0   'False
+      Width           =   372
+   End
    Begin ColorControls.EyeDropper EyeDropper1 
       Left            =   5640
       Top             =   4440
@@ -42,16 +74,16 @@ Begin VB.Form frmColorDialog
       Visible         =   0   'False
       Width           =   492
       Begin VB.PictureBox picEyeDropperIcon 
+         AutoRedraw      =   -1  'True
          BackColor       =   &H00C0C0C0&
          BorderStyle     =   0  'None
-         Height          =   384
+         Height          =   400
          Left            =   48
-         Picture         =   "frmColorDialog.frx":0000
-         ScaleHeight     =   384
-         ScaleWidth      =   384
+         ScaleHeight     =   396
+         ScaleWidth      =   396
          TabIndex        =   36
          Top             =   48
-         Width           =   384
+         Width           =   400
       End
    End
    Begin VB.PictureBox picBasicColorsContainer 
@@ -455,13 +487,13 @@ Begin VB.Form frmColorDialog
       MaxLength       =   11
    End
    Begin ColorControls.ColorSelector ColorSelector1 
-      Height          =   3936
+      Height          =   4224
       Left            =   120
       TabIndex        =   0
       Top             =   144
-      Width           =   4764
-      _ExtentX        =   7959
-      _ExtentY        =   6943
+      Width           =   5052
+      _ExtentX        =   8467
+      _ExtentY        =   7451
    End
    Begin ColorControls.LabelW lblTT2 
       Height          =   204
@@ -647,6 +679,12 @@ Private Declare Function TranslateColor Lib "olepro32.dll" Alias "OleTranslateCo
 Private Declare Function HashData Lib "shlwapi" (ByVal pbData As Long, ByVal cbData As Long, ByRef pbHash As Any, ByVal cbHash As Long) As Long
 Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
 Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+Private Declare Function GetDpiForWindow Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
+Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
+Private Declare Function GetPixel Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long) As Long
+Private Declare Function DeleteDC Lib "gdi32.dll" (ByVal hDC As Long) As Long
+Private Declare Function TransparentBlt Lib "msimg32.dll" (ByVal hdcDest As Long, ByVal nXOriginDest As Long, ByVal nYOriginDest As Long, ByVal nWidthDest As Long, ByVal nHeightDest As Long, ByVal hdcSrc As Long, ByVal nXOriginSrc As Long, ByVal nYOriginSrc As Long, ByVal nWidthSrc As Long, ByVal nHeightSrc As Long, ByVal crTransparent As Long) As Long
 
 Private Const GWL_STYLE = (-16)
 Private Const WS_CAPTION = &HC00000
@@ -734,6 +772,10 @@ Private mSubclassed As Boolean
 Private mFormHwnd As Long
 Private mEyeDropping As Boolean
 Private mLoading As Boolean
+Private mIsWindows10 As Boolean
+Private mPicAuxEyeDrpperBackPicture As StdPicture
+Private mPicAuxEyeDrpperBackPicture_Factor As Long
+Private mPicAuxEyeDrpperBackPicture_MaskColor As Long
 
 Private Sub cboColorSystem_Click()
     ColorSelector1.ColorSystem = cboColorSystem.ListIndex
@@ -928,6 +970,7 @@ End Sub
 Private Sub EyeDropper1_UnderMouseColor(nColor As Long)
     picEyeDropper.BackColor = nColor
     picEyeDropperIcon.BackColor = picEyeDropper.BackColor
+    DrawEyeDropperBackPicture
     If Not mRoundedBoxes Then
         picEyeDropper.Line (0, 0)-(picEyeDropper.ScaleWidth, picEyeDropper.ScaleHeight), vbActiveBorder, B
     End If
@@ -939,6 +982,7 @@ Private Sub Form_Initialize()
     mColorSelectionBoxVisible = cPropDefault_ColorDialog_ColorSelectionBoxVisible
     mHexControlVisible = cPropDefault_ColorDialog_HexControlVisible
     mHexFormatVB = cPropDefault_ColorDialog_HexFormatVB
+    mIsWindows10 = IsFunctionExported("GetDpiForWindow", "User32")
 End Sub
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
@@ -959,10 +1003,13 @@ Private Sub Form_Load()
     Dim iLeft As Single
     
     mLoading = True
+    mFormHwnd = Me.hWnd
     Set Me.Icon = Nothing
     SetBackColor
     SetCaptions
     SetTxtHeights
+    SetEyeDropperBackPicture
+    DrawEyeDropperBackPicture
     If (Not mDialogCaptionVisible) Then SetWindowLong Me.hWnd, GWL_STYLE, GetWindowLong(Me.hWnd, GWL_STYLE) And Not (WS_CAPTION Or WS_THICKFRAME)
     If Not mConfirmationButtonsVisible Then
         cmdOK.Visible = False
@@ -1009,7 +1056,6 @@ Private Sub Form_Load()
     
     ColorSelector1.Redraw = True
     
-    mFormHwnd = Me.hWnd
     AttachMessage Me, mFormHwnd, WM_NCACTIVATE
     mSubclassed = True
     mLoading = False
@@ -1125,6 +1171,7 @@ Private Sub StartDropper()
         picEyeDropper.BackColor = Val(picEyeDropper.Tag)
         picEyeDropperIcon.BackColor = picEyeDropper.BackColor
     End If
+    DrawEyeDropperBackPicture
     lblTT2.Visible = False
     mEyeDropping = False
 End Sub
@@ -2372,4 +2419,77 @@ Private Sub SetTxtHeights()
     lblHue.Move txtHue.Left - lblHue.Width - 36, txtHue.Top + (txtHue.Height - lblHue.Height) / 2
     lblSat.Move txtSat.Left - lblSat.Width - 36, txtSat.Top + (txtSat.Height - lblSat.Height) / 2
     lblLum.Move txtLum.Left - lblLum.Width - 36, txtLum.Top + (txtLum.Height - lblLum.Height) / 2
+End Sub
+
+Private Sub SetEyeDropperBackPicture()
+    Dim iTx As Single
+    
+    If mIsWindows10 Then
+        iTx = 1440 / GetDpiForWindow(mFormHwnd)
+    Else
+        iTx = Screen.TwipsPerPixelX * DPICorrectionFactor
+    End If
+        
+    If iTx >= 15 Then ' 96 DPI
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon16.Picture
+        mPicAuxEyeDrpperBackPicture_Factor = 1
+    ElseIf iTx >= 12 Then ' 120 DPI
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon20.Picture
+        mPicAuxEyeDrpperBackPicture_Factor = 1
+    ElseIf iTx >= 10 Then ' 144 DPI
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon24.Picture
+        mPicAuxEyeDrpperBackPicture_Factor = 1
+    ElseIf iTx >= 7 Then ' 192 DPI
+        mPicAuxEyeDrpperBackPicture_Factor = 2
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon16.Picture
+    ElseIf iTx >= 6 Then
+        mPicAuxEyeDrpperBackPicture_Factor = 2
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon20.Picture
+    ElseIf iTx >= 5 Then
+        mPicAuxEyeDrpperBackPicture_Factor = 2
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon24.Picture
+    ElseIf iTx >= 4 Then  ' 289 to 360 DPI
+        mPicAuxEyeDrpperBackPicture_Factor = 3
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon20.Picture
+    ElseIf iTx >= 3 Then   ' 361 to 480 DPI
+        mPicAuxEyeDrpperBackPicture_Factor = 3
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon24.Picture
+    ElseIf iTx >= 2 Then   ' 481 to 720 DPI
+        mPicAuxEyeDrpperBackPicture_Factor = 5
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon20.Picture
+    Else ' greater than 720 DPI
+        mPicAuxEyeDrpperBackPicture_Factor = 10
+        Set mPicAuxEyeDrpperBackPicture = picAuxEyeDrpperIcon24.Picture
+    End If
+    
+    ' get MaskColor
+    Dim hdcSrc As Long
+    Dim hOldob As Long
+    Dim iW As Long
+    Dim iH As Long
+    Dim iLng As Long
+    
+    iW = ScaleX(mPicAuxEyeDrpperBackPicture.Width, vbHimetric, vbPixels) / DPICorrectionFactor - 1
+    iH = ScaleY(mPicAuxEyeDrpperBackPicture.Height, vbHimetric, vbPixels) / DPICorrectionFactor - 1
+    hdcSrc = CreateCompatibleDC(0)
+    hOldob = SelectObject(hdcSrc, mPicAuxEyeDrpperBackPicture.Handle)
+    mPicAuxEyeDrpperBackPicture_MaskColor = GetPixel(hdcSrc, 2, 2)
+    SelectObject hdcSrc, hOldob
+    DeleteDC hdcSrc
+End Sub
+
+Private Sub DrawEyeDropperBackPicture()
+    Dim iPicWidth As Long
+    Dim iPicHeight As Long
+    Dim hdcSrc As Long
+    Dim hOldob As Long
+    
+    iPicWidth = ScaleX(mPicAuxEyeDrpperBackPicture.Width, vbHimetric, vbPixels) * mPicAuxEyeDrpperBackPicture_Factor / DPICorrectionFactor
+    iPicHeight = ScaleY(mPicAuxEyeDrpperBackPicture.Height, vbHimetric, vbPixels) * mPicAuxEyeDrpperBackPicture_Factor / DPICorrectionFactor
+    
+    hdcSrc = CreateCompatibleDC(0)
+    hOldob = SelectObject(hdcSrc, mPicAuxEyeDrpperBackPicture.Handle)
+    TransparentBlt picEyeDropperIcon.hDC, 0, 0, iPicWidth, iPicHeight, hdcSrc, 0, 0, iPicWidth / mPicAuxEyeDrpperBackPicture_Factor, iPicHeight / mPicAuxEyeDrpperBackPicture_Factor, mPicAuxEyeDrpperBackPicture_MaskColor
+    SelectObject hdcSrc, hOldob
+    DeleteDC hdcSrc
 End Sub
