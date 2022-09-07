@@ -703,7 +703,7 @@ Private Sub SetUILanguageToWindowsUILanguage()
     End If
     mUIRightToLeft = IsLanguagueRightToLeft(MAKELANGID(mUILanguage, mUISubLanguage))
     
-#Const TestingLanguages = 1
+#Const TestingLanguages = 0
 #If TestingLanguages Then
     mUILanguage = bsLang_CHINESE_SIMPLIFIED ' bsLang_FRENCH 'bsLang_ENGLISH
 #End If
