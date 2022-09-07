@@ -969,7 +969,7 @@ Private Sub Form_Load()
         cmdCancel.Visible = False
     ElseIf mModeless Then
         cmdOK.Visible = False
-        cmdCancel.Caption = "Close"
+        cmdCancel.Caption = GetLocalizedString1(cdUIT_frmColorDialog_Close)
     End If
     ColorSelector1.Redraw = False
     ColorSelector1.SliderOptionsAvailable = mSliderOptionsAvailable
@@ -2317,8 +2317,8 @@ Private Sub SetCaptions()
     cboColorSystem.Clear
     cboColorSystem.AddItem GetLocalizedString1(cdUIT_ColorSelector_cboColorSystem_ListItem_HSV)
     cboColorSystem.AddItem GetLocalizedString1(cdUIT_ColorSelector_cboColorSystem_ListItem_HSL)
-    cmdOK.Caption = GetLocalizedString1(cdUIT_frmColorDialog_cmdOK_Caption)
-    cmdCancel.Caption = GetLocalizedString1(cdUIT_frmColorDialog_cmdCancel_Caption)
+    cmdOK.Caption = GetLocalizedString1(cdUIT_frmColorDialog_OK)
+    cmdCancel.Caption = GetLocalizedString1(cdUIT_frmColorDialog_Cancel)
     picEyeDropper.ToolTipText = GetLocalizedString1(cdUIT_frmColorDialog_picEyeDropper_ToolTiptext)
     picEyeDropperIcon.ToolTipText = GetLocalizedString1(cdUIT_frmColorDialog_picEyeDropper_ToolTiptext)
 End Sub

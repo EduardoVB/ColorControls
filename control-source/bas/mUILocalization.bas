@@ -205,8 +205,9 @@ Public Enum CDUserInterfaceTextIDConstants
     cdUIT_frmColorDialog_ParameterFullName_Green = 6504
     cdUIT_frmColorDialog_ParameterFullName_Blue = 6505
     cdUIT_frmColorDialog_ParameterFullName_Value = 6506
-    cdUIT_frmColorDialog_cmdOK_Caption = 6600
-    cdUIT_frmColorDialog_cmdCancel_Caption = 6700
+    cdUIT_frmColorDialog_OK = 6600
+    cdUIT_frmColorDialog_Cancel = 6700
+    cdUIT_frmColorDialog_Close = 6800
     
 End Enum
 
@@ -330,10 +331,12 @@ Private Sub Do_ENGLISH(ByRef TextID As Long, ByRef Text As String)
             Text = "Blue"
         Case cdUIT_frmColorDialog_ParameterFullName_Value
             Text = "Value"
-        Case cdUIT_frmColorDialog_cmdOK_Caption
+        Case cdUIT_frmColorDialog_OK
             Text = "OK"
-        Case cdUIT_frmColorDialog_cmdCancel_Caption
+        Case cdUIT_frmColorDialog_Cancel
             Text = "Cancel"
+        Case cdUIT_frmColorDialog_Close
+            Text = "Close"
     End Select
 End Sub
 
@@ -430,10 +433,12 @@ Private Sub Do_SPANISH(ByRef TextID As Long, ByRef Text As String)
             Text = "Azul"
         Case cdUIT_frmColorDialog_ParameterFullName_Value
             Text = "Valor"
-        Case cdUIT_frmColorDialog_cmdOK_Caption
+        Case cdUIT_frmColorDialog_OK
             Text = "Aceptar"
-        Case cdUIT_frmColorDialog_cmdCancel_Caption
+        Case cdUIT_frmColorDialog_Cancel
             Text = "Cancelar"
+        Case cdUIT_frmColorDialog_Close
+            Text = "Cerrar"
     End Select
 End Sub
 
@@ -529,10 +534,12 @@ Private Sub Do_FRENCH(ByRef TextID As Long, ByRef Text As String)
             Text = "Bleu"
         Case cdUIT_frmColorDialog_ParameterFullName_Value
             Text = "Valeur"
-        Case cdUIT_frmColorDialog_cmdOK_Caption
+        Case cdUIT_frmColorDialog_OK
             Text = "OK"
-        Case cdUIT_frmColorDialog_cmdCancel_Caption
+        Case cdUIT_frmColorDialog_Cancel
             Text = "Annuler"
+        Case cdUIT_frmColorDialog_Close
+            Text = "Fermer"
     End Select
 End Sub
 
