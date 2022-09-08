@@ -257,32 +257,6 @@ Attribute DblClick.VB_Description = "Occurs when the user presses and releases a
 Public Event GetLocalizedText(ByVal LanguageID As Long, ByVal SubLanguageID As Long, ByVal TextID As Long, ByRef Text As String)
 Attribute GetLocalizedText.VB_Description = "Occurs when setting a text for the IU. It allows to customize captions and texts."
 
-Public Enum CDYesNoAutoConstants
-    cdYNNo = 0
-    cdYNYes = 1
-    cdYNAuto = 2
-End Enum
-
-Public Enum CDStyleConstants
-    cdStyleWheel = 0
-    cdStyleBox = 1
-End Enum
-
-Public Enum CDColorSystemConstants
-    cdColorSystemHSV
-    cdColorSystemHSL
-End Enum
-
-Public Enum CDSliderParameterConstants
-    cdParameterHue = 0
-    cdParameterLuminance = 1
-    cdParameterValue = 1
-    cdParameterSaturation = 2
-    cdParameterRed = 3
-    cdParameterGreen = 4
-    cdParameterBlue = 5
-End Enum
-
 Private Enum CDCaptionsIDConstants
     cdCWCaptionHue ' Hue
     cdCWCaptionLum ' Lum
@@ -295,19 +269,6 @@ Private Enum CDCaptionsIDConstants
     cdCWCaptionFixedToolTipText ' Reflects color changes visually or not
     cdCWCaptionSliderParameterToolTipText ' Select parameter
     cdCWCaptionMode ' Mode
-End Enum
-
-Public Enum CDMouseWheelScrollConstants
-    cdMouseWheelNavigatingSlider
-    cdMouseWheelNavigatingAxial
-    cdMouseWheelNavigatingRadial
-End Enum
-
-Public Enum CDSliderOptionsAvailableConstants
-    cdSliderOptionsNone
-    cdSliderOptionsLumAndSat
-    cdSliderOptionsHueLumAndSat
-    cdSliderOptionsAll
 End Enum
 
 Private Declare Function CreateRoundRectRgn Lib "gdi32" (ByVal X1 As Long, ByVal Y1 As Long, ByVal X2 As Long, ByVal Y2 As Long, ByVal X3 As Long, ByVal Y3 As Long) As Long
