@@ -1855,13 +1855,15 @@ Private Sub PositionControls()
     Dim iLastTop As Long
     Const SM_CYCAPTION = 4
     
+    
     lblBasicColors.Left = (picBasicColorsContainer.ScaleWidth - lblBasicColors.Width) / 2
     If mRecentColorsColumns > 1 Then
+        ColorSelector1.Move 120, 120, ColorSelector1.Width, 3888
         picRecentContainer.Width = 780 + 570 * (mRecentColorsColumns - 1)
         lblRecent.Left = (picRecentContainer.ScaleWidth - lblRecent.Width) / 2
     End If
     If mSizeBig Then
-        ColorSelector1.Height = 5000
+        ColorSelector1.Move 120, 120, ColorSelector1.Width, 5000
         picColorValuesSection.Move 220, ColorSelector1.Height + 420
     Else
         picColorValuesSection.Move 220, ColorSelector1.Height + 360
