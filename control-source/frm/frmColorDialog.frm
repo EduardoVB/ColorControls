@@ -773,6 +773,7 @@ Private mIsWindows10 As Boolean
 Private mPicAuxEyeDrpperBackPicture As StdPicture
 Private mPicAuxEyeDrpperBackPicture_Factor As Long
 Private mPicAuxEyeDrpperBackPicture_MaskColor As Long
+Private mLastControlBottom As Long
 
 Private Sub cboColorSystem_Click()
     ColorSelector1.ColorSystem = cboColorSystem.ListIndex
@@ -828,8 +829,10 @@ Private Sub ColorSelector1_MouseWheelScroll(Axis As CDMouseWheelScrollConstants)
             If Not tmrDoNotShowTT.Enabled Then
                 If Not lblTT.Visible Then
                     SetMouseWheelTTText
-                    lblTT.Visible = True
-                    tmrHideTT.Enabled = True
+                    If (Me.ScaleHeight - mLastControlBottom) > lblTT.Height Then
+                        lblTT.Visible = True
+                        tmrHideTT.Enabled = True
+                    End If
                 End If
             End If
         End If
@@ -1154,7 +1157,26 @@ Private Sub StartDropper()
     lblTT2.Caption = GetLocalizedString1(cdUIT_frmColorDialog_EyeDropper_ToolTip)
     
     lblTT2.Move 90, Me.ScaleHeight - lblTT2.Height - 120
-    lblTT2.Visible = True
+    Do Until lblTT2.Top > (mLastControlBottom + 60)
+        If (lblTT2.Left + lblTT2.Width) > (Me.ScaleWidth - 100) Then Exit Do
+        lblTT2.Width = lblTT2.Width + 30
+        lblTT2.AutoSize = False
+        lblTT2.AutoSize = True
+        lblTT2.Move 90, Me.ScaleHeight - lblTT2.Height - 120
+    Loop
+    If cmdOK.Visible Then
+        Do Until (lblTT2.Left + lblTT2.Width) < (cmdOK.Left - 60)
+            lblTT2.Width = cmdOK.Left - lblTT2.Left - 60
+            lblTT2.Font.Size = lblTT2.Font.Size - 1
+            lblTT2.AutoSize = False
+            lblTT2.AutoSize = True
+            lblTT2.Move 90, Me.ScaleHeight - lblTT2.Height - 120
+            If lblTT2.Font.Size < 7 Then Exit Do
+        Loop
+    End If
+    If (Me.ScaleHeight - mLastControlBottom) > lblTT2.Height Then
+        lblTT2.Visible = True
+    End If
     picEyeDropper.Tag = picEyeDropper.BackColor
     If EyeDropper1.StartDropper Then
         ColorSelector1.Color = EyeDropper1.Color
@@ -2085,7 +2107,7 @@ Private Sub PositionControls()
     If mHexControlVisible Then HandleLastTopValue iLastTop, txtHex
     If mColorSystemControlVisible Then HandleLastTopValue iLastTop, cboColorSystem
     If mPaletteTypeControlVisible Then HandleLastTopValue iLastTop, cboPalette
-    If mEyeDropperVisible Then HandleLastTopValue iLastTop, picEyeDropper
+    
     If mColorSelectionBoxVisible Then
         HandleLastTopValue iLastTop, picSelection
         HandleLastTopValue iLastTop, lblPrevious
@@ -2094,6 +2116,9 @@ Private Sub PositionControls()
             iLastTop = iLastTop + 120
         End If
     End If
+    mLastControlBottom = iLastTop
+    If mEyeDropperVisible Then HandleLastTopValue iLastTop, picEyeDropper
+    
     If mConfirmationButtonsVisible Then
         If mDialogCaptionVisible Then
             iLastTop = iLastTop + 1240

@@ -1,3 +1,5 @@
+2022-09-09 Some minor adjustments/fixes.
+2022-09-09 Added Italian and Greek. 
 2022-09-07 Added Chinese language
 2022-09-07 Fix of the EyeDropper Image icon for adapting to different DPI settings.
 2022-09-07 Several improvements and some bux fixes.
