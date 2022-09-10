@@ -1,3 +1,6 @@
+2022-09-10 Added German translation.
+2022-09-10 Fixed a bug in tool tips
+2022-09-10 Added support for high contrast theme (high contrast theme in Windows is set with Shift+Alt+PrintScreen).
 2022-09-09 Some minor adjustments/fixes.
 2022-09-09 Added Italian and Greek. 
 2022-09-07 Added Chinese language

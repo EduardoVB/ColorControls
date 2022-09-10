@@ -207,7 +207,7 @@ Private mParentHwnd As Long ' hWnd of the window the tooltip attached to
 Private mTi As TOOLINFOW
 Private mOldOwner As Long
 Private mTTShown As Boolean
-Private mDetached As Boolean
+Private mAttached As Boolean
 Private mShowTime As Single
 Private mStartTime As Single
 Private mMouseStartPosition As POINTAPI
@@ -434,7 +434,7 @@ Public Function Create(ByVal nParentHwnd As Long) As Boolean
     AttachMessage Me, mParentHwnd, WM_DESTROY
     AttachMessage Me, mParentHwnd, WM_MOVE
     
-    mDetached = False
+    mAttached = True
     
     If mDelayTimeSecondsSng = 0 Then
 '        SendMessage mTTHwnd, TTM_TRACKACTIVATE, 1&, mTi
@@ -529,6 +529,7 @@ End Sub
 Public Sub CloseTip()
     RaiseEvent BeforeClose
     If mTTHwnd <> 0 Then
+        Detach
         SetOwner mTTHwnd, mOldOwner
         DestroyWindow mTTHwnd
         If Not mTTCollection Is Nothing Then
@@ -537,10 +538,23 @@ Public Sub CloseTip()
         End If
         mTTHwnd = 0
     End If
+
     DestroyTimers
     Set mFont = Nothing
     Set miFont = Nothing
     RaiseEvent Closed
+End Sub
+
+Private Sub Detach()
+    If mAttached Then
+        DetachMessage Me, mTTHwnd, WM_DESTROY
+        DetachMessage Me, mTTHwnd, WM_WINDOWPOSCHANGED
+        DetachMessage Me, mTTHwnd, WM_LBUTTONDOWN
+        DetachMessage Me, mParentHwnd, WM_WINDOWPOSCHANGED
+        DetachMessage Me, mParentHwnd, WM_DESTROY
+        DetachMessage Me, mParentHwnd, WM_MOVE
+        mAttached = False
+    End If
 End Sub
 
 Private Sub DestroyTimers()
@@ -601,33 +615,13 @@ Private Function IBSSubclass_WindowProc(ByVal hWnd As Long, ByVal iMsg As Long, 
     
     Select Case iMsg
         Case WM_DESTROY
-            RaiseEvent BeforeClose
-            DetachMessage Me, mTTHwnd, WM_DESTROY
-            If Not mDetached Then
-                DetachMessage Me, mTTHwnd, WM_WINDOWPOSCHANGED
-                DetachMessage Me, mTTHwnd, WM_LBUTTONDOWN
-                DetachMessage Me, mParentHwnd, WM_WINDOWPOSCHANGED
-                DetachMessage Me, mParentHwnd, WM_DESTROY
-                DetachMessage Me, mParentHwnd, WM_MOVE
-            End If
-            DestroyTimers
-            If Not mTTCollection Is Nothing Then
-                mTTCollection.Remove mTTHwnd
-                Set mTTCollection = Nothing
-            End If
-            RaiseEvent Closed
+            CloseTip
         Case WM_WINDOWPOSCHANGED
             If hWnd = mTTHwnd Then
                 If IsWindowVisible(mTTHwnd) = 0 Then
                     If mTTShown Then
-                        DetachMessage Me, mTTHwnd, WM_WINDOWPOSCHANGED
-                        DetachMessage Me, mTTHwnd, WM_LBUTTONDOWN
-                        DetachMessage Me, mParentHwnd, WM_WINDOWPOSCHANGED
-                        DetachMessage Me, mParentHwnd, WM_DESTROY
-                        DetachMessage Me, mParentHwnd, WM_MOVE
-                        mDetached = True
-                        mTTShown = False
                         CloseTip
+                        mTTShown = False
                     End If
                 Else
                     If Not mTTShown Then
@@ -640,23 +634,11 @@ Private Function IBSSubclass_WindowProc(ByVal hWnd As Long, ByVal iMsg As Long, 
                 End If
             Else ' parent
                 If IsWindowVisible(mParentHwnd) = 0 Then
-                    DetachMessage Me, mTTHwnd, WM_WINDOWPOSCHANGED
-                    DetachMessage Me, mTTHwnd, WM_LBUTTONDOWN
-                    DetachMessage Me, mParentHwnd, WM_WINDOWPOSCHANGED
-                    DetachMessage Me, mParentHwnd, WM_DESTROY
-                    DetachMessage Me, mParentHwnd, WM_MOVE
-                    mDetached = True
-                    mTTShown = False
                     CloseTip
+                    mTTShown = False
                 End If
             End If
         Case WM_LBUTTONDOWN
-            DetachMessage Me, mTTHwnd, WM_WINDOWPOSCHANGED
-            DetachMessage Me, mTTHwnd, WM_LBUTTONDOWN
-            DetachMessage Me, mParentHwnd, WM_WINDOWPOSCHANGED
-            DetachMessage Me, mParentHwnd, WM_DESTROY
-            DetachMessage Me, mParentHwnd, WM_MOVE
-            mDetached = True
             mTTShown = False
             CloseTip
             mouse_event MOUSEEVENTF_LEFTDOWN, 0&, 0&, 0&, GetMessageExtraInfo()

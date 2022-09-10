@@ -9,6 +9,18 @@ Begin VB.UserControl ToolTipHandler
    ScaleHeight     =   2880
    ScaleWidth      =   3840
    ToolboxBitmap   =   "ctlToolTipHandler.ctx":0E14
+   Begin VB.Timer tmrShowTT 
+      Enabled         =   0   'False
+      Interval        =   700
+      Left            =   180
+      Top             =   1260
+   End
+   Begin VB.Timer tmrCheck 
+      Enabled         =   0   'False
+      Interval        =   50
+      Left            =   180
+      Top             =   720
+   End
 End
 Attribute VB_Name = "ToolTipHandler"
 Attribute VB_GlobalNameSpace = False
@@ -38,10 +50,6 @@ Private Declare Function GetWindowRect Lib "user32" (ByVal hWnd As Long, lpRect 
 Private Const GA_ROOT = 2
 
 Private mTTData As Collection
-Private WithEvents mTmrCheck As cTimer
-Attribute mTmrCheck.VB_VarHelpID = -1
-Private WithEvents mTmrShowTT As cTimer
-Attribute mTmrShowTT.VB_VarHelpID = -1
 Private WithEvents mToolTipEx As cToolTipEx
 Attribute mToolTipEx.VB_VarHelpID = -1
 Private mRTLForm As Boolean
@@ -65,24 +73,22 @@ Public Sub Remove(ByVal nControlName As String)
     On Error GoTo 0
 End Sub
     
-Private Sub mTmrShowTT_ThatTime()
-    If MouseIsOverControl(CStr(mTmrShowTT.Tag)) Then
+Private Sub tmrShowTT_Timer()
+    If MouseIsOverControl(CStr(tmrShowTT.Tag)) Then
         On Error Resume Next
-        Set mToolTipEx = ShowToolTipEx(mTTData(CStr(mTmrShowTT.Tag)).ToolTipText, , vxTTStandard, , , 0, , , , , , , , , 200, mRightToLeft)
+        Set mToolTipEx = ShowToolTipEx(mTTData(CStr(tmrShowTT.Tag)).ToolTipText, , vxTTStandard, , , 0, , , , , , , , , 200, mRightToLeft)
         If Not mToolTipEx Is Nothing Then
-            mTmrCheck.Interval = 0
-            Set mTmrCheck = Nothing
+            tmrCheck.Enabled = False
         End If
         On Error GoTo 0
     End If
-    mTmrShowTT.Interval = 0
-    Set mTmrShowTT = Nothing
+    tmrShowTT.Enabled = False
+    tmrShowTT.Tag = ""
 End Sub
 
 Private Sub mToolTipEx_Closed()
     Set mToolTipEx = Nothing
-    Set mTmrCheck = New cTimer
-    mTmrCheck.Interval = 50
+    tmrCheck.Enabled = True
 End Sub
 
 Private Sub UserControl_Initialize()
@@ -91,16 +97,14 @@ End Sub
 
 Private Sub UserControl_InitProperties()
     If Ambient.UserMode Then
-        Set mTmrCheck = New cTimer
-        mTmrCheck.Interval = 50
+        tmrCheck.Enabled = True
     End If
     mRightToLeft = False
 End Sub
 
 Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     If Ambient.UserMode Then
-        Set mTmrCheck = New cTimer
-        mTmrCheck.Interval = 50
+        tmrCheck.Enabled = True
     End If
     mRightToLeft = PropBag.ReadProperty("RightToLeft", False)
 End Sub
@@ -125,14 +129,8 @@ End Sub
 
 Private Sub UserControl_Terminate()
     Set mTTData = Nothing
-    If Not mTmrCheck Is Nothing Then
-        mTmrCheck.Interval = 0
-        Set mTmrCheck = Nothing
-    End If
-    If Not mTmrShowTT Is Nothing Then
-        mTmrShowTT.Interval = 0
-        Set mTmrShowTT = Nothing
-    End If
+    tmrCheck.Enabled = False
+    tmrShowTT.Enabled = False
     If Not mToolTipEx Is Nothing Then
         On Error Resume Next
         mToolTipEx.CloseTip
@@ -141,7 +139,7 @@ Private Sub UserControl_Terminate()
     End If
 End Sub
 
-Private Sub mTmrCheck_ThatTime()
+Private Sub tmrCheck_Timer()
     Dim iVar As Variant
     Dim iTTD As cToolTipHandlerItem
     Dim iCP As POINTAPI
@@ -157,15 +155,11 @@ Private Sub mTmrCheck_ThatTime()
     For Each iVar In mTTData
         Set iTTD = iVar
         If MouseIsOverControl(iTTD.ControlName, iCP.X, iCP.Y) Then
-            If Not mTmrShowTT Is Nothing Then
-                If mTmrShowTT.Tag = iTTD.ControlName Then
-                    Exit Sub
-                End If
-                mTmrShowTT.Interval = 0
+            If tmrShowTT.Tag = iTTD.ControlName Then
+                Exit Sub
             End If
-            Set mTmrShowTT = New cTimer
-            mTmrShowTT.Interval = 700
-            mTmrShowTT.Tag = iTTD.ControlName
+            tmrShowTT.Enabled = True
+            tmrShowTT.Tag = iTTD.ControlName
             Exit For
         End If
     Next

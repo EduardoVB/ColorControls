@@ -23,6 +23,7 @@ Private Const SUBLANG_PORTUGUESE_BRAZILIAN As Long = &H1
 Public Enum BSLanguageIDConstants
     bsLang_AUTO_SELECT = 0
     bsLang_CHINESE_SIMPLIFIED = 4
+    bsLang_GERMAN = 7
     bsLang_GREEK = 8
     bsLang_ENGLISH = 9
     bsLang_SPANISH = 10
@@ -233,6 +234,8 @@ Public Function GetLocalizedString(TextID As CDUserInterfaceTextIDConstants) As 
     Select Case mUILanguage
         Case bsLang_CHINESE_SIMPLIFIED
             Do_CHINESE_SIMPLIFIED TextID, GetLocalizedString
+        Case bsLang_GERMAN
+            Do_GERMAN TextID, GetLocalizedString
         Case bsLang_SPANISH
             Do_SPANISH TextID, GetLocalizedString
         Case bsLang_FRENCH
@@ -300,8 +303,8 @@ Private Sub Do_ENGLISH(ByRef TextID As Long, ByRef Text As String)
             Text = "new"
         Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = "previous"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to navigate"
-            Text = "Hold down the Control key to navigate"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
+            Text = "Hold down the Control key to change"
         Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = "with the mouse wheel, press Shift key to go slowly"
         Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
@@ -414,7 +417,7 @@ Private Sub Do_SPANISH(ByRef TextID As Long, ByRef Text As String)
             Text = "nuevo"
         Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = "previo"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to navigate"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
             Text = "Mantenga presionada la tecla Control para cambiar"
         Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = "con la rueda del mouse, presione la tecla Mayúsculas para ir lento"
@@ -515,8 +518,8 @@ Private Sub Do_FRENCH(ByRef TextID As Long, ByRef Text As String)
             Text = "nouvelle"
         Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = "précédente"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to navigate"
-            Text = "Maintenez la touche Control appuyée pour naviguer"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
+            Text = "Maintenez la touche Control appuyée pour modifier"
         Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = "avec la molette de la souris, pressez Shift pour defiler doucement"
         Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
@@ -617,7 +620,7 @@ Private Sub Do_CHINESE_SIMPLIFIED(ByRef TextID As Long, ByRef Text As String)
             Text = StrFromArray(176, 101, 250, 94) ' ANSI: "ÐÂ½¨"
         Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = StrFromArray(10, 78, 0, 78, 42, 78) ' ANSI: "ÉÏÒ»¸ö"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to navigate"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
             Text = StrFromArray(9, 99, 79, 79, 32, 0, 67, 0, 116, 0, 114, 0, 108, 0, 32, 0, 46, 149, 219, 143, 76, 136, 252, 91, 42, 130) ' ANSI: "°´×¡ Ctrl ¼ü½øÐÐµ¼º½"
         Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = StrFromArray(127, 79, 40, 117, 32, 159, 7, 104, 218, 110, 110, 143, 22, 98, 9, 99, 32, 0, 83, 0, 104, 0, 105, 0, 102, 0, 116, 0, 32, 0, 46, 149, 19, 127, 98, 97, 251, 121, 168, 82) ' ANSI: "Ê¹ÓÃÊó±ê¹öÂÖ»ò°´ Shift ¼ü»ºÂýÒÆ¶¯"
@@ -719,8 +722,8 @@ Private Sub Do_ITALIAN(ByRef TextID As Long, ByRef Text As String)
             Text = "nuovo"
         Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = "precedente"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to navigate"
-            Text = "Tieni premuto il tasto CTRL per spostarsi"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
+            Text = "Tieni premuto il tasto CTRL per modificare"
         Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = "con la rotellina del mouse, premere il tasto MAIUSC per procedere lentamente"
         Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
@@ -821,7 +824,7 @@ Private Sub Do_GREEK(ByRef TextID As Long, ByRef Text As String)
             Text = StrFromArray(189, 3, 173, 3, 191, 3) ' ANSI: "íÝï"
         Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
             Text = StrFromArray(192, 3, 193, 3, 191, 3, 183, 3, 179, 3, 191, 3, 205, 3, 188, 3, 181, 3, 189, 3, 191, 3) ' ANSI: "ðñïçãïýìåíï"
-        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to navigate"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
             Text = StrFromArray(154, 3, 193, 3, 177, 3, 196, 3, 174, 3, 195, 3, 196, 3, 181, 3, 32, 0, 192, 3, 177, 3, 196, 3, 183, 3, 188, 3, 173, 3, 189, 3, 191, 3, 32, 0, 196, 3, 191, 3, 32, 0, 192, 3, 187, 3, 174, 3, 186, 3, 196, 3, 193, 3, 191, 3, 32, 0, 67, 0, 111, 0, 110, 0, 116, 0, 114, 0, 111, 0, 108, 0, 32, 0, 179, 3, 185, 3, 177, 3, 32, 0, 177, 3, 187, 3, 187, 3, 177, 3, 179, 3, 174, 3) ' ANSI: "ÊñáôÞóôå ðáôçìÝíï ôï ðëÞêôñï Control ãéá áëëáãÞ"
         Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
             Text = StrFromArray(188, 3, 181, 3, 32, 0, 196, 3, 191, 3, 189, 3, 32, 0, 196, 3, 193, 3, 191, 3, 199, 3, 204, 3, 32, 0, 196, 3, 191, 3, 197, 3, 32, 0, 192, 3, 191, 3, 189, 3, 196, 3, 185, 3, 186, 3, 185, 3, 191, 3, 205, 3, 44, 0, 32, 0, 192, 3, 177, 3, 196, 3, 174, 3, 195, 3, 196, 3, 181, 3, 32, 0, 196, 3, 191, 3, 32, 0, 192, 3, 187, 3, 174, 3, 186, 3, 196, 3, 193, 3, 191, 3, 32, 0, 83, 0, 104, 0, 105, 0, 102, 0, 116, 0, 32, 0, 179, 3, 185, 3, 177, 3, 32, 0, 189, 3, 177, 3, 32, 0, 192, 3, 193, 3, 191, 3, 199, 3, 201, 3, 193, 3, 174, 3, 195, 3, 181, 3, 196, 3, 181, 3, 32, 0, 177, 3, 193, 3, 179, 3, 172, 3) ' ANSI: "ìå ôïí ôñï÷ü ôïõ ðïíôéêéïý, ðáôÞóôå ôï ðëÞêôñï Shift ãéá íá ðñï÷ùñÞóåôå áñãÜ"
@@ -882,6 +885,107 @@ Private Sub Do_GREEK(ByRef TextID As Long, ByRef Text As String)
     End Select
 End Sub
 
+Private Sub Do_GERMAN(ByRef TextID As Long, ByRef Text As String)
+    ' Microsoft teminology search: https://www.microsoft.com/en-us/language/search
+    Select Case TextID
+        Case cdUIT_frmColorDialog_Form_Caption ' English: "Color selection"
+            Text = "Farbwahl"
+        Case cdUIT_ColorSelector_chkFixedPalette_Caption ' English: "Fixed"
+            Text = "Feste"
+        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText ' English: "Reflects color changes visually in the palette or not"
+            Text = "Reflektiert Farbänderungen visuell in der Palette oder nicht"
+        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText ' English: "Slider control parameter"
+            Text = "Schieberegler-Parameter"
+        Case cdUIT_ColorSelector_lblMode_Caption ' English: "Mode:"
+            Text = "Modus:"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue ' English: "Hue"
+            Text = "Farbt."
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance ' English: "Lum."
+            Text = "Hell."
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value ' English: "Value"
+            Text = "Wert"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation ' English: "Sat."
+            Text = "Sätt."
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red ' English: "Red"
+            Text = "Rot"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green ' English: "Green"
+            Text = "Grün"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue ' English: "Blue"
+            Text = "Blau"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV ' English: "HSV"
+            Text = "HSV"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL ' English: "HSL"
+            Text = "HSL"
+        Case cdUIT_frmColorDialog_lblBasicColors_Caption ' English: "Basic colors:"
+            Text = "Grundfarben:"
+        Case cdUIT_frmColorDialog_lblRecent_Caption ' English: "Recent:"
+            Text = "Letzte:"
+        Case cdUIT_frmColorDialog_Color_Caption ' English: "color"
+            Text = "Farbe"
+        Case cdUIT_frmColorDialog_ColorNew_Caption ' English: "new"
+            Text = "neue"
+        Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
+            Text = "vorherige"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
+            Text = "Halten Sie zum Ändern die Strg-Taste gedrückt"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
+            Text = "Mit dem Mausrad drücken Sie die Umschalttaste, um langsam zu fahren"
+        Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
+            Text = "Wählen Sie an einer beliebigen Stelle auf dem Bildschirm eine Farbe aus oder drücken Sie die Esc-Taste, um den Vorgang abzubrechen"
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTipText ' English: "Choose a color from the screen"
+            Text = "Wählen Sie eine Farbe auf dem Bildschirm aus"
+        Case cdUIT_frmColorDialog_lblRed_Caption ' English: "Red:"
+            Text = "Rot:"
+        Case cdUIT_frmColorDialog_lblGreen_Caption ' English: "Green:"
+            Text = "Grün:"
+        Case cdUIT_frmColorDialog_lblBlue_Caption ' English: "Blue:"
+            Text = "Blau:"
+        Case cdUIT_frmColorDialog_lblHex_Caption ' English: "Hex:"
+            Text = "Hex:"
+        Case cdUIT_frmColorDialog_lblHue_Caption ' English: "Hue:"
+            Text = "Farbton:"
+        Case cdUIT_frmColorDialog_lblSaturation_Caption ' English: "Sat.:"
+            Text = "Sätt:"
+        Case cdUIT_frmColorDialog_Luminance_Caption ' English: "Lum.:"
+            Text = "Hell.:"
+        Case cdUIT_frmColorDialog_Value_Caption ' English: "Value:"
+            Text = "Wert:"
+        Case cdUIT_frmColorDialog_lblColorSystem_Caption ' English: "Mode:"
+            Text = "Modus:"
+        Case cdUIT_frmColorDialog_lblPalette_Caption ' English: "Palette:"
+            Text = "Palette:"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem1 ' English: "Wheel, fixed"
+            Text = "Rad, fest"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem2 ' English: "Box, fixed"
+            Text = "Schachtel, fest"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem3 ' English: "Wheel, dynamic"
+            Text = "Rad, dynamisch"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem4 ' English: "Box, dynamic"
+            Text = "Schachtel, dynamisch"
+        Case cdUIT_frmColorDialog_InvalidColorMessage ' English: "The color is not valid."
+            Text = "The color is not valid."
+        Case cdUIT_frmColorDialog_ParameterFullName_Hue ' English: "Hue"
+            Text = "Farbton"
+        Case cdUIT_frmColorDialog_ParameterFullName_Luminance ' English: "Luminance"
+            Text = "Helligkeit"
+        Case cdUIT_frmColorDialog_ParameterFullName_Saturation ' English: "Saturation"
+            Text = "Saturation"
+        Case cdUIT_frmColorDialog_ParameterFullName_Red ' English: "Red"
+            Text = "Rot"
+        Case cdUIT_frmColorDialog_ParameterFullName_Green ' English: "Green"
+            Text = "Grün"
+        Case cdUIT_frmColorDialog_ParameterFullName_Blue ' English: "Blue"
+            Text = "Blau"
+        Case cdUIT_frmColorDialog_ParameterFullName_Value ' English: "Value"
+            Text = "Wert"
+        Case cdUIT_frmColorDialog_OK ' English: "OK"
+            Text = "OK"
+        Case cdUIT_frmColorDialog_Cancel ' English: "Cancel"
+            Text = "Abbrechen"
+        Case cdUIT_frmColorDialog_Close ' English: "Close"
+            Text = "Schließen"
+    End Select
+End Sub
 
 'Private Sub Do_OTHER(ByRef TextID As Long, ByRef Text As String)
 '    ' Microsoft teminology search: https://www.microsoft.com/en-us/language/search
@@ -924,8 +1028,8 @@ End Sub
 '            Text = "new"
 '        Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
 '            Text = "previous"
-'        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to navigate"
-'            Text = "Hold down the Control key to navigate"
+'        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
+'            Text = "Hold down the Control key to change"
 '        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
 '            Text = "with the mouse wheel, press Shift key to go slowly"
 '        Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
@@ -1016,10 +1120,10 @@ Private Sub SetUILanguageToWindowsUILanguage()
     End If
     mUIRightToLeft = IsLanguagueRightToLeft(MAKELANGID(mUILanguage, mUISubLanguage))
     
-#Const TestingLanguages = 0
+#Const TestingLanguages = 1
 #If TestingLanguages Then
     If InIDE Then
-        mUILanguage = bsLang_GREEK ' bsLang_ITALIAN ' bsLang_CHINESE_SIMPLIFIED ' bsLang_FRENCH 'bsLang_ENGLISH
+        mUILanguage = bsLang_GERMAN ' bsLang_GREEK ' bsLang_ITALIAN ' bsLang_CHINESE_SIMPLIFIED ' bsLang_FRENCH 'bsLang_ENGLISH
     End If
 #End If
 End Sub
@@ -1028,7 +1132,7 @@ Private Function LanguageIsSupported(nLang As Long) As Boolean
     Dim c As Long
     
     Select Case nLang
-        Case bsLang_CHINESE_SIMPLIFIED, bsLang_GREEK, bsLang_ENGLISH, bsLang_SPANISH, bsLang_FRENCH, bsLang_ITALIAN
+        Case bsLang_CHINESE_SIMPLIFIED, bsLang_GERMAN, bsLang_GREEK, bsLang_ENGLISH, bsLang_SPANISH, bsLang_FRENCH, bsLang_ITALIAN
             LanguageIsSupported = True
     End Select
 End Function

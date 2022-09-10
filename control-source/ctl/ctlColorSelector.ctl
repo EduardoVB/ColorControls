@@ -276,6 +276,9 @@ Private Declare Function SetWindowRgn Lib "user32" (ByVal hWnd As Long, ByVal hR
 Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 
 Private Const WM_MOUSEWHEEL As Long = &H20A
+Private Const WM_SYSCOLORCHANGE As Long = &H15
+Private Const WM_THEMECHANGED As Long = &H31A
+
 Private Declare Function GetCursorPos Lib "user32" (lpPoint As POINTAPI) As Long
 Private Declare Function ScreenToClient Lib "user32" (ByVal hWnd As Long, lpPoint As POINTAPI) As Long
 Private Declare Function GetAsyncKeyState Lib "user32.dll" (ByVal vKey As Long) As Integer
@@ -400,6 +403,7 @@ Private mPicShadesWidth  As Long
 Private mMouseDown As Boolean
 Private mStyleBox As Boolean
 Private mSubclassed As Boolean
+Private mFormHwnd As Long
 
 Private Const cPropDefault_Color As Long = &H808080
 Private Const cPropDefault_SliderOptionsAvailable As Long = cdSliderOptionsNone
@@ -528,6 +532,13 @@ Private Function IBSSubclass_WindowProc(ByVal hWnd As Long, ByVal iMsg As Long, 
                     End If
                 End If
             End If
+        Case WM_SYSCOLORCHANGE, WM_THEMECHANGED
+            picPalette.Cls
+            InitPalette
+            StorePaletteColors
+            DrawPalette
+            picSlider.Cls
+            DrawSliderGrip
     End Select
 End Function
 
@@ -726,6 +737,9 @@ Private Sub UserControl_InitProperties()
     mPropertiesAreSet = True
     init
     mRaiseEvents = True
+    On Error Resume Next
+    If mAmbientUserMode Then mFormHwnd = UserControl.Parent.hWnd
+    On Error GoTo 0
     DoSubclass
 End Sub
 
@@ -821,6 +835,9 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     mPropertiesAreSet = True
     init
     mRaiseEvents = True
+    On Error Resume Next
+    If mAmbientUserMode Then mFormHwnd = UserControl.Parent.hWnd
+    On Error GoTo 0
     DoSubclass
 End Sub
 
@@ -832,6 +849,10 @@ Private Sub DoSubclass()
     If (Not iInIDE) Or cSUBCLASS_IN_IDE Then
         If mUserControlHwnd <> 0 Then
             AttachMessage Me, mUserControlHwnd, WM_MOUSEWHEEL
+            If mAmbientUserMode And (mFormHwnd <> 0) Then
+                AttachMessage Me, mFormHwnd, WM_SYSCOLORCHANGE
+                AttachMessage Me, mFormHwnd, WM_THEMECHANGED
+            End If
             mSubclassed = True
         End If
     End If
@@ -1757,6 +1778,10 @@ End Sub
 Private Sub DoUnsubclass()
     If mSubclassed Then
         DetachMessage Me, mUserControlHwnd, WM_MOUSEWHEEL
+        If mAmbientUserMode And (mFormHwnd <> 0) Then
+            DetachMessage Me, mFormHwnd, WM_SYSCOLORCHANGE
+            DetachMessage Me, mFormHwnd, WM_THEMECHANGED
+        End If
         mSubclassed = False
     End If
 End Sub

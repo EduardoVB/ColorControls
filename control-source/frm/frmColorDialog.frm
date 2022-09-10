@@ -689,7 +689,7 @@ Private Const WS_THICKFRAME = &H40000
 
 Private Declare Function ReleaseCapture Lib "user32" () As Long
 Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
- 
+
 Private Const WM_NCLBUTTONDOWN = &HA1
 Private Const HTCAPTION = 2
 
@@ -830,6 +830,7 @@ Private Sub ColorSelector1_MouseWheelScroll(Axis As CDMouseWheelScrollConstants)
                 If Not lblTT.Visible Then
                     SetMouseWheelTTText
                     If (Me.ScaleHeight - mLastControlBottom) > lblTT.Height Then
+                        If lblTT2.Visible Then lblTT2.Visible = False
                         lblTT.Visible = True
                         tmrHideTT.Enabled = True
                     End If
@@ -1054,7 +1055,7 @@ Private Sub Form_Load()
     End If
     
     ColorSelector1.Redraw = True
-    
+     
     AttachMessage Me, mFormHwnd, WM_NCACTIVATE
     mSubclassed = True
     mLoading = False
@@ -1156,6 +1157,8 @@ Private Sub StartDropper()
     mEyeDropping = True
     lblTT2.Caption = GetLocalizedString1(cdUIT_frmColorDialog_EyeDropper_ToolTip)
     
+    lblTT2.AutoSize = False
+    lblTT2.AutoSize = True
     lblTT2.Move 90, Me.ScaleHeight - lblTT2.Height - 120
     Do Until lblTT2.Top > (mLastControlBottom + 60)
         If (lblTT2.Left + lblTT2.Width) > (Me.ScaleWidth - 100) Then Exit Do
@@ -1175,6 +1178,7 @@ Private Sub StartDropper()
         Loop
     End If
     If (Me.ScaleHeight - mLastControlBottom) > lblTT2.Height Then
+        If lblTT.Visible Then lblTT.Visible = False
         lblTT2.Visible = True
     End If
     picEyeDropper.Tag = picEyeDropper.BackColor
@@ -2345,17 +2349,18 @@ Private Sub IBSSubclass_UnsubclassIt()
 End Sub
 
 Private Function IBSSubclass_WindowProc(ByVal hWnd As Long, ByVal iMsg As Long, wParam As Long, lParam As Long, bConsume As Boolean) As Long
-    If iMsg = WM_NCACTIVATE Then
-        If wParam = 0 Then ' deactivate
-            If Not mConfirmationButtonsVisible Then
-                If Not mEyeDropping Then
-                    cmdOK_Click
+    Select Case iMsg
+        Case WM_NCACTIVATE
+            If wParam = 0 Then ' deactivate
+                If Not mConfirmationButtonsVisible Then
+                    If Not mEyeDropping Then
+                        cmdOK_Click
+                    End If
                 End If
             End If
-        End If
-    End If
+    End Select
 End Function
- 
+
 Private Sub DoUnsubclass()
     If mSubclassed Then
         mSubclassed = False
