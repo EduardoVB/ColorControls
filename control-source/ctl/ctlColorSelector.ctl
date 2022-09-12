@@ -417,6 +417,7 @@ Private Const cPropDefault_SliderWide As Long = cdYNAuto
 Private Const cPropDefault_HideLabels As Boolean = False
 Private Const cPropDefault_Style As Long = cdStyleWheel
 Private Const cPropDefault_RoundedBoxes As Boolean = True
+Private Const cPropDefault_SliderParameterComboWidth As Long = 900
 
 Private mColor As Long
 Private mSliderOptionsAvailable As CDSliderOptionsAvailableConstants
@@ -430,6 +431,7 @@ Private mSliderWide As CDYesNoAutoConstants
 Private mHideLabels As Boolean
 Private mStyle As CDStyleConstants
 Private mRoundedBoxes As Boolean
+Private mSliderParameterComboWidth As Long
 
 Private mH As Double
 Private mL As Double
@@ -712,6 +714,7 @@ Private Sub UserControl_InitProperties()
     mColorSystemControlVisible = cPropDefault_ColorSystemControlVisible
     mFixedPalette = cPropDefault_FixedPalette
     mSliderParameter = cPropDefault_SliderParameter
+    mSliderParameterComboWidth = cPropDefault_SliderParameterComboWidth
     LoadcboSliderParameter
     If Not SelectInListByItemData(cboSliderParameter, mSliderParameter) Then
         If mSliderOptionsAvailable = cdSliderOptionsNone Then
@@ -810,6 +813,7 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     mColorSystemControlVisible = PropBag.ReadProperty("ColorSystemControlVisible", cPropDefault_ColorSystemControlVisible)
     mFixedPalette = PropBag.ReadProperty("FixedPalette", cPropDefault_FixedPalette)
     mSliderParameter = PropBag.ReadProperty("SliderParameter", cPropDefault_SliderParameter)
+    mSliderParameterComboWidth = PropBag.ReadProperty("SliderParameterComboWidth", cPropDefault_SliderParameterComboWidth)
     LoadcboSliderParameter
     If Not SelectInListByItemData(cboSliderParameter, mSliderParameter) Then
         If mSliderOptionsAvailable = cdSliderOptionsNone Then
@@ -988,7 +992,7 @@ Private Sub SetPicShades()
         On Error GoTo 0
         cboSliderParameter.Move picShades.Left, UserControl.ScaleHeight - cboSliderParameter.Height
     Else
-        cboSliderParameter.Width = 900
+        cboSliderParameter.Width = mSliderParameterComboWidth
         cboSliderParameter.Move picShades.Left + picShades.Width - cboSliderParameter.Width, UserControl.ScaleHeight - cboSliderParameter.Height
     End If
     cboSliderParameter.Visible = mSliderOptionsAvailable <> cdSliderOptionsNone
@@ -1797,6 +1801,7 @@ Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
     PropBag.WriteProperty "ColorSystemControlVisible", mColorSystemControlVisible, cPropDefault_ColorSystemControlVisible
     PropBag.WriteProperty "FixedPalette", mFixedPalette, cPropDefault_FixedPalette
     PropBag.WriteProperty "SliderParameter", mSliderParameter, cPropDefault_SliderParameter
+    PropBag.WriteProperty "SliderParameterComboWidth", mSliderParameterComboWidth, cPropDefault_SliderParameterComboWidth
     PropBag.WriteProperty "ColorSystem", mColorSystem, cPropDefault_ColorSystem
     PropBag.WriteProperty "BackColor", mBackColor, cPropDefault_BackColor
 End Sub
@@ -2842,6 +2847,19 @@ Public Property Let Style(ByVal nValue As CDStyleConstants)
         LoadcboSliderParameter
         UserControl_Resize
         PropertyChanged "Style"
+    End If
+End Property
+
+
+Public Property Get SliderParameterComboWidth() As Long
+    SliderParameterComboWidth = mSliderParameterComboWidth
+End Property
+
+Public Property Let SliderParameterComboWidth(ByVal nValue As Long)
+    If nValue <> mSliderParameterComboWidth Then
+        mSliderParameterComboWidth = nValue
+        UserControl_Resize
+        PropertyChanged "SliderParameterComboWidth"
     End If
 End Property
 

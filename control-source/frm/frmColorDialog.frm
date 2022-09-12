@@ -953,8 +953,7 @@ Private Sub ColorSelector1_ColorSystemChange()
     
     If picParameterLabel.Visible Then
         If ColorSelector1.SliderParameter = cdParameterLuminance Then
-            lblParameter.Caption = LCase$(lblLum.Caption)
-            PositionlblParameter
+            SetlblParameter
         End If
     End If
     lblTT.Visible = False
@@ -1005,6 +1004,29 @@ Private Sub Form_Load()
     mLoading = True
     mFormHwnd = Me.hWnd
     Set Me.Icon = Nothing
+    If UILanguage = bsLang_RUSSIAN Then
+        ColorSelector1.SliderParameterComboWidth = 1200
+        picColorValuesSection.Width = 3320
+        txtHue.Left = 2404
+        txtSat.Left = 2404
+        txtLum.Left = 2404
+    ElseIf UILanguage = bsLang_PORTUGUESE Then
+        ColorSelector1.SliderParameterComboWidth = 1120
+        picColorValuesSection.Width = 3320
+        txtRed.Left = 744
+        txtGreen.Left = 744
+        txtBlue.Left = 744
+        txtHue.Left = 2404
+        txtSat.Left = 2404
+        txtLum.Left = 2404
+    Else
+        ColorSelector1.SliderParameterComboWidth = 1000
+        picColorValuesSection.Width = 3260
+        txtHue.Left = 2344
+        txtSat.Left = 2344
+        txtLum.Left = 2344
+    End If
+    
     SetBackColor
     SetCaptions
     SetTxtHeights
@@ -1998,14 +2020,10 @@ Private Sub PositionControls()
                 ColorSelector1.ColorSystemControlVisible = False
                 If mPaletteTypeControlVisible Then
                     cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height * cTxtSeparation
-                    cboPalette.Left = txtHex.Left
-                    lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
                     iCboPaletteVisible = True
                 End If
             ElseIf mPaletteTypeControlVisible Then
                 cboPalette.Top = cboColorSystem.Top
-                cboPalette.Left = txtHex.Left ' lblPalette.Left + lblPalette.Width + 60
-                lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
                 iCboPaletteVisible = True
             End If
         End If
@@ -2018,16 +2036,16 @@ Private Sub PositionControls()
             ColorSelector1.ColorSystemControlVisible = False
             If mPaletteTypeControlVisible Then
                 cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height * cTxtSeparation
-                cboPalette.Left = txtHex.Left ' lblPalette.Left + lblPalette.Width + 60
-                lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
                 iCboPaletteVisible = True
             End If
         ElseIf mPaletteTypeControlVisible Then
             cboPalette.Top = cboColorSystem.Top + cboColorSystem.Height * cTxtSeparation
-            cboPalette.Left = txtHex.Left ' lblPalette.Left + lblPalette.Width + 60
-            lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
             iCboPaletteVisible = True
         End If
+    End If
+    If iCboPaletteVisible Then
+        cboPalette.Move txtHex.Left, cboPalette.Top, txtHue.Left + txtHue.Width - txtRed.Left + Screen.TwipsPerPixelX
+        lblPalette.Left = cboPalette.Left - lblPalette.Width - 60
     End If
     
     If iCboPaletteVisible Then
@@ -2038,7 +2056,7 @@ Private Sub PositionControls()
     End If
     If (mSliderOptionsAvailable = cdSliderOptionsNone) Then
         lblParameter.Move 0, 0
-        PositionlblParameter
+        SetlblParameter
         picParameterLabel.Visible = True
     End If
     
@@ -2165,7 +2183,9 @@ Private Sub HandleLastTopValue(ByRef nLT As Long, nCtl As Control)
     If t > nLT Then nLT = t
 End Sub
     
-Private Sub PositionlblParameter()
+Private Sub SetlblParameter()
+    Dim iLeft As Long
+    
     If ColorSelector1.SliderParameter = cdParameterLuminance Then
         If ColorSelector1.ColorSystem = cdColorSystemHSV Then
             lblParameter.Caption = LCase$(WithoutEnding(ColorSelector1.GetCaption(cdCWCaptionVal), ":"))
@@ -2177,7 +2197,13 @@ Private Sub PositionlblParameter()
     End If
     lblParameter.AutoSize = False
     lblParameter.AutoSize = True
-    picParameterLabel.Move ColorSelector1.Left + ColorSelector1.SliderControlLeft + ColorSelector1.SliderControlWidth / 2 - lblParameter.Width / 2, ColorSelector1.Height + 10, lblParameter.Width
+    iLeft = ColorSelector1.Left + ColorSelector1.SliderControlLeft + (ColorSelector1.SliderControlWidth - lblParameter.Width) / 2
+    If ColorSelector1.Style = cdStyleBox Then
+        If iLeft < (ColorSelector1.Left + ColorSelector1.SliderControlLeft - 90) Then
+            iLeft = ColorSelector1.Left + ColorSelector1.SliderControlLeft - 90
+        End If
+    End If
+    picParameterLabel.Move iLeft, ColorSelector1.Height + 10, lblParameter.Width
 End Sub
 
 Private Function EnsureEnding(nText As Variant, nEnding As String)

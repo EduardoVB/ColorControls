@@ -29,6 +29,9 @@ Public Enum BSLanguageIDConstants
     bsLang_SPANISH = 10
     bsLang_FRENCH = 12
     bsLang_ITALIAN = 16
+    bsLang_PORTUGUESE = 22
+    bsLang_RUSSIAN = 25
+    
     
 ' Full list:
 
@@ -244,6 +247,10 @@ Public Function GetLocalizedString(TextID As CDUserInterfaceTextIDConstants) As 
             Do_ITALIAN TextID, GetLocalizedString
         Case bsLang_GREEK
             Do_GREEK TextID, GetLocalizedString
+        Case bsLang_RUSSIAN
+            Do_RUSSIAN TextID, GetLocalizedString
+        Case bsLang_PORTUGUESE
+            Do_PORTUGUESE TextID, GetLocalizedString
         Case Else ' ENGLISH
             Do_ENGLISH TextID, GetLocalizedString
     End Select
@@ -987,6 +994,216 @@ Private Sub Do_GERMAN(ByRef TextID As Long, ByRef Text As String)
     End Select
 End Sub
 
+Private Sub Do_RUSSIAN(ByRef TextID As Long, ByRef Text As String)
+    ' Microsoft teminology search: https://www.microsoft.com/en-us/language/search
+    Select Case TextID
+        Case cdUIT_frmColorDialog_Form_Caption ' English: "Color selection"
+            Text = StrFromArray(18, 4, 75, 4, 49, 4, 62, 4, 64, 4, 32, 0, 70, 4, 50, 4, 53, 4, 66, 4, 48, 4) ' ANSI: "Выбор цвета"
+        Case cdUIT_ColorSelector_chkFixedPalette_Caption ' English: "Fixed"
+            Text = StrFromArray(36, 4, 56, 4, 58, 4, 65, 4, 56, 4, 64, 4, 46, 0) ' ANSI: "Фиксир."
+        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText ' English: "Reflects color changes visually in the palette or not"
+            Text = StrFromArray(30, 4, 66, 4, 64, 4, 48, 4, 54, 4, 48, 4, 53, 4, 66, 4, 32, 0, 56, 4, 55, 4, 60, 4, 53, 4, 61, 4, 53, 4, 61, 4, 56, 4, 53, 4, 32, 0, 70, 4, 50, 4, 53, 4, 66, 4, 48, 4, 32, 0, 50, 4, 56, 4, 55, 4, 67, 4, 48, 4, 59, 4, 76, 4, 61, 4, 62, 4, 32, 0, 50, 4, 32, 0, 63, 4, 48, 4, 59, 4, 56, 4, 66, 4, 64, 4, 53, 4, 32, 0, 56, 4, 59, 4, 56, 4, 32, 0, 61, 4, 53, 4, 66, 4) ' ANSI: "Отражает изменение цвета визуально в палитре или нет"
+        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText ' English: "Slider control parameter"
+            Text = StrFromArray(31, 4, 48, 4, 64, 4, 48, 4, 60, 4, 53, 4, 66, 4, 64, 4, 32, 0, 67, 4, 63, 4, 64, 4, 48, 4, 50, 4, 59, 4, 53, 4, 61, 4, 56, 4, 79, 4, 32, 0, 63, 4, 62, 4, 59, 4, 55, 4, 67, 4, 61, 4, 58, 4, 62, 4, 60, 4) ' ANSI: "Параметр управления ползунком"
+        Case cdUIT_ColorSelector_lblMode_Caption ' English: "Mode:"
+            Text = StrFromArray(32, 4, 53, 4, 54, 4, 56, 4, 60, 4, 58, 0) ' ANSI: "Режим:"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue ' English: "Hue"
+            Text = StrFromArray(30, 4, 66, 4, 66, 4, 53, 4, 61, 4, 62, 4, 58, 4) ' ANSI: "Оттенок"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance ' English: "Lum."
+            Text = StrFromArray(47, 4, 64, 4, 58, 4, 62, 4, 65, 4, 66, 4, 76, 4) ' ANSI: "Яркость"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value ' English: "Value"
+            Text = StrFromArray(23, 4, 61, 4, 48, 4, 71, 4, 53, 4, 61, 4, 56, 4, 53, 4) ' ANSI: "Значение"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation ' English: "Sat."
+            'Text = StrFromArray(29, 4, 48, 4, 65, 4, 75, 4, 73, 4, 53, 4, 61, 4, 56, 4, 53, 4) ' ANSI: "Насыщение"
+            Text = StrFromArray(61, 4, 48, 4, 65, 4, 75, 4, 73, 4, 46, 0) ' ANSI: "насыщ:"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red ' English: "Red"
+            Text = StrFromArray(26, 4, 64, 4, 48, 4, 65, 4, 61, 4, 75, 4, 57, 4) ' ANSI: "Красный"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green ' English: "Green"
+            Text = StrFromArray(23, 4, 53, 4, 59, 4, 53, 4, 61, 4, 75, 4, 57, 4) ' ANSI: "Зеленый"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue ' English: "Blue"
+            Text = StrFromArray(33, 4, 56, 4, 61, 4, 56, 4, 57, 4) ' ANSI: "Синий"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV ' English: "HSV"
+            Text = "HSV"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL ' English: "HSL"
+            Text = "HSL"
+        Case cdUIT_frmColorDialog_lblBasicColors_Caption ' English: "Basic colors:"
+            Text = StrFromArray(30, 4, 65, 4, 61, 4, 62, 4, 50, 4, 61, 4, 75, 4, 53, 4, 32, 0, 70, 4, 50, 4, 53, 4, 66, 4, 48, 4, 58, 0) ' ANSI: "Основные цвета:"
+        Case cdUIT_frmColorDialog_lblRecent_Caption ' English: "Recent:"
+            Text = StrFromArray(31, 4, 62, 4, 65, 4, 59, 4, 53, 4, 52, 4, 61, 4, 56, 4, 53, 4, 58, 0) ' ANSI: "Последние:"
+        Case cdUIT_frmColorDialog_Color_Caption ' English: "color"
+            Text = StrFromArray(70, 4, 50, 4, 53, 4, 66, 4) ' ANSI: "цвет"
+        Case cdUIT_frmColorDialog_ColorNew_Caption ' English: "new"
+            Text = StrFromArray(61, 4, 62, 4, 50, 4, 75, 4, 57, 4) ' ANSI: "новый"
+        Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
+            Text = StrFromArray(63, 4, 64, 4, 53, 4, 52, 4, 75, 4, 52, 4, 67, 4, 73, 4, 56, 4, 57, 4) ' ANSI: "предыдущий"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
+            Text = StrFromArray(35, 4, 52, 4, 53, 4, 64, 4, 54, 4, 56, 4, 50, 4, 48, 4, 57, 4, 66, 4, 53, 4, 32, 0, 58, 4, 59, 4, 48, 4, 50, 4, 56, 4, 72, 4, 67, 4, 32, 0, 67, 0, 111, 0, 110, 0, 116, 0, 114, 0, 111, 0, 108, 0, 44, 0, 32, 0, 71, 4, 66, 4, 62, 4, 49, 4, 75, 4, 32, 0, 56, 4, 55, 4, 60, 4, 53, 4, 61, 4, 56, 4, 66, 4, 76, 4) ' ANSI: "Удерживайте клавишу Control, чтобы изменить"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
+            Text = StrFromArray(65, 4, 32, 0, 58, 4, 62, 4, 59, 4, 53, 4, 65, 4, 56, 4, 58, 4, 62, 4, 60, 4, 32, 0, 60, 4, 75, 4, 72, 4, 56, 4, 44, 0, 32, 0, 61, 4, 48, 4, 54, 4, 60, 4, 56, 4, 66, 4, 53, 4, 32, 0, 58, 4, 59, 4, 48, 4, 50, 4, 56, 4, 72, 4, 67, 4, 32, 0, 83, 0, 104, 0, 105, 0, 102, 0, 116, 0, 44, 0, 32, 0, 71, 4, 66, 4, 62, 4, 49, 4, 75, 4, 32, 0, 52, 4, 50, 4, 56, 4, 51, 4, 48, 4, 66, 4, 76, 4, 65, 4, 79, 4, 32, 0, 60, 4, 53, 4, 52, 4, 59, 4, 53, 4, 61, 4, 61, 4, 62, 4) ' ANSI: "с колесиком мыши, нажмите клавишу Shift, чтобы двигаться медленно"
+        Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
+            Text = StrFromArray(18, 4, 75, 4, 49, 4, 53, 4, 64, 4, 56, 4, 66, 4, 53, 4, 32, 0, 70, 4, 50, 4, 53, 4, 66, 4, 32, 0, 50, 4, 32, 0, 59, 4, 78, 4, 49, 4, 62, 4, 60, 4, 32, 0, 60, 4, 53, 4, 65, 4, 66, 4, 53, 4, 32, 0, 77, 4, 58, 4, 64, 4, 48, 4, 61, 4, 48, 4, 32, 0, 56, 4, 59, 4, 56, 4, 32, 0, 61, 4, 48, 4, 54, 4, 60, 4, 56, 4, 66, 4, 53, 4, 32, 0, 58, 4, 59, 4, 48, 4, 50, 4, 56, 4, 72, 4, 67, 4, 32, 0, 69, 0, 115, 0, 99, 0, 97, 0, 112, 0, 101, 0, 44, 0, 32, 0, 71, 4, 66, 4, 62, 4, 49, 4, 75, 4, 32, 0, 62, 4, 66, 4, 60, 4, 53, 4, 61, 4, 56, 4, 66, 4, 76, 4) ' ANSI: "Выберите цвет в любом месте экрана или нажмите клавишу Escape, чтобы отменить"
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTipText ' English: "Choose a color from the screen"
+            Text = StrFromArray(18, 4, 75, 4, 49, 4, 53, 4, 64, 4, 56, 4, 66, 4, 53, 4, 32, 0, 70, 4, 50, 4, 53, 4, 66, 4, 32, 0, 61, 4, 48, 4, 32, 0, 77, 4, 58, 4, 64, 4, 48, 4, 61, 4, 53, 4) ' ANSI: "Выберите цвет на экране"
+        Case cdUIT_frmColorDialog_lblRed_Caption ' English: "Red:"
+            Text = StrFromArray(26, 4, 64, 4, 48, 4, 65, 4, 61, 4, 75, 4, 57, 4, 58, 0) ' ANSI: "Красный:"
+        Case cdUIT_frmColorDialog_lblGreen_Caption ' English: "Green:"
+            Text = StrFromArray(23, 4, 53, 4, 59, 4, 53, 4, 61, 4, 75, 4, 57, 4, 58, 0) ' ANSI: "Зеленый:"
+        Case cdUIT_frmColorDialog_lblBlue_Caption ' English: "Blue:"
+            Text = StrFromArray(33, 4, 56, 4, 61, 4, 56, 4, 57, 4, 58, 0) ' ANSI: "Синий:"
+        Case cdUIT_frmColorDialog_lblHex_Caption ' English: "Hex:"
+            Text = StrFromArray(40, 4, 53, 4, 65, 4, 66, 4, 61, 4, 46, 0, 58, 0) ' ANSI: "Шестн.:"
+        Case cdUIT_frmColorDialog_lblHue_Caption ' English: "Hue:"
+            Text = StrFromArray(30, 4, 66, 4, 66, 4, 53, 4, 61, 4, 62, 4, 58, 4, 58, 0) ' ANSI: "Оттенок:"
+        Case cdUIT_frmColorDialog_lblSaturation_Caption ' English: "Sat.:"
+            Text = StrFromArray(61, 4, 48, 4, 65, 4, 75, 4, 73, 4, 46, 0, 58, 0) ' ANSI: "насыщ.:"
+        Case cdUIT_frmColorDialog_Luminance_Caption ' English: "Lum.:"
+            Text = StrFromArray(47, 4, 64, 4, 58, 4, 62, 4, 65, 4, 66, 4, 76, 4, 58, 0) ' ANSI: "Яркость:"
+        Case cdUIT_frmColorDialog_Value_Caption ' English: "Value:"
+            Text = StrFromArray(23, 4, 61, 4, 48, 4, 71, 4, 53, 4, 61, 4, 56, 4, 53, 4, 58, 0) ' ANSI: "Значение:"
+        Case cdUIT_frmColorDialog_lblColorSystem_Caption ' English: "Mode:"
+            Text = StrFromArray(32, 4, 53, 4, 54, 4, 56, 4, 60, 4, 58, 0) ' ANSI: "Режим:"
+        Case cdUIT_frmColorDialog_lblPalette_Caption ' English: "Palette:"
+            Text = StrFromArray(31, 4, 48, 4, 59, 4, 56, 4, 66, 4, 64, 4, 48, 4, 58, 0) ' ANSI: "Палитра:"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem1 ' English: "Wheel, fixed"
+            Text = StrFromArray(26, 4, 64, 4, 67, 4, 51, 4, 44, 0, 32, 0, 68, 4, 56, 4, 58, 4, 65, 4, 56, 4, 64, 4, 62, 4, 50, 4, 48, 4, 61, 4, 61, 4, 75, 4, 57, 4) ' ANSI: "Круг, фиксированный"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem2 ' English: "Box, fixed"
+            Text = StrFromArray(47, 4, 73, 4, 56, 4, 58, 4, 44, 0, 32, 0, 68, 4, 56, 4, 58, 4, 65, 4, 56, 4, 64, 4, 62, 4, 50, 4, 48, 4, 61, 4, 61, 4, 75, 4, 57, 4) ' ANSI: "Ящик, фиксированный"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem3 ' English: "Wheel, dynamic"
+            Text = StrFromArray(26, 4, 64, 4, 67, 4, 51, 4, 44, 0, 32, 0, 52, 4, 56, 4, 61, 4, 48, 4, 60, 4, 56, 4, 71, 4, 53, 4, 65, 4, 58, 4, 56, 4, 57, 4) ' ANSI: "Круг, динамический"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem4 ' English: "Box, dynamic"
+            Text = StrFromArray(47, 4, 73, 4, 56, 4, 58, 4, 44, 0, 32, 0, 52, 4, 56, 4, 61, 4, 48, 4, 60, 4, 56, 4, 71, 4, 53, 4, 65, 4, 58, 4, 56, 4, 57, 4) ' ANSI: "Ящик, динамический"
+        Case cdUIT_frmColorDialog_InvalidColorMessage ' English: "The color is not valid."
+            Text = StrFromArray(38, 4, 50, 4, 53, 4, 66, 4, 32, 0, 61, 4, 53, 4, 52, 4, 53, 4, 57, 4, 65, 4, 66, 4, 50, 4, 56, 4, 66, 4, 53, 4, 59, 4, 53, 4, 61, 4, 46, 0) ' ANSI: "Цвет недействителен."
+        Case cdUIT_frmColorDialog_ParameterFullName_Hue ' English: "Hue"
+            Text = StrFromArray(30, 4, 66, 4, 66, 4, 53, 4, 61, 4, 62, 4, 58, 4) ' ANSI: "Оттенок"
+        Case cdUIT_frmColorDialog_ParameterFullName_Luminance ' English: "Luminance"
+            Text = StrFromArray(47, 4, 64, 4, 58, 4, 62, 4, 65, 4, 66, 4, 76, 4) ' ANSI: "Яркость"
+        Case cdUIT_frmColorDialog_ParameterFullName_Saturation ' English: "Saturation"
+            Text = StrFromArray(29, 4, 48, 4, 65, 4, 75, 4, 73, 4, 53, 4, 61, 4, 61, 4, 62, 4, 65, 4, 66, 4, 76, 4) ' ANSI: "Насыщенность"
+        Case cdUIT_frmColorDialog_ParameterFullName_Red ' English: "Red"
+            Text = StrFromArray(26, 4, 64, 4, 48, 4, 65, 4, 61, 4, 75, 4, 57, 4) ' ANSI: "Красный"
+        Case cdUIT_frmColorDialog_ParameterFullName_Green ' English: "Green"
+            Text = StrFromArray(23, 4, 53, 4, 59, 4, 53, 4, 61, 4, 75, 4, 57, 4) ' ANSI: "Зеленый"
+        Case cdUIT_frmColorDialog_ParameterFullName_Blue ' English: "Blue"
+            Text = StrFromArray(33, 4, 56, 4, 61, 4, 56, 4, 57, 4) ' ANSI: "Синий"
+        Case cdUIT_frmColorDialog_ParameterFullName_Value ' English: "Value"
+            Text = StrFromArray(23, 4, 61, 4, 48, 4, 71, 4, 53, 4, 61, 4, 56, 4, 53, 4) ' ANSI: "Значение"
+        Case cdUIT_frmColorDialog_OK ' English: "OK"
+            Text = "OK"
+        Case cdUIT_frmColorDialog_Cancel ' English: "Cancel"
+            Text = StrFromArray(30, 4, 66, 4, 60, 4, 53, 4, 61, 4, 48, 4) ' ANSI: "Отмена"
+        Case cdUIT_frmColorDialog_Close ' English: "Close"
+            Text = StrFromArray(23, 4, 48, 4, 58, 4, 64, 4, 75, 4, 66, 4, 76, 4) ' ANSI: "Закрыть"
+    End Select
+End Sub
+
+Private Sub Do_PORTUGUESE(ByRef TextID As Long, ByRef Text As String)
+    ' Microsoft teminology search: https://www.microsoft.com/en-us/language/search
+    Select Case TextID
+        Case cdUIT_frmColorDialog_Form_Caption ' English: "Color selection"
+            Text = "Seleзгo de cor"
+        Case cdUIT_ColorSelector_chkFixedPalette_Caption ' English: "Fixed"
+            Text = "Fixa"
+        Case cdUIT_ColorSelector_chkFixedPalette_ToolTipText ' English: "Reflects color changes visually in the palette or not"
+            Text = "Reflete as mudanзas de cor visualmente na paleta ou nгo"
+        Case cdUIT_ColorSelector_cboSliderParameter_ToolTipText ' English: "Slider control parameter"
+            If mUISubLanguage = SUBLANG_PORTUGUESE_BRAZILIAN Then
+                Text = "Parвmetro de controle deslizante"
+            Else
+                Text = "Parвmetro de controlo de deslize"
+            End If
+        Case cdUIT_ColorSelector_lblMode_Caption ' English: "Mode:"
+            Text = "Modo:"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Hue ' English: "Hue"
+            Text = "Matiz"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Luminance ' English: "Lum."
+            Text = "Lum."
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Value ' English: "Value"
+            Text = "Valor"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Saturation ' English: "Sat."
+            Text = "Sat."
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Red ' English: "Red"
+            Text = "Vermelho"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Green ' English: "Green"
+            Text = "Verde"
+        Case cdUIT_ColorSelector_cboSliderParameter_ListItem_Blue ' English: "Blue"
+            Text = "Azul"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSV ' English: "HSV"
+            Text = "HSV"
+        Case cdUIT_ColorSelector_cboColorSystem_ListItem_HSL ' English: "HSL"
+            Text = "HSL"
+        Case cdUIT_frmColorDialog_lblBasicColors_Caption ' English: "Basic colors:"
+            Text = "Cores base:"
+        Case cdUIT_frmColorDialog_lblRecent_Caption ' English: "Recent:"
+            Text = "Recente:"
+        Case cdUIT_frmColorDialog_Color_Caption ' English: "color"
+            Text = "cor"
+        Case cdUIT_frmColorDialog_ColorNew_Caption ' English: "new"
+            Text = "nova"
+        Case cdUIT_frmColorDialog_ColorPrevious_Caption ' English: "previous"
+            Text = "anterior"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipStart ' English: "Hold down the Control key to change"
+            Text = "Mantenha pressionada a tecla Control para alterar"
+        Case cdUIT_frmColorDialog_MouseWheel_ToolTipEnd ' English: "with the mouse wheel, press Shift key to go slowly"
+            Text = "com a roda do mouse, pressione a tecla Shift para ir devagar"
+        Case cdUIT_frmColorDialog_EyeDropper_ToolTip ' English: "Choose a color from anywhere on the screen or press the Escape key to cancel"
+            Text = "Escolha uma cor de qualquer lugar na tela ou pressione a tecla Escape para cancelar"
+        Case cdUIT_frmColorDialog_picEyeDropper_ToolTipText ' English: "Choose a color from the screen"
+            Text = "Escolha uma cor na tela"
+        Case cdUIT_frmColorDialog_lblRed_Caption ' English: "Red:"
+            Text = "Vermelho:"
+        Case cdUIT_frmColorDialog_lblGreen_Caption ' English: "Green:"
+            Text = "Verde:"
+        Case cdUIT_frmColorDialog_lblBlue_Caption ' English: "Blue:"
+            Text = "Azul:"
+        Case cdUIT_frmColorDialog_lblHex_Caption ' English: "Hex:"
+            Text = "Hex:"
+        Case cdUIT_frmColorDialog_lblHue_Caption ' English: "Hue:"
+            Text = "Matiz:"
+        Case cdUIT_frmColorDialog_lblSaturation_Caption ' English: "Sat.:"
+            Text = "Sat.:"
+        Case cdUIT_frmColorDialog_Luminance_Caption ' English: "Lum.:"
+            Text = "Lum.:"
+        Case cdUIT_frmColorDialog_Value_Caption ' English: "Value:"
+            Text = "Valor:"
+        Case cdUIT_frmColorDialog_lblColorSystem_Caption ' English: "Mode:"
+            Text = "Modo:"
+        Case cdUIT_frmColorDialog_lblPalette_Caption ' English: "Palette:"
+            Text = "Paleta:"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem1 ' English: "Wheel, fixed"
+            Text = "Roda, fixa"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem2 ' English: "Box, fixed"
+            Text = "Caixa, fixa"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem3 ' English: "Wheel, dynamic"
+            Text = "Roda, dinвmica"
+        Case cdUIT_frmColorDialog_cboPalette_ListItem4 ' English: "Box, dynamic"
+            Text = "Caixa, dinвmica"
+        Case cdUIT_frmColorDialog_InvalidColorMessage ' English: "The color is not valid."
+            Text = "A cor nгo й vбlida."
+        Case cdUIT_frmColorDialog_ParameterFullName_Hue ' English: "Hue"
+            Text = "Matiz"
+        Case cdUIT_frmColorDialog_ParameterFullName_Luminance ' English: "Luminance"
+            Text = "Luminвncia"
+        Case cdUIT_frmColorDialog_ParameterFullName_Saturation ' English: "Saturation"
+            Text = "Saturaзгo"
+        Case cdUIT_frmColorDialog_ParameterFullName_Red ' English: "Red"
+            Text = "Vermelho"
+        Case cdUIT_frmColorDialog_ParameterFullName_Green ' English: "Green"
+            Text = "Verde"
+        Case cdUIT_frmColorDialog_ParameterFullName_Blue ' English: "Blue"
+            Text = "Azul"
+        Case cdUIT_frmColorDialog_ParameterFullName_Value ' English: "Value"
+            Text = "Valor"
+        Case cdUIT_frmColorDialog_OK ' English: "OK"
+            Text = "OK"
+        Case cdUIT_frmColorDialog_Cancel ' English: "Cancel"
+            Text = "Cancelar"
+        Case cdUIT_frmColorDialog_Close ' English: "Close"
+            Text = "Fechar"
+    End Select
+End Sub
+
+
 'Private Sub Do_OTHER(ByRef TextID As Long, ByRef Text As String)
 '    ' Microsoft teminology search: https://www.microsoft.com/en-us/language/search
 '    Select Case TextID
@@ -1099,7 +1316,7 @@ Public Property Get SubLanguageWindowsUI() As Variant
     SubLanguageWindowsUI = mSubLanguageWindowsUI
 End Property
 
-Private Property Get UILanguage() As Variant
+Public Property Get UILanguage() As Variant
     If mUILanguage = bsLang_AUTO_SELECT Then SetUILanguageToWindowsUILanguage
     UILanguage = mUILanguage
 End Property
@@ -1123,7 +1340,7 @@ Private Sub SetUILanguageToWindowsUILanguage()
 #Const TestingLanguages = 0
 #If TestingLanguages Then
     If InIDE Then
-        mUILanguage = bsLang_GERMAN ' bsLang_GREEK ' bsLang_ITALIAN ' bsLang_CHINESE_SIMPLIFIED ' bsLang_FRENCH 'bsLang_ENGLISH
+        mUILanguage = bsLang_PORTUGUESE ' bsLang_RUSSIAN ' bsLang_GERMAN ' bsLang_GREEK ' bsLang_ITALIAN ' bsLang_CHINESE_SIMPLIFIED ' bsLang_FRENCH 'bsLang_ENGLISH
     End If
 #End If
 End Sub
@@ -1132,7 +1349,7 @@ Private Function LanguageIsSupported(nLang As Long) As Boolean
     Dim c As Long
     
     Select Case nLang
-        Case bsLang_CHINESE_SIMPLIFIED, bsLang_GERMAN, bsLang_GREEK, bsLang_ENGLISH, bsLang_SPANISH, bsLang_FRENCH, bsLang_ITALIAN
+        Case bsLang_CHINESE_SIMPLIFIED, bsLang_GERMAN, bsLang_GREEK, bsLang_ENGLISH, bsLang_SPANISH, bsLang_FRENCH, bsLang_ITALIAN, bsLang_PORTUGUESE, bsLang_RUSSIAN
             LanguageIsSupported = True
     End Select
 End Function
@@ -1141,7 +1358,7 @@ Public Property Get LanguageIsUnicode() As Boolean
     Select Case mUILanguage
         'Case bsLang_CHINESE_SIMPLIFIED, bsLang_HEBREW, bsLang_ARABIC, bsLang_GREEK
         '    LanguageIsUnicode = True
-        Case bsLang_CHINESE_SIMPLIFIED, bsLang_GREEK
+        Case bsLang_CHINESE_SIMPLIFIED, bsLang_GREEK, bsLang_RUSSIAN
             LanguageIsUnicode = True
     End Select
 End Property
