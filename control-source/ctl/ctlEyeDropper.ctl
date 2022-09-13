@@ -30,13 +30,13 @@ Option Explicit
 
 Public Event Click()
 Attribute Click.VB_Description = "Occurs when the user chooses a color from the screen by clicking."
-Public Event UnderMouseColor(nColor As Long)
-Attribute UnderMouseColor.VB_Description = "Occurs when the color under the mouse changes."
 
 Private mColor As Long
 Private mAColorWasChosen As Boolean
+Private mEyeDropping As Boolean
 
 Private Sub UserControl_Initialize()
+    mColor = -1
     UserControl.PaintPicture imgAux.Picture, 2, 2
 End Sub
 
@@ -61,18 +61,29 @@ End Sub
 
 Public Function StartDropper() As Boolean
 Attribute StartDropper.VB_Description = "Starts the eye dropper."
+    mEyeDropping = True
     mAColorWasChosen = False
     frmEyeDropper.Width = Screen.TwipsPerPixelX * 10
     frmEyeDropper.Height = Screen.TwipsPerPixelY * 10
     Set frmEyeDropper.EyeDropperControl = Me
     frmEyeDropper.Show vbModal
+    mEyeDropping = False
     StartDropper = mAColorWasChosen
     On Error Resume Next
     UserControl.Parent.SetFocus
 End Function
 
 Friend Sub SetUnderMouseColor(ByVal nColor As Long)
-    RaiseEvent UnderMouseColor(nColor)
+    Dim iEdn As IEyeDropperNotification
+    
+    mColor = nColor
+    
+    On Error Resume Next
+    Set iEdn = UserControl.Parent
+    On Error GoTo 0
+    If Not iEdn Is Nothing Then
+        iEdn.ColorUnderMouseChange mColor
+    End If
 End Sub
     
 Friend Sub SetColor(ByVal nColor As Long)
@@ -108,7 +119,14 @@ Public Property Get Color() As OLE_COLOR
 Attribute Color.VB_Description = "Returns/sets the current color."
 Attribute Color.VB_UserMemId = 0
 Attribute Color.VB_MemberFlags = "200"
-    Color = mColor
+    If mColor = -1 Then
+        If mEyeDropping Then
+            mColor = frmEyeDropper.GetCurrentColor
+        End If
+    End If
+    If mColor <> -1 Then
+        Color = mColor
+    End If
 End Property
 
 Public Property Get Canceled() As Boolean

@@ -650,6 +650,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Implements IBSSubclass
+Implements IEyeDropperNotification
 
 Public Event Change()
 Public Event ColorSet()
@@ -967,14 +968,6 @@ Private Sub ColorSelector1_SliderParameterChange()
     tmrDoNotShowTT.Enabled = False
 End Sub
 
-Private Sub EyeDropper1_UnderMouseColor(nColor As Long)
-    picEyeDropper.BackColor = nColor
-    DrawEyeDropperBackPicture
-    If Not mRoundedBoxes Then
-        picEyeDropper.Line (0, 0)-(picEyeDropper.ScaleWidth, picEyeDropper.ScaleHeight), vbActiveBorder, B
-    End If
-End Sub
-
 Private Sub Form_Initialize()
     mBackColor = -1
     mConfirmationButtonsVisible = cPropDefault_ColorDialog_ConfirmationButtonsVisible
@@ -1215,6 +1208,14 @@ Private Sub StartDropper()
     mEyeDropping = False
 End Sub
     
+Private Sub IEyeDropperNotification_ColorUnderMouseChange(ByVal nColor As Long)
+    picEyeDropper.BackColor = nColor
+    DrawEyeDropperBackPicture
+    If Not mRoundedBoxes Then
+        picEyeDropper.Line (0, 0)-(picEyeDropper.ScaleWidth, picEyeDropper.ScaleHeight), vbActiveBorder, B
+    End If
+End Sub
+
 Private Sub mnuClearAllRecent_Click()
     ClearRecent
 End Sub

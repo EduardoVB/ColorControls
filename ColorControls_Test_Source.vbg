@@ -1,0 +1,3 @@
+VBGROUP 5.0
+Project=control-source\ClrDlg.vbp
+StartupProject=test in source code\Test_ColorControls.vbp
