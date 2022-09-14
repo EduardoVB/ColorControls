@@ -1,3 +1,4 @@
+2022-09-13 EyeDropper control color under mouse notification is now via Implements (updated also the test project).
 2022-09-10 Added Portuguese and Russian translations.
 2022-09-10 Added German translation.
 2022-09-10 Fixed a bug in tool tips
