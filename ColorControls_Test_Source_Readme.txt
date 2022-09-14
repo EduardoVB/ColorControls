@@ -1,0 +1,1 @@
+If you are not experienced with subclassing, TLBs and OCX development in general, it is preferable to use the compiled OCX instead.
