@@ -2207,14 +2207,14 @@ Private Sub SetlblParameter()
     picParameterLabel.Move iLeft, ColorSelector1.Height + 10, lblParameter.Width
 End Sub
 
-Private Function EnsureEnding(nText As Variant, nEnding As String)
+Private Function EnsureEnding(nText As Variant, nEnding As String) As String
     EnsureEnding = nText
     If Right$(EnsureEnding, Len(nEnding)) <> nEnding Then
         EnsureEnding = EnsureEnding & nEnding
     End If
 End Function
 
-Private Function WithoutEnding(nText As Variant, nEnding As String)
+Private Function WithoutEnding(nText As Variant, nEnding As String) As String
     WithoutEnding = nText
     If Right$(WithoutEnding, Len(nEnding)) = nEnding Then
         WithoutEnding = Left$(WithoutEnding, Len(WithoutEnding) - 1)

@@ -94,7 +94,7 @@ Private mChanged As Boolean
 Private mColorSet As Boolean
 Private mTag As String
 
-Public Function Show(Optional ByVal nStyleBox) As Boolean
+Public Function Show(Optional ByVal nStyleBox As Variant) As Boolean
 Attribute Show.VB_Description = "Shows the dialog."
     Dim iColorPrev As Long
     Dim iActiveWindowHwnd As Long
@@ -634,7 +634,7 @@ Attribute SetComplete.VB_Description = "Helper method to set several properties 
     mHexControlVisible = True
 End Sub
 
-Public Sub SetCompact(Optional nRecentColorsColumns = 0, Optional ColorValuesSectionVisible As Boolean = False, Optional SliderOptionsAvailable As CDSliderOptionsAvailableConstants = cdSliderOptionsNone, Optional nDialogCaptionVisible As Boolean = True, Optional nConfirmationButtonsVisible As Boolean = True, Optional nColorSelectionBoxVisible As Boolean = True, Optional nSliderWide As CDYesNoAutoConstants = cdYNAuto, Optional nHideLabels As Boolean = False)
+Public Sub SetCompact(Optional nRecentColorsColumns As Long = 0, Optional ColorValuesSectionVisible As Boolean = False, Optional SliderOptionsAvailable As CDSliderOptionsAvailableConstants = cdSliderOptionsNone, Optional nDialogCaptionVisible As Boolean = True, Optional nConfirmationButtonsVisible As Boolean = True, Optional nColorSelectionBoxVisible As Boolean = True, Optional nSliderWide As CDYesNoAutoConstants = cdYNAuto, Optional nHideLabels As Boolean = False)
 Attribute SetCompact.VB_Description = "Helper method to set several properties to get a 'Compact' configuration in one shot."
     mColorValuesSectionVisible = ColorValuesSectionVisible
     mSliderOptionsAvailable = SliderOptionsAvailable

@@ -105,7 +105,7 @@ Private Type T_ChooseColor
         hInstance As Long
         RGBResult As Long
         lpCustColors As Long
-        flags As Long
+        Flags As Long
         lCustData As Long
         lpfnHook As Long
         lpTemplateName As String
@@ -128,30 +128,30 @@ Private Const FW_BOLD As Long = 700
 
 'data buffer for the ChooseFont function
 Private Type LOGFONT
-    lfHeight As Long
-    lfWidth As Long
-    lfEscapement As Long
-    lfOrientation As Long
-    lfWeight As Long
-    lfItalic As Byte
-    lfUnderline As Byte
-    lfStrikeOut As Byte
-    lfCharSet As Byte
-    lfOutPrecision As Byte
-    lfClipPrecision As Byte
-    lfQuality As Byte
-    lfPitchAndFamily As Byte
-    lfFaceName(0 To LF_FACESIZE - 1) As Byte
+    LFHeight As Long
+    LFWidth As Long
+    LFEscapement As Long
+    LFOrientation As Long
+    LFWeight As Long
+    LFItalic As Byte
+    LFUnderline As Byte
+    LFStrikeOut As Byte
+    LFCharset As Byte
+    LFOutPrecision As Byte
+    LFClipPrecision As Byte
+    LFQuality As Byte
+    LFPitchAndFamily As Byte
+    LFFaceName(0 To LF_FACESIZE - 1) As Byte
 End Type
 
 'data buffer for the ChooseFont function
 Private Type T_CHOOSEFONT
         lStructSize As Long
         hwndOwner As Long
-        hDC As Long
+        HDC As Long
         lpLogFont As Long
         iPointSize As Long
-        flags As Long
+        Flags As Long
         rgbColors As Long
         lCustData As Long
         lpfnHook As Long
@@ -181,7 +181,7 @@ Private Type T_PAGESETUPDLG
     hwndOwner                   As Long
     hDevMode                    As Long
     hDevNames                   As Long
-    flags                       As Long
+    Flags                       As Long
     ptPaperSize                 As POINTAPI
     rtMinMargin                 As RECT
     rtMargin                    As RECT
@@ -234,7 +234,7 @@ Private Type T_OpenFilename
         nMaxFileTitle As Long
         lpstrInitialDir As String
         lpstrTitle As String
-        flags As Long
+        Flags As Long
         nFileOffset As Integer
         nFileExtension As Integer
         lpstrDefExt As String
@@ -250,8 +250,8 @@ Private Type T_PrintDlg
         hwndOwner As Long
         hDevMode As Long
         hDevNames As Long
-        hDC As Long
-        flags As Long
+        HDC As Long
+        Flags As Long
         nFromPage As Integer
         nToPage As Integer
         nMinPage As Integer
@@ -783,7 +783,7 @@ Public Sub ShowColor(Optional ByVal nFlags As cdeCommonDialogExColorFlagsConstan
  
     tChooseColor.lpCustColors = lCustomColorAddress
     
-    tChooseColor.flags = iFlags And Not (CC_ENABLEHOOK Or CC_ENABLETEMPLATE) Or CC_RGBINIT
+    tChooseColor.Flags = iFlags And Not (CC_ENABLEHOOK Or CC_ENABLETEMPLATE) Or CC_RGBINIT
         
     tChooseColor.RGBResult = TranslateAColor(mColor)
         
@@ -857,43 +857,43 @@ Public Sub ShowFont(Optional ByVal nFlags As cdeCommonDialogExFontFlagsConstants
     '***    prepare tChooseFont data
         
     
-    tLogFont.lfHeight = mFont.Size * 20 / Screen.TwipsPerPixelY * -1 ' PointsPerTwip = 1440 / 72 = 20
+    tLogFont.LFHeight = mFont.Size * 20 / Screen.TwipsPerPixelY * -1 ' PointsPerTwip = 1440 / 72 = 20
     'tLogFont.lfWidth As Long
     'tLogFont.lfEscapement As Long
     'tLogFont.lfOrientation As Long
     
     'tLogFont.lfWeight As Long - init from FontBold property
     If mFont.Bold Then
-        tLogFont.lfWeight = FW_BOLD
+        tLogFont.LFWeight = FW_BOLD
     Else
-        tLogFont.lfWeight = FW_NORMAL
+        tLogFont.LFWeight = FW_NORMAL
     End If
     
     'tLogFont.lfItalic As Byte - init from FontItalic property
     If mFont.Italic Then
-        tLogFont.lfItalic = 1
+        tLogFont.LFItalic = 1
     End If
     
     'tLogFont.lfUnderline As Byte - init from FontUnderline property
     If mFont.Underline Then
-        tLogFont.lfUnderline = 1
+        tLogFont.LFUnderline = 1
     End If
 
     'tLogFont.lfStrikeOut As Byte - init from FontStrikethru property
     If mFont.Strikethrough Then
-        tLogFont.lfStrikeOut = 1
+        tLogFont.LFStrikeOut = 1
     End If
 
 
-    tLogFont.lfCharSet = DEFAULT_CHARSET
+    tLogFont.LFCharset = DEFAULT_CHARSET
     'tLogFont.lfOutPrecision As Byte
     'tLogFont.lfClipPrecision As Byte
-    tLogFont.lfQuality = CLEARTYPE_QUALITY
+    tLogFont.LFQuality = CLEARTYPE_QUALITY
     'tLogFont.lfPitchAndFamily As Byte
     
     For i = 0 To Len(mFont.Name) - 1
         If i > 31 Then Exit For
-        tLogFont.lfFaceName(i) = Asc(Mid$(mFont.Name, i + 1, 1))
+        tLogFont.LFFaceName(i) = Asc(Mid$(mFont.Name, i + 1, 1))
     Next
     
     lLogFontSize = Len(tLogFont)
@@ -940,24 +940,24 @@ Public Sub ShowFont(Optional ByVal nFlags As cdeCommonDialogExFontFlagsConstants
     tChooseFont.iPointSize = mFont.Size * 10
     
     ' Flags can get reference variable or constant with bit flags
-    tChooseFont.flags = iFlags Or CF_INITTOLOGFONTSTRUCT And Not (CF_APPLY Or CF_ENABLEHOOK Or CF_ENABLETEMPLATE)
+    tChooseFont.Flags = iFlags Or CF_INITTOLOGFONTSTRUCT And Not (CF_APPLY Or CF_ENABLEHOOK Or CF_ENABLETEMPLATE)
     
     If mhDc = 0 Then
         If Not Printer Is Nothing Then
-            If ((tChooseFont.flags And CF_PRINTERFONTS) = CF_PRINTERFONTS) Then tChooseFont.hDC = Printer.hDC
+            If ((tChooseFont.Flags And CF_PRINTERFONTS) = CF_PRINTERFONTS) Then tChooseFont.HDC = Printer.HDC
         End If
     Else
-        tChooseFont.flags = tChooseFont.flags Or CF_PRINTERFONTS
-        tChooseFont.hDC = mhDc
+        tChooseFont.Flags = tChooseFont.Flags Or CF_PRINTERFONTS
+        tChooseFont.HDC = mhDc
     End If
     ' Must have some fonts
-    If (tChooseFont.flags And CF_PRINTERFONTS) = 0 Then tChooseFont.flags = tChooseFont.flags Or CF_SCREENFONTS
+    If (tChooseFont.Flags And CF_PRINTERFONTS) = 0 Then tChooseFont.Flags = tChooseFont.Flags Or CF_SCREENFONTS
     ' Color can take initial color, receive chosen color
-    If mColor <> 0 Then tChooseFont.flags = tChooseFont.flags Or CF_EFFECTS
+    If mColor <> 0 Then tChooseFont.Flags = tChooseFont.Flags Or CF_EFFECTS
     ' MinSize can be minimum size accepted
-    If (mMin <> 0) Then tChooseFont.flags = tChooseFont.flags Or CF_LIMITSIZE
+    If (mMin <> 0) Then tChooseFont.Flags = tChooseFont.Flags Or CF_LIMITSIZE
     ' MaxSize can be maximum size accepted
-    If (mMax <> 0) Then tChooseFont.flags = tChooseFont.flags Or CF_LIMITSIZE
+    If (mMax <> 0) Then tChooseFont.Flags = tChooseFont.Flags Or CF_LIMITSIZE
     
     'tChooseFont.Flags = tChooseFont.Flags And Not CF_LIMITSIZE
     
@@ -982,28 +982,28 @@ Public Sub ShowFont(Optional ByVal nFlags As cdeCommonDialogExFontFlagsConstants
             Call CopyMemory(tLogFont, ByVal lLogFontAddress, lLogFontSize)
             
             'tLogFont.lfWeight As Long  - store to FontBold property
-            If tLogFont.lfWeight >= FW_BOLD Then
+            If tLogFont.LFWeight >= FW_BOLD Then
                 mFont.Bold = True
             Else
                 mFont.Bold = False
             End If
                         
             'tLogFont.lfItalic As Byte - store to FontItalic property
-            If tLogFont.lfItalic <> 0 Then
+            If tLogFont.LFItalic <> 0 Then
                 mFont.Italic = True
             Else
                 mFont.Italic = False
             End If
             
             'tLogFont.lfUnderline As Byte - store to FontUnderline property
-            If tLogFont.lfUnderline <> 0 Then
+            If tLogFont.LFUnderline <> 0 Then
                 mFont.Underline = True
             Else
                 mFont.Underline = False
             End If
         
             'tLogFont.lfStrikeOut As Byte - store to FontStrikethru property
-            If tLogFont.lfStrikeOut <> 0 Then
+            If tLogFont.LFStrikeOut <> 0 Then
                 mFont.Strikethrough = True
             Else
                 mFont.Strikethrough = False
@@ -1012,7 +1012,7 @@ Public Sub ShowFont(Optional ByVal nFlags As cdeCommonDialogExFontFlagsConstants
             mColor = tChooseFont.rgbColors
             
             'tLogFont.lfFaceName(LF_FACESIZE) As Byte - store to FontName property
-            FontName = sByteArrayToString(tLogFont.lfFaceName())
+            FontName = sByteArrayToString(tLogFont.LFFaceName())
             
             'tChooseFont.iPointSize As Long - store to FontSize property
             mFont.Size = CLng(tChooseFont.iPointSize / 10)
@@ -1157,7 +1157,7 @@ Public Sub ShowPrinter(Optional ByVal nFlags As cdeCommonDialogExPrinterFlagsCon
     'hDevNames As Long
     
     'flags As Long - init from Flags property
-    tPrintDlg.flags = iFlags Or cdlbPDUseDevModeCopies Or cdlbPDReturnDC ' it requires these two flags to return the number of copies properly
+    tPrintDlg.Flags = iFlags Or cdlbPDUseDevModeCopies Or cdlbPDReturnDC ' it requires these two flags to return the number of copies properly
     
     'nFromPage As Integer - init from FromPage property
     tPrintDlg.nFromPage = mFromPage
@@ -1208,7 +1208,7 @@ Public Sub ShowPrinter(Optional ByVal nFlags As cdeCommonDialogExPrinterFlagsCon
             'nFromPage As Integer - store to FromPage property
             
             mFlags = mFlags And Not (cdlbPDSelection Or cdlbPDPageNums)
-            mFlags = mFlags Or (tPrintDlg.flags And (cdlbPDSelection Or cdlbPDPageNums))
+            mFlags = mFlags Or (tPrintDlg.Flags And (cdlbPDSelection Or cdlbPDPageNums))
 
             mFromPage = tPrintDlg.nFromPage
             
@@ -1221,7 +1221,7 @@ Public Sub ShowPrinter(Optional ByVal nFlags As cdeCommonDialogExPrinterFlagsCon
             'nMaxPage As Integer - store to Max property
             mMax = tPrintDlg.nMaxPage
             
-            mhDc = tPrintDlg.hDC
+            mhDc = tPrintDlg.HDC
             
             If mDevModePtr = 0 Then
                 mDevModePtr = GlobalLock(tPrintDlg.hDevMode)
@@ -1317,7 +1317,7 @@ Public Property Let Filter(nValue As String)
 End Property
 
 
-Private Function sLeftOfNull(ByVal sIn As String)
+Private Function sLeftOfNull(ByVal sIn As String) As String
     'returns the part of sIn preceding Chr$(0)
     Dim lNullPos As Long
     
@@ -1334,7 +1334,7 @@ Private Function sLeftOfNull(ByVal sIn As String)
     
 End Function
 
-Private Function sLeftOfLastNull(ByVal sIn As String)
+Private Function sLeftOfLastNull(ByVal sIn As String) As String
     'returns the part of sIn preceding Chr$(0)
     Dim iNullPos As Long
     Dim iChr As String
@@ -1363,7 +1363,7 @@ Private Function sLeftOfLastNull(ByVal sIn As String)
 End Function
 
 
-Private Function sAPIFilter(sIn)
+Private Function sAPIFilter(sIn As String) As String
     'prepares sIn for use as a filter string in API common dialog functions
     Dim lChrNdx As Long
     Dim sOneChr As String
@@ -1443,11 +1443,11 @@ Public Property Let DialogCaption(nValue As String)
     mDialogCaption = nValue
 End Property
 
-Public Property Get flags() As CommonDialogsFlags
-    flags = mFlags
+Public Property Get Flags() As CommonDialogsFlags
+    Flags = mFlags
 End Property
 
-Public Property Let flags(nValue As CommonDialogsFlags)
+Public Property Let Flags(nValue As CommonDialogsFlags)
     mFlags = nValue
 End Property
 
@@ -1508,12 +1508,12 @@ Public Property Let FromPage(nValue As Long)
     mFromPage = nValue
 End Property
 
-Public Property Get hDC() As Long
+Public Property Get HDC() As Long
     EnsurePageSet
-    hDC = mhDc
+    HDC = mhDc
 End Property
 
-Public Property Let hDC(nValue As Long)
+Public Property Let HDC(nValue As Long)
     mhDc = nValue
 End Property
 
@@ -1790,7 +1790,7 @@ Private Sub ShowFileDialog(ByVal mAction As Integer, nFlags As Long, Optional By
     tOpenFile.lpstrTitle = mDialogCaption
     
     'tOpenFile.flags As Long - init from Flags property
-    tOpenFile.flags = nFlags Or cdlbOFNNoChangeDir
+    tOpenFile.Flags = nFlags Or cdlbOFNNoChangeDir
         
     'tOpenFile.lpstrDefExt As String - init from DefaultExt property
     tOpenFile.lpstrDefExt = mDefaultExt
@@ -1824,7 +1824,7 @@ Private Sub ShowFileDialog(ByVal mAction As Integer, nFlags As Long, Optional By
         
         Case 1  'user selected or entered a file
             'mFileName gets part of tOpenFile.lpstrFile to the Left of first Chr$(0)
-            If (tOpenFile.flags And cdlbOFNAllowMultiselect) <> 0 Then
+            If (tOpenFile.Flags And cdlbOFNAllowMultiselect) <> 0 Then
                 mFileName = sLeftOfLastNull(tOpenFile.lpstrFile)
             Else
                 mFileName = sLeftOfNull(tOpenFile.lpstrFile)
@@ -2171,43 +2171,43 @@ Public Sub ShowPageSetup(Optional ByVal nFlags As cdeCommonDialogExPageSetupFlag
     
     iPsd.lStructSize = Len(iPsd)
     
-    iPsd.flags = iFlags And Not (PSD_ENABLEPAGEPAINTHOOK Or PSD_ENABLEPAGESETUPHOOK Or PSD_ENABLEPAGESETUPTEMPLATE)
+    iPsd.Flags = iFlags And Not (PSD_ENABLEPAGEPAINTHOOK Or PSD_ENABLEPAGESETUPHOOK Or PSD_ENABLEPAGESETUPTEMPLATE)
     
     Select Case mUnitsForUser
         Case cdeMUInches
-            iPsd.flags = iPsd.flags Or PSD_INTHOUSANDTHSOFINCHES
+            iPsd.Flags = iPsd.Flags Or PSD_INTHOUSANDTHSOFINCHES
         Case cdeMUMillimeters
-            iPsd.flags = iPsd.flags Or PSD_INHUNDREDTHSOFMILLIMETERS
+            iPsd.Flags = iPsd.Flags Or PSD_INHUNDREDTHSOFMILLIMETERS
         Case Else
             If GetLocaleMeasureSystem = 1 Then ' EEUU system, Inches
-                iPsd.flags = iPsd.flags Or PSD_INTHOUSANDTHSOFINCHES
+                iPsd.Flags = iPsd.Flags Or PSD_INTHOUSANDTHSOFINCHES
             Else
-                iPsd.flags = iPsd.flags Or PSD_INHUNDREDTHSOFMILLIMETERS
+                iPsd.Flags = iPsd.Flags Or PSD_INHUNDREDTHSOFMILLIMETERS
             End If
     End Select
     
-    If (iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) <> 0 Then
+    If (iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) <> 0 Then
         iUnitsMultiplier = 1000
     Else
         iUnitsMultiplier = 100
     End If
     Select Case True
-        Case (Units = vbInches) And ((iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) = 0)
+        Case (Units = vbInches) And ((iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) = 0)
             iUnitsMultiplier = iUnitsMultiplier * 25.4
-        Case (Units = vbInches) And ((iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) <> 0)
+        Case (Units = vbInches) And ((iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) <> 0)
             ' OK
-        Case (Units = vbMillimeters) And ((iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) = 0)
+        Case (Units = vbMillimeters) And ((iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) = 0)
             ' OK
-        Case (Units = vbMillimeters) And ((iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) <> 0)
+        Case (Units = vbMillimeters) And ((iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) <> 0)
             iUnitsMultiplier = iUnitsMultiplier / 25.4
     End Select
     
     
 '    If mMarginSet Then
-    iPsd.flags = iPsd.flags Or PSD_MARGINS
+    iPsd.Flags = iPsd.Flags Or PSD_MARGINS
 '    End If
     If (mMinTopMargin <> 0) Or (mMinLeftMargin <> 0) Or (mMinBottomMargin <> 0) Or (mMinRightMargin <> 0) Then
-        iPsd.flags = iPsd.flags Or cdlbPSMinMargins
+        iPsd.Flags = iPsd.Flags Or cdlbPSMinMargins
     End If
     
     iPsd.hwndOwner = iHwndOwner
@@ -2253,19 +2253,19 @@ Public Sub ShowPageSetup(Optional ByVal nFlags As cdeCommonDialogExPageSetupFlag
         End If
         
         Case 1  'user clicked OK
-            If (iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) <> 0 Then
+            If (iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) <> 0 Then
                 iUnitsMultiplier = 1000
             Else
                 iUnitsMultiplier = 100
             End If
             Select Case True
-                Case (Units = vbInches) And ((iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) = 0)
+                Case (Units = vbInches) And ((iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) = 0)
                     iUnitsMultiplier = iUnitsMultiplier * 25.4
-                Case (Units = vbInches) And ((iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) <> 0)
+                Case (Units = vbInches) And ((iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) <> 0)
                     ' OK
-                Case (Units = vbMillimeters) And ((iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) = 0)
+                Case (Units = vbMillimeters) And ((iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) = 0)
                     ' OK
-                Case (Units = vbMillimeters) And ((iPsd.flags And PSD_INTHOUSANDTHSOFINCHES) <> 0)
+                Case (Units = vbMillimeters) And ((iPsd.Flags And PSD_INTHOUSANDTHSOFINCHES) <> 0)
                     iUnitsMultiplier = iUnitsMultiplier / 25.4
             End Select
             
@@ -2339,7 +2339,7 @@ End Sub
 Private Function GetDevNameString( _
       ByVal ptrDevNames As Long, _
       ByVal ptrOffset As Long _
-   )
+   ) As String
    Dim Ptr As Long
    Dim lSize As Long
    Dim B() As Byte
@@ -2596,7 +2596,7 @@ Private Function GetActiveWindowHwnd() As Long
     End If
 End Function
 
-Private Function CloneFont(nOrigFont) As StdFont
+Private Function CloneFont(nOrigFont As StdFont) As StdFont
     Dim iFont As New StdFont
     
     If nOrigFont Is Nothing Then Exit Function

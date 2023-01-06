@@ -2252,7 +2252,7 @@ Private Sub DrawShades()
     picShades.Refresh
 End Sub
 
-Private Function GetShadedColor()
+Private Function GetShadedColor() As Long
     If (mSliderParameter = cdParameterLuminance) Or (mSliderParameter = cdParameterHue) Or (mSliderParameter = cdParameterSaturation) Then
         GetShadedColor = ColorCurrentColorSystemToRGB(mH, mL, mS)
     Else

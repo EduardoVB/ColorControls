@@ -551,7 +551,7 @@ Attribute Changed.VB_Description = "Returns true if the color was changed."
 End Property
 
 
-Public Function Show(Optional ByVal nStyleBox) As Boolean
+Public Function Show(Optional ByVal nStyleBox As Variant) As Boolean
 Attribute Show.VB_Description = "Shows the dialog."
     Show = mDlg.Show(nStyleBox)
 End Function
