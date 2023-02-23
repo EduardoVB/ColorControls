@@ -24,18 +24,18 @@ Begin VB.Form frmTestConfigurations
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame20 
       Caption         =   "Style Box"
-      Height          =   1332
+      Height          =   1300
       Left            =   11254
       TabIndex        =   58
       Top             =   432
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command20 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   60
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture20 
          Appearance      =   0  'Flat
@@ -62,11 +62,11 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame19 
       Caption         =   "Style Box Big"
-      Height          =   1332
+      Height          =   1300
       Left            =   11254
       TabIndex        =   55
       Top             =   2076
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture19 
          Appearance      =   0  'Flat
          BackColor       =   &H00008080&
@@ -95,16 +95,16 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   56
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame18 
       Caption         =   "Style Box Complete && Big"
-      Height          =   1332
+      Height          =   1300
       Left            =   11254
       TabIndex        =   52
       Top             =   3744
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture18 
          Appearance      =   0  'Flat
          BackColor       =   &H00781012&
@@ -133,23 +133,23 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   53
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame17 
       Caption         =   "Style Box Simple"
-      Height          =   1332
+      Height          =   1300
       Left            =   11254
       TabIndex        =   49
       Top             =   5412
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command17 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   51
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture17 
          Appearance      =   0  'Flat
@@ -176,11 +176,11 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame16 
       Caption         =   "Remember position"
-      Height          =   1332
+      Height          =   1300
       Left            =   5736
       TabIndex        =   45
       Top             =   5412
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture16 
          Appearance      =   0  'Flat
          BackColor       =   &H00E0E0E0&
@@ -209,23 +209,23 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   46
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame15 
       Caption         =   "Simple && Big"
-      Height          =   1332
+      Height          =   1300
       Left            =   312
       TabIndex        =   42
       Top             =   5412
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command15 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   44
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture15 
          Appearance      =   0  'Flat
@@ -252,18 +252,18 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame14 
       Caption         =   "Keep open (floating window)"
-      Height          =   1332
+      Height          =   1300
       Left            =   3024
       TabIndex        =   39
       Top             =   5412
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton cmdHide 
          Caption         =   "Hide"
          Height          =   396
          Left            =   1080
          TabIndex        =   48
          Top             =   720
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture14 
          Appearance      =   0  'Flat
@@ -293,16 +293,16 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   40
          Top             =   300
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame13 
       Caption         =   "Set a ""Context"" for user settings"
-      Height          =   1332
+      Height          =   1300
       Left            =   8494
       TabIndex        =   36
       Top             =   5412
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture13 
          Appearance      =   0  'Flat
          BackColor       =   &H00004080&
@@ -331,23 +331,23 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   37
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame12 
       Caption         =   "Change color in one touch"
-      Height          =   1332
+      Height          =   1300
       Left            =   8494
       TabIndex        =   33
       Top             =   3744
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command12 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   35
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture12 
          Appearance      =   0  'Flat
@@ -374,18 +374,18 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame11 
       Caption         =   "Simple"
-      Height          =   1332
+      Height          =   1300
       Left            =   3024
       TabIndex        =   30
       Top             =   3744
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command11 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   32
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture11 
          Appearance      =   0  'Flat
@@ -412,11 +412,11 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame10 
       Caption         =   "Complete && Big"
-      Height          =   1332
+      Height          =   1300
       Left            =   312
       TabIndex        =   27
       Top             =   3744
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture10 
          Appearance      =   0  'Flat
          BackColor       =   &H00C0C000&
@@ -445,23 +445,23 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   28
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame9 
       Caption         =   "Use HSL color system"
-      Height          =   1332
+      Height          =   1300
       Left            =   5736
       TabIndex        =   24
       Top             =   3744
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command9 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   26
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture9 
          Appearance      =   0  'Flat
@@ -488,18 +488,18 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame8 
       Caption         =   "Complete"
-      Height          =   1332
+      Height          =   1300
       Left            =   312
       TabIndex        =   21
       Top             =   2076
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command8 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   23
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture8 
          Appearance      =   0  'Flat
@@ -526,11 +526,11 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame7 
       Caption         =   "Compact"
-      Height          =   1332
+      Height          =   1300
       Left            =   3024
       TabIndex        =   18
       Top             =   2076
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture7 
          Appearance      =   0  'Flat
          BackColor       =   &H008080FF&
@@ -559,23 +559,23 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   19
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame6 
       Caption         =   "Hue selection"
-      Height          =   1332
+      Height          =   1300
       Left            =   5736
       TabIndex        =   15
       Top             =   432
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command6 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   17
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture6 
          Appearance      =   0  'Flat
@@ -602,11 +602,11 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame5 
       Caption         =   "Hide parameters section"
-      Height          =   1332
+      Height          =   1300
       Left            =   5736
       TabIndex        =   12
       Top             =   2076
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture5 
          Appearance      =   0  'Flat
          BackColor       =   &H00F4CE33&
@@ -635,23 +635,23 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   13
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame4 
       Caption         =   "Hide recent colors"
-      Height          =   1332
+      Height          =   1300
       Left            =   8494
       TabIndex        =   9
       Top             =   2076
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command4 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   11
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture4 
          Appearance      =   0  'Flat
@@ -678,11 +678,11 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame3 
       Caption         =   "Saturation selection"
-      Height          =   1332
+      Height          =   1300
       Left            =   8494
       TabIndex        =   6
       Top             =   432
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture3 
          Appearance      =   0  'Flat
          BackColor       =   &H002404FF&
@@ -711,23 +711,23 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   7
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
    Begin VB.Frame Frame2 
       Caption         =   "Big"
-      Height          =   1332
+      Height          =   1300
       Left            =   3024
       TabIndex        =   3
       Top             =   408
-      Width           =   2508
+      Width           =   2600
       Begin VB.CommandButton Command2 
          Caption         =   "Change color"
          Height          =   396
          Left            =   1080
          TabIndex        =   5
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
       Begin VB.PictureBox Picture2 
          Appearance      =   0  'Flat
@@ -754,11 +754,11 @@ Begin VB.Form frmTestConfigurations
    End
    Begin VB.Frame Frame1 
       Caption         =   "Standard"
-      Height          =   1332
+      Height          =   1300
       Left            =   312
       TabIndex        =   0
       Top             =   408
-      Width           =   2508
+      Width           =   2600
       Begin VB.PictureBox Picture1 
          Appearance      =   0  'Flat
          BackColor       =   &H00FF0000&
@@ -787,7 +787,7 @@ Begin VB.Form frmTestConfigurations
          Left            =   1080
          TabIndex        =   1
          Top             =   456
-         Width           =   1164
+         Width           =   1300
       End
    End
 End
