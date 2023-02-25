@@ -476,7 +476,8 @@ Public Property Get Icon() As vbExBalloonTooltipIconConstants
 End Property
 
 Public Property Let BackColor(ByVal nValue As Variant)
-   If Not IsNumeric(nValue) Then Exit Property
+   If Not IsNumeric(nValue) Then Err.Raise 380: Exit Property
+   If Not IsValidOLE_COLOR(nValue) Then Err.Raise 380: Exit Property
    mBackColor = nValue
    If mTTHwnd <> 0 Then
       SendMessage mTTHwnd, TTM_SETTIPBKCOLOR, mBackColor, 0&
@@ -488,7 +489,8 @@ Public Property Get BackColor() As Variant
 End Property
 
 Public Property Let ForeColor(ByVal nValue As Variant)
-   If Not IsNumeric(nValue) Then Exit Property
+   If Not IsNumeric(nValue) Then Err.Raise 380: Exit Property
+   If Not IsValidOLE_COLOR(nValue) Then Err.Raise 380: Exit Property
    mForeColor = nValue
    If mTTHwnd <> 0 Then
       SendMessage mTTHwnd, TTM_SETTIPTEXTCOLOR, mForeColor, 0&

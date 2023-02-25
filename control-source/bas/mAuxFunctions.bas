@@ -15,6 +15,7 @@ Private Type OSVERSIONINFO 'for GetVersionEx API call
     szCSDVersion As String * 128
 End Type
 
+Private Declare Function TranslateColor Lib "olepro32.dll" Alias "OleTranslateColor" (ByVal clr As OLE_COLOR, ByVal palet As Long, Col As Long) As Long
 Private Declare Function GetFileVersionInfoSize Lib "Version.dll" Alias "GetFileVersionInfoSizeA" (ByVal lptstrFilename As String, lpdwHandle As Long) As Long
 Private Declare Function GetFileVersionInfo Lib "Version.dll" Alias "GetFileVersionInfoA" (ByVal lptstrFilename As String, ByVal dwHandle As Long, ByVal dwLen As Long, lpData As Any) As Long
 Private Declare Function GetCurrentProcessId Lib "kernel32" () As Long
@@ -441,5 +442,10 @@ Public Function GetParentFormHwnd(nControlHwnd As Long) As Long
         lPar = GetParent(lPar)
     Wend
     GetParentFormHwnd = iHwnd
+End Function
+
+Public Function IsValidOLE_COLOR(ByVal nColor As Long) As Boolean
+    Const S_OK As Long = 0
+    IsValidOLE_COLOR = (TranslateColor(nColor, 0, nColor) = S_OK)
 End Function
 

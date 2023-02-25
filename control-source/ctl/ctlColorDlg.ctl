@@ -180,6 +180,7 @@ End Property
 
 Public Property Let BackColor(ByVal nValue As OLE_COLOR)
     If nValue <> mDlg.BackColor Then
+        If Not IsValidOLE_COLOR(nValue) Then Err.Raise 380: Exit Property
         mDlg.BackColor = nValue
         PropertyChanged "BackColor"
     End If

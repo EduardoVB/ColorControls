@@ -1882,6 +1882,7 @@ Attribute Color.VB_UserMemId = 0
 End Property
 
 Public Property Let Color(ByVal nValue As OLE_COLOR)
+    If Not IsValidOLE_COLOR(nValue) Then Err.Raise 380: Exit Property
     mChangingParameter = True
     TranslateColor nValue, 0, nValue
     SetColor nValue
@@ -2781,6 +2782,7 @@ End Property
 
 Public Property Let BackColor(ByVal nValue As OLE_COLOR)
     If nValue <> mBackColor Then
+        If Not IsValidOLE_COLOR(nValue) Then Err.Raise 380: Exit Property
         mBackColor = nValue
         SetBackColor
         mDiameter = 0
