@@ -1,6 +1,6 @@
 Run the file:
 
-Register (run as Admin).bat
+ClrCtrl2 Register (run as Admin).bat
 
 that is in the 'ocx' folder to be able to use the OCX 
 
