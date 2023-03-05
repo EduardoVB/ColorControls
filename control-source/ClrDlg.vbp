@@ -1,6 +1,6 @@
 Type=Control
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Reference=*\G{5A2B9220-BF07-11E6-9598-0800200C9A66}#1.0#0#C:\Windows\SysWow64\OLEGUIDS.TLB#OLE Guid and interface definitions
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWow64\stdole2.tlb#OLE Automation
+Reference=*\G{5A2B9220-BF07-11E6-9598-0800200C9A66}#1.0#0#\\?\D:\Programas\BSPrinter\CommonControls\OLEGuids.tlb#OLE Guid and interface definitions
 UserControl=ctl\ctlColorDlg.ctl
 UserControl=ctl\ctlColorSelector.ctl
 UserControl=ctl\ctlEyeDropper.ctl
@@ -47,7 +47,7 @@ CompatibleMode="0"
 CompatibleEXE32="cmp\ClrCtrl2.cmp2"
 MajorVer=1
 MinorVer=0
-RevisionVer=30
+RevisionVer=31
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionFileDescription="Color controls for VB."
