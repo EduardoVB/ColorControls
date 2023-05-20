@@ -2032,12 +2032,12 @@ Public Property Let V(ByVal nValue As Integer)
 End Property
 
 
-Public Property Get S() As Integer
-Attribute S.VB_Description = "Returns/sets the 'Saturation' component of the color."
-    S = mS
+Public Property Get s() As Integer
+Attribute s.VB_Description = "Returns/sets the 'Saturation' component of the color."
+    s = mS
 End Property
 
-Public Property Let S(ByVal nValue As Integer)
+Public Property Let s(ByVal nValue As Integer)
     If nValue <> mS Then
         If (nValue < 0) Or (nValue > mS_Max) Then
             Err.Raise 380, TypeName(Me)
@@ -2566,27 +2566,28 @@ Private Sub PaintPaletteAndSetPointer(Optional X As Single = -1, Optional Y As S
             iPointerColor = vbWhite
         End If
         picPalette.DrawMode = vbCopyPen
-        DrawAntialiasedCircle mPointerX, mPointerY, 9, iPointerColor
+        DrawAntialiasedCircle mPointerX, mPointerY, 7, iPointerColor, 1.5
     End If
     picPalette.Refresh
 End Sub
 
-Private Sub DrawAntialiasedCircle(X As Single, Y As Single, nRadius As Single, nColor As Long)
+Private Sub DrawAntialiasedCircle(X As Single, Y As Single, nRadius As Single, nColor As Long, nDrawWidth As Single)
     Dim iX As Long
     Dim iY As Long
     Dim iDistance As Single
     Dim iColor As Long
-    Const cDrawWidth As Single = 2.5
+    Dim s As Single
     
-    For iX = X - nRadius - 4 To X + nRadius + 4
-        For iY = Y - nRadius - 4 To Y + nRadius + 4
-            iDistance = Sqr((X - iX) ^ 2 + (Y - iY) ^ 2)
-            iDistance = Abs(nRadius - iDistance)
-            'Debug.Print "(" & Abs(X - iX) & ","; Abs(Y - iY) & ") = " & iDistance,
-            If iDistance < cDrawWidth Then
-                iColor = GetPixel(picPalette.HDC, iX, iY)
-                SetPixelV picPalette.HDC, iX, iY, MixColors(iColor, nColor, 100 / cDrawWidth * iDistance)
-            End If
+    For s = 1 To nDrawWidth Step 0.5
+        For iX = X - nRadius - nDrawWidth - 1 To X + nRadius + nDrawWidth + 1
+            For iY = Y - nRadius - nDrawWidth - 1 To Y + nRadius + nDrawWidth + 1
+                iDistance = Sqr((X - iX) ^ 2 + (Y - iY) ^ 2)
+                iDistance = Abs(nRadius - iDistance + s)
+                If iDistance < nDrawWidth Then
+                    iColor = GetPixel(picPalette.HDC, iX, iY)
+                    SetPixelV picPalette.HDC, iX, iY, MixColors(iColor, nColor, 100 / nDrawWidth * iDistance)
+                End If
+            Next
         Next
     Next
 End Sub
@@ -3354,7 +3355,7 @@ Private Property Let RadialValue(ByVal nValue As Double)
     ElseIf mRadialParameter = cdParameterSaturation Then
         If nValue < 0 Then nValue = 0
         If nValue > mS_Max Then nValue = mS_Max
-        S = nValue
+        s = nValue
     ElseIf mRadialParameter = cdParameterRed Then
         If nValue < 0 Then nValue = 0
         If nValue > 255 Then nValue = 255
@@ -3416,7 +3417,7 @@ Private Property Let AxialValue(ByVal nValue As Double)
     ElseIf mAxialParameter = cdParameterSaturation Then
         If nValue < 0 Then nValue = 0
         If nValue > mS_Max Then nValue = mS_Max
-        S = nValue
+        s = nValue
     ElseIf mAxialParameter = cdParameterRed Then
         If nValue < 0 Then nValue = 0
         If nValue > 255 Then nValue = 255
