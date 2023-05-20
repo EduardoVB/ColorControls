@@ -65,6 +65,7 @@ Private Sub UserControl_InitProperties()
     mDlg.HexControlVisible = cPropDefault_ColorDialog_HexControlVisible
     mDlg.HexFormatVB = cPropDefault_ColorDialog_HexFormatVB
     mDlg.HideLabels = cPropDefault_ColorDialog_HideLabels
+    mDlg.PointerType = cPropDefault_ColorDialog_PointerType
     mDlg.Modeless = cPropDefault_ColorDialog_Modeless
     mDlg.RecentColorsColumns = cPropDefault_ColorDialog_RecentColorsColumns
     mDlg.RememberPosition = cPropDefault_ColorDialog_RememberPosition
@@ -99,6 +100,7 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     mDlg.HexControlVisible = PropBag.ReadProperty("HexControlVisible", cPropDefault_ColorDialog_HexControlVisible)
     mDlg.HexFormatVB = PropBag.ReadProperty("HexFormatVB", cPropDefault_ColorDialog_HexFormatVB)
     mDlg.HideLabels = PropBag.ReadProperty("HideLabels", cPropDefault_ColorDialog_HideLabels)
+    mDlg.PointerType = PropBag.ReadProperty("PointerType", cPropDefault_ColorDialog_PointerType)
     mDlg.Modeless = PropBag.ReadProperty("Modeless", cPropDefault_ColorDialog_Modeless)
     mDlg.RecentColorsColumns = PropBag.ReadProperty("RecentColorsColumns", cPropDefault_ColorDialog_RecentColorsColumns)
     mDlg.RememberPosition = PropBag.ReadProperty("RememberPosition", cPropDefault_ColorDialog_RememberPosition)
@@ -158,6 +160,7 @@ Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
     PropBag.WriteProperty "HexControlVisible", mDlg.HexControlVisible, cPropDefault_ColorDialog_HexControlVisible
     PropBag.WriteProperty "HexFormatVB", mDlg.HexFormatVB, cPropDefault_ColorDialog_HexFormatVB
     PropBag.WriteProperty "HideLabels", mDlg.HideLabels, cPropDefault_ColorDialog_HideLabels
+    PropBag.WriteProperty "PointerType", mDlg.PointerType, cPropDefault_ColorDialog_PointerType
     PropBag.WriteProperty "Modeless", mDlg.Modeless, cPropDefault_ColorDialog_Modeless
     PropBag.WriteProperty "RecentColorsColumns", mDlg.RecentColorsColumns, cPropDefault_ColorDialog_RecentColorsColumns
     PropBag.WriteProperty "RememberPosition", mDlg.RememberPosition, cPropDefault_ColorDialog_RememberPosition
@@ -379,6 +382,19 @@ Public Property Let HideLabels(ByVal nValue As Boolean)
     If nValue <> mDlg.HideLabels Then
         mDlg.HideLabels = nValue
         PropertyChanged "HideLabels"
+    End If
+End Property
+
+
+Public Property Get PointerType() As CDPointerTypeConstants
+Attribute PointerType.VB_Description = "Returns/sets the pointer type that will indicate the selected color in the palette."
+    PointerType = mDlg.PointerType
+End Property
+
+Public Property Let PointerType(ByVal nValue As CDPointerTypeConstants)
+    If nValue <> mDlg.PointerType Then
+        mDlg.PointerType = nValue
+        PropertyChanged "PointerType"
     End If
 End Property
 

@@ -76,6 +76,7 @@ Private mPaletteTypeControlVisible As Boolean
 Private mHexControlVisible As Boolean
 Private mHexFormatVB As Boolean
 Private mHideLabels As Boolean
+Private mPointerType As CDPointerTypeConstants
 Private mModeless As Boolean
 Private mRecentColorsColumns As Long
 Private mRememberPosition As Boolean
@@ -128,6 +129,7 @@ Attribute Show.VB_Description = "Shows the dialog."
         iActiveFormHwnd = mActiveForm.hWnd
     End If
     
+    mFrm.PointerType = mPointerType
     mFrm.HexControlVisible = mHexControlVisible
     mFrm.HexFormatVB = mHexFormatVB
     mFrm.ColorValuesSectionVisible = mColorValuesSectionVisible
@@ -448,6 +450,14 @@ Public Property Let HideLabels(ByVal nValue As Boolean)
     mHideLabels = nValue
 End Property
 
+Public Property Get PointerType() As CDPointerTypeConstants
+Attribute PointerType.VB_Description = "Returns/sets the pointer type that will indicate the selected color in the palette."
+    PointerType = mPointerType
+End Property
+
+Public Property Let PointerType(ByVal nValue As CDPointerTypeConstants)
+    mPointerType = nValue
+End Property
 
 Public Property Get Tag() As String
 Attribute Tag.VB_Description = "Stores any extra data needed for your program."
@@ -607,6 +617,7 @@ Private Sub Class_Initialize()
     mHexControlVisible = cPropDefault_ColorDialog_HexControlVisible
     mHexFormatVB = cPropDefault_ColorDialog_HexFormatVB
     mHideLabels = cPropDefault_ColorDialog_HideLabels
+    mPointerType = cPropDefault_ColorDialog_PointerType
     mModeless = cPropDefault_ColorDialog_Modeless
     mRecentColorsColumns = cPropDefault_ColorDialog_RecentColorsColumns
     mRememberPosition = cPropDefault_ColorDialog_RememberPosition

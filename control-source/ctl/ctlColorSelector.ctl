@@ -162,6 +162,8 @@ Begin VB.UserControl ColorSelector
       AutoRedraw      =   -1  'True
       BackColor       =   &H8000000D&
       BorderStyle     =   0  'None
+      DrawMode        =   5  'Not Copy Pen
+      DrawWidth       =   3
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   7.8
@@ -180,42 +182,6 @@ Begin VB.UserControl ColorSelector
       TabIndex        =   0
       Top             =   168
       Width           =   2244
-      Begin VB.Line linPointer 
-         BorderWidth     =   3
-         DrawMode        =   5  'Not Copy Pen
-         Index           =   0
-         X1              =   10
-         X2              =   24
-         Y1              =   74
-         Y2              =   74
-      End
-      Begin VB.Line linPointer 
-         BorderWidth     =   3
-         DrawMode        =   5  'Not Copy Pen
-         Index           =   1
-         X1              =   50
-         X2              =   64
-         Y1              =   74
-         Y2              =   74
-      End
-      Begin VB.Line linPointer 
-         BorderWidth     =   3
-         DrawMode        =   5  'Not Copy Pen
-         Index           =   3
-         X1              =   36
-         X2              =   36
-         Y1              =   82
-         Y2              =   96
-      End
-      Begin VB.Line linPointer 
-         BorderWidth     =   3
-         DrawMode        =   5  'Not Copy Pen
-         Index           =   2
-         X1              =   36
-         X2              =   36
-         Y1              =   54
-         Y2              =   68
-      End
    End
    Begin ColorControls.ToolTipHandler ToolTipHandler1 
       Left            =   3240
@@ -271,6 +237,8 @@ Private Enum CDCaptionsIDConstants
     cdCWCaptionMode ' Mode
 End Enum
 
+Private Declare Function GetPixel Lib "gdi32" (ByVal HDC As Long, ByVal X As Long, ByVal Y As Long) As Long
+Private Declare Function SetPixelV Lib "gdi32" (ByVal HDC As Long, ByVal X As Long, ByVal Y As Long, ByVal crColor As Long) As Long
 Private Declare Function CreateRoundRectRgn Lib "gdi32" (ByVal X1 As Long, ByVal Y1 As Long, ByVal X2 As Long, ByVal Y2 As Long, ByVal X3 As Long, ByVal Y3 As Long) As Long
 Private Declare Function SetWindowRgn Lib "user32" (ByVal hWnd As Long, ByVal hRgn As Long, ByVal bRedraw As Boolean) As Long
 Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
@@ -418,6 +386,7 @@ Private Const cPropDefault_HideLabels As Boolean = False
 Private Const cPropDefault_Style As Long = cdStyleWheel
 Private Const cPropDefault_RoundedBoxes As Boolean = True
 Private Const cPropDefault_SliderParameterComboWidth As Long = 900
+Private Const cPropDefault_PointerType As Long = cdPointerCircle
 
 Private mColor As Long
 Private mSliderOptionsAvailable As CDSliderOptionsAvailableConstants
@@ -432,6 +401,7 @@ Private mHideLabels As Boolean
 Private mStyle As CDStyleConstants
 Private mRoundedBoxes As Boolean
 Private mSliderParameterComboWidth As Long
+Private mPointerType As CDPointerTypeConstants
 
 Private mH As Double
 Private mL As Double
@@ -612,7 +582,6 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
             ClientToScreen picPalette.hWnd, iPt
             OffsetRect iRect, iPt.X, iPt.Y
             ClipCursor iRect
-            PointerVisible = False
             mSelectingColor = True
             picPalette_MouseMove Button, Shift, X, Y
         Else
@@ -715,6 +684,7 @@ Private Sub UserControl_InitProperties()
     mFixedPalette = cPropDefault_FixedPalette
     mSliderParameter = cPropDefault_SliderParameter
     mSliderParameterComboWidth = cPropDefault_SliderParameterComboWidth
+    mPointerType = cPropDefault_PointerType
     LoadcboSliderParameter
     If Not SelectInListByItemData(cboSliderParameter, mSliderParameter) Then
         If mSliderOptionsAvailable = cdSliderOptionsNone Then
@@ -814,6 +784,7 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     mFixedPalette = PropBag.ReadProperty("FixedPalette", cPropDefault_FixedPalette)
     mSliderParameter = PropBag.ReadProperty("SliderParameter", cPropDefault_SliderParameter)
     mSliderParameterComboWidth = PropBag.ReadProperty("SliderParameterComboWidth", cPropDefault_SliderParameterComboWidth)
+    mPointerType = PropBag.ReadProperty("PointerType", cPropDefault_PointerType)
     LoadcboSliderParameter
     If Not SelectInListByItemData(cboSliderParameter, mSliderParameter) Then
         If mSliderOptionsAvailable = cdSliderOptionsNone Then
@@ -951,7 +922,7 @@ Private Sub UserControl_Resize()
     cboColorSystem.Visible = mColorSystemControlVisible And (Not mStyleBox)
     
     sInside = sInside - 1
-
+    
     If (sInside = 0) And mPropertiesAreSet Then
         InitPalette
         DrawPalette
@@ -1750,9 +1721,9 @@ Private Sub DrawPalette()
         Next t
     End If
     
-    SetDIBitsToDevice picPalette.HDC, 0, 0, mBMPWidth, mBMPHeight, 0, 0, 0, mBMPHeight, mPixelsBytes2(0), mBMPiH, DIB_RGB_COLORS
-    picPalette.Refresh
-    SetPointer
+'    SetDIBitsToDevice picPalette.HDC, 0, 0, mBMPWidth, mBMPHeight, 0, 0, 0, mBMPHeight, mPixelsBytes2(0), mBMPiH, DIB_RGB_COLORS
+'    picPalette.Refresh
+    PaintPaletteAndSetPointer
 End Sub
 
 Private Function PixelIsInPalette(ByVal X As Single, ByVal Y As Single) As Boolean
@@ -1802,6 +1773,7 @@ Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
     PropBag.WriteProperty "FixedPalette", mFixedPalette, cPropDefault_FixedPalette
     PropBag.WriteProperty "SliderParameter", mSliderParameter, cPropDefault_SliderParameter
     PropBag.WriteProperty "SliderParameterComboWidth", mSliderParameterComboWidth, cPropDefault_SliderParameterComboWidth
+    PropBag.WriteProperty "PointerType", mPointerType, cPropDefault_PointerType
     PropBag.WriteProperty "ColorSystem", mColorSystem, cPropDefault_ColorSystem
     PropBag.WriteProperty "BackColor", mBackColor, cPropDefault_BackColor
 End Sub
@@ -1829,7 +1801,7 @@ Private Sub picPalette_MouseMove(Button As Integer, Shift As Integer, X As Singl
             mClickingPalette = True
             SetColor GetShadedColor
             mClickingPalette = False
-            PointerVisible = False
+            PaintPaletteAndSetPointer X, Y
         Else
             mSelectionFromOutside = True
             GetXYSameAngleInsideCircle X, Y
@@ -1853,8 +1825,7 @@ Private Sub picPalette_MouseMove(Button As Integer, Shift As Integer, X As Singl
             mClickingPalette = True
             SetColor GetShadedColor
             mClickingPalette = False
-            SetPointer X, Y
-            PointerVisible = True
+            PaintPaletteAndSetPointer X, Y
             mSelectionFromOutside = False
         End If
     End If
@@ -1869,8 +1840,7 @@ Private Sub picPalette_MouseUp(Button As Integer, Shift As Integer, X As Single,
         picPalette_MouseMove Button, Shift, X, Y
         ClipCursor ByVal 0&
         mSelectingColor = False
-        If PixelIsInPalette(X, Y) Then SetPointer X, Y
-        PointerVisible = True
+        If PixelIsInPalette(X, Y) Then PaintPaletteAndSetPointer X, Y
     End If
 End Sub
 
@@ -2338,14 +2308,14 @@ Private Sub ShowSelectedColor()
         iP2Max = 255
     End If
     If mStyleBox Then
-        SetPointer CSng(mPaletteWidth / iP2Max * iP2), CSng(mPaletteHeight - mPaletteHeight / iP1Max * iP1)
+        PaintPaletteAndSetPointer CSng(mPaletteWidth / iP2Max * iP2), CSng(mPaletteHeight - mPaletteHeight / iP1Max * iP1)
     Else
         iX = (iP1 * Cos(Pi / 180 * (1 - iP2 / iP2Max) * 360)) / iP1Max * mRadius + mCx
         iY = (iP1 * sIn(Pi / 180 * (1 - iP2 / iP2Max) * 360)) / iP1Max * mRadius + mCy
         If mColor = cPropDefault_Color Then
             iX = mCx
             iY = mCy
-            SetPointer iX, iY
+            PaintPaletteAndSetPointer iX, iY
             Exit Sub
         End If
         iX = Int(iX)
@@ -2426,7 +2396,7 @@ Private Sub ShowSelectedColor()
                 iY = iY + iY2
             End If
             
-            SetPointer iX, iY
+            PaintPaletteAndSetPointer iX, iY
         End If
     End If
 End Sub
@@ -2490,19 +2460,11 @@ Private Function DistanceFromCenter(X As Single, Y As Single) As Single
     DistanceFromCenter = Sqr((X - mCx) ^ 2 + (Y - mCy) ^ 2)
 End Function
 
-Private Property Let PointerVisible(ByVal nValue As Boolean)
-    linPointer(0).Visible = nValue
-    linPointer(1).Visible = nValue
-    linPointer(2).Visible = nValue
-    linPointer(3).Visible = nValue
-End Property
-
-Private Sub SetPointer(Optional X As Single = -1, Optional Y As Single)
+Private Sub PaintPaletteAndSetPointer(Optional X As Single = -1, Optional Y As Single)
     Dim c As Long
     Dim iPointerColor As Long
     Dim iX2 As Single
     Dim iY2 As Single
-    Dim iDrawMode As Long
     Dim iColorBrightness As Long
     Dim iColor As Long
     
@@ -2529,56 +2491,139 @@ Private Sub SetPointer(Optional X As Single = -1, Optional Y As Single)
     Else
         iColor = mColor
     End If
-
-    iColorBrightness = GetColorBrightness(iColor)
-    If iColorBrightness > 110 Then
-        If (iColorBrightness > 200) Then
-            iPointerColor = vbWhite
-            iDrawMode = vbMaskPenNot
-        Else
-            iPointerColor = vbBlack
-            iDrawMode = vbCopyPen
-        End If
-    Else
-        iPointerColor = vbWhite
-        If (mRadius - DistanceFromCenter(iX2, iY2) < ((linPointer(0).X2 - linPointer(0).X1) * 1.5)) And (Not (mStyleBox)) Then
-            iDrawMode = vbMaskPenNot
-        Else
-            If (iColorBrightness < 50) Then
+    SetDIBitsToDevice picPalette.HDC, 0, 0, mBMPWidth, mBMPHeight, 0, 0, 0, mBMPHeight, mPixelsBytes2(0), mBMPiH, DIB_RGB_COLORS
+    
+    If mPointerType = cdPointerCrosshair Then
+        Dim iDrawMode As Long
+        Dim iLinPointerLeft_X1 As Long
+        Dim iLinPointerLeft_X2 As Long
+        Dim iLinPointerLeft_Y1 As Long
+        Dim iLinPointerLeft_Y2 As Long
+        Dim iLinPointerRight_X1 As Long
+        Dim iLinPointerRight_X2 As Long
+        Dim iLinPointerRight_Y1 As Long
+        Dim iLinPointerRight_Y2 As Long
+        Dim iLinPointerTop_X1 As Long
+        Dim iLinPointerTop_X2 As Long
+        Dim iLinPointerTop_Y1 As Long
+        Dim iLinPointerTop_Y2 As Long
+        Dim iLinPointerBottom_X1 As Long
+        Dim iLinPointerBottom_X2 As Long
+        Dim iLinPointerBottom_Y1 As Long
+        Dim iLinPointerBottom_Y2 As Long
+        
+        iLinPointerLeft_X1 = mPointerX - 14 * 15 / Screen.TwipsPerPixelX - 0.5
+        iLinPointerLeft_X2 = iLinPointerLeft_X1 + 8 * 15 / Screen.TwipsPerPixelX
+        iLinPointerLeft_Y1 = mPointerY - 0.5
+        iLinPointerLeft_Y2 = mPointerY - 0.5
+    
+        iLinPointerRight_X1 = mPointerX + 14 * 15 / Screen.TwipsPerPixelX - 0.5
+        iLinPointerRight_X2 = iLinPointerRight_X1 - 8 * 15 / Screen.TwipsPerPixelX
+        iLinPointerRight_Y1 = mPointerY - 0.5
+        iLinPointerRight_Y2 = mPointerY - 0.5
+    
+        iLinPointerTop_Y1 = mPointerY - 14 * 15 / Screen.TwipsPerPixelY - 0.5
+        iLinPointerTop_Y2 = iLinPointerTop_Y1 + 8 * 15 / Screen.TwipsPerPixelY
+        iLinPointerTop_X1 = mPointerX - 0.5
+        iLinPointerTop_X2 = mPointerX - 0.5
+    
+        iLinPointerBottom_Y1 = mPointerY + 14 * 15 / Screen.TwipsPerPixelY - 0.5
+        iLinPointerBottom_Y2 = iLinPointerBottom_Y1 - 8 * 15 / Screen.TwipsPerPixelY
+        iLinPointerBottom_X1 = mPointerX - 0.5
+        iLinPointerBottom_X2 = mPointerX - 0.5
+    
+        iColorBrightness = GetColorBrightness(iColor)
+        If iColorBrightness > 110 Then
+            If (iColorBrightness > 200) Then
+                iPointerColor = vbWhite
                 iDrawMode = vbMaskPenNot
             Else
+                iPointerColor = vbBlack
                 iDrawMode = vbCopyPen
             End If
+        Else
+            iPointerColor = vbWhite
+            If (mRadius - DistanceFromCenter(iX2, iY2) < ((iLinPointerLeft_X2 - iLinPointerLeft_X1) * 1.5)) And (Not (mStyleBox)) Then
+                iDrawMode = vbMaskPenNot
+            Else
+                If (iColorBrightness < 50) Then
+                    iDrawMode = vbMaskPenNot
+                Else
+                    iDrawMode = vbCopyPen
+                End If
+            End If
         End If
+        picPalette.DrawMode = iDrawMode
+        picPalette.Line (iLinPointerLeft_X1, iLinPointerLeft_Y1)-(iLinPointerLeft_X2, iLinPointerLeft_Y2), iPointerColor
+        picPalette.Line (iLinPointerRight_X1, iLinPointerRight_Y1)-(iLinPointerRight_X2, iLinPointerRight_Y2), iPointerColor
+        picPalette.Line (iLinPointerTop_X1, iLinPointerTop_Y1)-(iLinPointerTop_X2, iLinPointerTop_Y2), iPointerColor
+        picPalette.Line (iLinPointerBottom_X1, iLinPointerBottom_Y1)-(iLinPointerBottom_X2, iLinPointerBottom_Y2), iPointerColor
+    ElseIf mPointerType = cdPointerCircle Then
+        iColorBrightness = GetColorBrightness(iColor)
+        If iColorBrightness > 180 Then
+            iPointerColor = vbBlack
+        Else
+            iPointerColor = vbWhite
+        End If
+        picPalette.DrawMode = vbCopyPen
+        DrawAntialiasedCircle mPointerX, mPointerY, 9, iPointerColor
     End If
-    
-    For c = 0 To 3
-        linPointer(c).BorderColor = iPointerColor
-        linPointer(c).DrawMode = iDrawMode
-    Next c
-    
-    linPointer(0).X1 = mPointerX - 14 * 15 / Screen.TwipsPerPixelX - 0.5
-    linPointer(0).X2 = linPointer(0).X1 + 8 * 15 / Screen.TwipsPerPixelX
-    linPointer(0).Y1 = mPointerY - 0.5
-    linPointer(0).Y2 = mPointerY - 0.5
-
-    linPointer(1).X1 = mPointerX + 14 * 15 / Screen.TwipsPerPixelX - 0.5
-    linPointer(1).X2 = linPointer(1).X1 - 8 * 15 / Screen.TwipsPerPixelX
-    linPointer(1).Y1 = mPointerY - 0.5
-    linPointer(1).Y2 = mPointerY - 0.5
-
-    linPointer(2).Y1 = mPointerY - 14 * 15 / Screen.TwipsPerPixelY - 0.5
-    linPointer(2).Y2 = linPointer(2).Y1 + 8 * 15 / Screen.TwipsPerPixelY
-    linPointer(2).X1 = mPointerX - 0.5
-    linPointer(2).X2 = mPointerX - 0.5
-
-    linPointer(3).Y1 = mPointerY + 14 * 15 / Screen.TwipsPerPixelY - 0.5
-    linPointer(3).Y2 = linPointer(3).Y1 - 8 * 15 / Screen.TwipsPerPixelY
-    linPointer(3).X1 = mPointerX - 0.5
-    linPointer(3).X2 = mPointerX - 0.5
-
+    picPalette.Refresh
 End Sub
 
+Private Sub DrawAntialiasedCircle(X As Single, Y As Single, nRadius As Single, nColor As Long)
+    Dim iX As Long
+    Dim iY As Long
+    Dim iDistance As Single
+    Dim iColor As Long
+    Const cDrawWidth As Single = 2.5
+    
+    For iX = X - nRadius - 4 To X + nRadius + 4
+        For iY = Y - nRadius - 4 To Y + nRadius + 4
+            iDistance = Sqr((X - iX) ^ 2 + (Y - iY) ^ 2)
+            iDistance = Abs(nRadius - iDistance)
+            'Debug.Print "(" & Abs(X - iX) & ","; Abs(Y - iY) & ") = " & iDistance,
+            If iDistance < cDrawWidth Then
+                iColor = GetPixel(picPalette.HDC, iX, iY)
+                SetPixelV picPalette.HDC, iX, iY, MixColors(iColor, nColor, 100 / cDrawWidth * iDistance)
+            End If
+        Next
+    Next
+End Sub
+
+Private Function MixColors(ByVal nColor1 As Long, ByVal nColor2 As Long, ByVal nPercentageColor1 As Long) As Long
+    Dim iColor1 As Long
+    Dim iColor2 As Long
+    Dim iColor1_R  As Byte
+    Dim iColor1_G   As Byte
+    Dim iColor1_B   As Byte
+    Dim iColor2_R  As Byte
+    Dim iColor2_G   As Byte
+    Dim iColor2_B   As Byte
+    
+    iColor1 = TranslatedColor(nColor1)
+    iColor2 = TranslatedColor(nColor2)
+    
+    iColor1_R = iColor1 And 255
+    iColor1_G = (iColor1 \ 256) And 255
+    iColor1_B = (iColor1 \ 65536) And 255
+    iColor2_R = iColor2 And 255
+    iColor2_G = (iColor2 \ 256) And 255
+    iColor2_B = (iColor2 \ 65536) And 255
+    
+    If nPercentageColor1 > 100 Then nPercentageColor1 = 100
+    If nPercentageColor1 < 0 Then nPercentageColor1 = 0
+    
+    MixColors = RGB((iColor1_R * nPercentageColor1 + iColor2_R * (100 - nPercentageColor1)) / 100, (iColor1_G * nPercentageColor1 + iColor2_G * (100 - nPercentageColor1)) / 100, (iColor1_B * nPercentageColor1 + iColor2_B * (100 - nPercentageColor1)) / 100)
+    
+End Function
+
+Private Function TranslatedColor(lOleColor As Long) As Long
+    Dim lRGBColor As Long
+    
+    Call TranslateColor(lOleColor, 0, lRGBColor)
+    TranslatedColor = lRGBColor
+End Function
 
 Public Property Get SliderOptionsAvailable() As CDSliderOptionsAvailableConstants
 Attribute SliderOptionsAvailable.VB_Description = "Returns/sets a value that determines which parameters for the slider the user will have available to choose from."
@@ -2862,6 +2907,20 @@ Public Property Let SliderParameterComboWidth(ByVal nValue As Long)
         mSliderParameterComboWidth = nValue
         UserControl_Resize
         PropertyChanged "SliderParameterComboWidth"
+    End If
+End Property
+
+
+Public Property Get PointerType() As CDPointerTypeConstants
+Attribute PointerType.VB_Description = "Returns/sets the pointer type that will indicate the selected color in the palette."
+    PointerType = mPointerType
+End Property
+
+Public Property Let PointerType(ByVal nValue As CDPointerTypeConstants)
+    If nValue <> mPointerType Then
+        mPointerType = nValue
+        PaintPaletteAndSetPointer
+        PropertyChanged "PointerType"
     End If
 End Property
 

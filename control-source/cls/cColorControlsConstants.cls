@@ -51,3 +51,9 @@ Public Enum CDSliderOptionsAvailableConstants
     cdSliderOptionsHueLumAndSat
     cdSliderOptionsAll
 End Enum
+
+Public Enum CDPointerTypeConstants
+    cdPointerNone = 0
+    cdPointerCrosshair = 1
+    cdPointerCircle = 2
+End Enum

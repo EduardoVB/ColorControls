@@ -755,6 +755,7 @@ Private mDialogCaptionVisible As Boolean
 Private mConfirmationButtonsVisible As Boolean
 Private mSliderWide As CDYesNoAutoConstants
 Private mHideLabels As Boolean
+Private mPointerType As CDPointerTypeConstants
 Private mBackColor As Long
 Private mRememberPosition As Boolean
 Private mActiveFormName As String
@@ -1044,6 +1045,7 @@ Private Sub Form_Load()
     ColorSelector1_ColorSystemChange
     ColorSelector1.RoundedBoxes = mRoundedBoxes
     ColorSelector1.HideLabels = mHideLabels
+    ColorSelector1.PointerType = mPointerType
     If mHideLabels Then
         lblNew.Visible = False
         lblPrevious.Visible = False
@@ -1860,6 +1862,10 @@ End Property
 
 Public Property Let BackColor2(nValue As OLE_COLOR)
     mBackColor = nValue
+End Property
+
+Public Property Let PointerType(ByVal nValue As CDPointerTypeConstants)
+    mPointerType = nValue
 End Property
 
 Public Property Let RememberPosition(nValue As Boolean)

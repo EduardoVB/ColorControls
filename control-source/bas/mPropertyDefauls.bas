@@ -16,6 +16,7 @@ Public Const cPropDefault_ColorDialog_FixedPalette As Boolean = True
 Public Const cPropDefault_ColorDialog_HexControlVisible As Boolean = True
 Public Const cPropDefault_ColorDialog_HexFormatVB As Boolean = False
 Public Const cPropDefault_ColorDialog_HideLabels As Boolean = False
+Public Const cPropDefault_ColorDialog_PointerType As Long = cdPointerCircle
 Public Const cPropDefault_ColorDialog_Modeless As Boolean = False
 Public Const cPropDefault_ColorDialog_RecentColorsColumns As Long = 1
 Public Const cPropDefault_ColorDialog_RememberPosition As Boolean = False

@@ -16,7 +16,7 @@
 </header>
 <h1>ColorSelector control</h1>
 <p>Control to select colors from a palette.</p><br>
-<li class="toc1"><a href="#ilink1">Properties</a></li><li class="toc1"><a href="#ilink35">Methods</a></li><li class="toc1"><a href="#ilink37">Events</a></li><br><a name="ilink1" /><h2><p class="section">Properties</p></h2></a>
+<li class="toc1"><a href="#ilink1">Properties</a></li><li class="toc1"><a href="#ilink51">Methods</a></li><li class="toc1"><a href="#ilink56">Events</a></li><br><a name="ilink1" /><h2><p class="section">Properties</p></h2></a>
 <li class="toc1"><a href="#ilink2">AxialParameter</a><br>
 <li class="toc1"><a href="#ilink3">B</a><br>
 <li class="toc1"><a href="#ilink4">BackColor</a><br>
@@ -24,48 +24,67 @@
 <li class="toc1"><a href="#ilink6">ColorHex</a><br>
 <li class="toc1"><a href="#ilink7">ColorSystem</a><br>
 <li class="toc1"><a href="#ilink8">ColorSystemControlVisible</a><br>
-<li class="toc1"><a href="#ilink9">FixedPalette</a><br>
-<li class="toc1"><a href="#ilink10">FixedPaletteControlVisible</a><br>
-<li class="toc1"><a href="#ilink11">G</a><br>
-<li class="toc1"><a href="#ilink12">H</a><br>
-<li class="toc1"><a href="#ilink13">HideLabels</a><br>
-<li class="toc1"><a href="#ilink14">HMax</a><br>
-<li class="toc1"><a href="#ilink15">hWnd</a><br>
-<li class="toc1"><a href="#ilink16">L</a><br>
-<li class="toc1"><a href="#ilink17">LMax</a><br>
-<li class="toc1"><a href="#ilink18">PaletteCenterX</a><br>
-<li class="toc1"><a href="#ilink19">PaletteCenterY</a><br>
-<li class="toc1"><a href="#ilink20">R</a><br>
-<li class="toc1"><a href="#ilink21">RadialParameter</a><br>
-<li class="toc1"><a href="#ilink22">Redraw</a><br>
-<li class="toc1"><a href="#ilink23">RoundedBoxes</a><br>
-<li class="toc1"><a href="#ilink24">S</a><br>
-<li class="toc1"><a href="#ilink25">SliderControlLeft</a><br>
-<li class="toc1"><a href="#ilink26">SliderControlWidth</a><br>
-<li class="toc1"><a href="#ilink27">SliderOptionsAvailable</a><br>
-<li class="toc1"><a href="#ilink28">SliderParameter</a><br>
-<li class="toc1"><a href="#ilink29">SliderParameterControlLeft</a><br>
-<li class="toc1"><a href="#ilink30">SliderParameterControlWidth</a><br>
-<li class="toc1"><a href="#ilink31">SliderWide</a><br>
-<li class="toc1"><a href="#ilink32">SMax</a><br>
-<li class="toc1"><a href="#ilink33">Style</a><br>
-<li class="toc1"><a href="#ilink34">V</a><br>
-<br><a name="ilink35" /><h2><p class="section">Methods</p></h2></a>
-<li class="toc1"><a href="#ilink36">GetCaption</a><br>
-<br><a name="ilink37" /><h2><p class="section">Events</p></h2></a>
-<li class="toc1"><a href="#ilink38">Change</a><br>
-<li class="toc1"><a href="#ilink39">ColorSystemChange</a><br>
-<li class="toc1"><a href="#ilink40">DblClick</a><br>
-<li class="toc1"><a href="#ilink41">DblClickOnColor</a><br>
-<li class="toc1"><a href="#ilink42">FixedPaletteChange</a><br>
-<li class="toc1"><a href="#ilink43">GetLocalizedText</a><br>
-<li class="toc1"><a href="#ilink44">MouseDown</a><br>
-<li class="toc1"><a href="#ilink45">MouseUp</a><br>
-<li class="toc1"><a href="#ilink46">MouseWheelScroll</a><br>
-<li class="toc1"><a href="#ilink47">SliderParameterChange</a><br>
+<li class="toc1"><a href="#ilink9">Container</a><br>
+<li class="toc1"><a href="#ilink10">DragIcon</a><br>
+<li class="toc1"><a href="#ilink11">DragMode</a><br>
+<li class="toc1"><a href="#ilink12">FixedPalette</a><br>
+<li class="toc1"><a href="#ilink13">FixedPaletteControlVisible</a><br>
+<li class="toc1"><a href="#ilink14">G</a><br>
+<li class="toc1"><a href="#ilink15">H</a><br>
+<li class="toc1"><a href="#ilink16">Height</a><br>
+<li class="toc1"><a href="#ilink17">HelpContextID</a><br>
+<li class="toc1"><a href="#ilink18">HideLabels</a><br>
+<li class="toc1"><a href="#ilink19">HMax</a><br>
+<li class="toc1"><a href="#ilink20">hWnd</a><br>
+<li class="toc1"><a href="#ilink21">L</a><br>
+<li class="toc1"><a href="#ilink22">Left</a><br>
+<li class="toc1"><a href="#ilink23">LMax</a><br>
+<li class="toc1"><a href="#ilink24">Name</a><br>
+<li class="toc1"><a href="#ilink25">PaletteCenterX</a><br>
+<li class="toc1"><a href="#ilink26">PaletteCenterY</a><br>
+<li class="toc1"><a href="#ilink27">Parent</a><br>
+<li class="toc1"><a href="#ilink28">PointerType</a><br>
+<li class="toc1"><a href="#ilink29">R</a><br>
+<li class="toc1"><a href="#ilink30">RadialParameter</a><br>
+<li class="toc1"><a href="#ilink31">Redraw</a><br>
+<li class="toc1"><a href="#ilink32">RoundedBoxes</a><br>
+<li class="toc1"><a href="#ilink33">S</a><br>
+<li class="toc1"><a href="#ilink34">SliderControlLeft</a><br>
+<li class="toc1"><a href="#ilink35">SliderControlWidth</a><br>
+<li class="toc1"><a href="#ilink36">SliderOptionsAvailable</a><br>
+<li class="toc1"><a href="#ilink37">SliderParameter</a><br>
+<li class="toc1"><a href="#ilink38">SliderParameterComboWidth</a><br>
+<li class="toc1"><a href="#ilink39">SliderParameterControlLeft</a><br>
+<li class="toc1"><a href="#ilink40">SliderParameterControlWidth</a><br>
+<li class="toc1"><a href="#ilink41">SliderWide</a><br>
+<li class="toc1"><a href="#ilink42">SMax</a><br>
+<li class="toc1"><a href="#ilink43">Style</a><br>
+<li class="toc1"><a href="#ilink44">Tag</a><br>
+<li class="toc1"><a href="#ilink45">ToolTipText</a><br>
+<li class="toc1"><a href="#ilink46">Top</a><br>
+<li class="toc1"><a href="#ilink47">V</a><br>
+<li class="toc1"><a href="#ilink48">Visible</a><br>
+<li class="toc1"><a href="#ilink49">WhatsThisHelpID</a><br>
+<li class="toc1"><a href="#ilink50">Width</a><br>
+<br><a name="ilink51" /><h2><p class="section">Methods</p></h2></a>
+<li class="toc1"><a href="#ilink52">Drag</a><br>
+<li class="toc1"><a href="#ilink53">GetCaption</a><br>
+<li class="toc1"><a href="#ilink54">SetFocus</a><br>
+<li class="toc1"><a href="#ilink55">ZOrder</a><br>
+<br><a name="ilink56" /><h2><p class="section">Events</p></h2></a>
+<li class="toc1"><a href="#ilink57">Change</a><br>
+<li class="toc1"><a href="#ilink58">ColorSystemChange</a><br>
+<li class="toc1"><a href="#ilink59">DblClick</a><br>
+<li class="toc1"><a href="#ilink60">DblClickOnColor</a><br>
+<li class="toc1"><a href="#ilink61">FixedPaletteChange</a><br>
+<li class="toc1"><a href="#ilink62">GetLocalizedText</a><br>
+<li class="toc1"><a href="#ilink63">MouseDown</a><br>
+<li class="toc1"><a href="#ilink64">MouseUp</a><br>
+<li class="toc1"><a href="#ilink65">MouseWheelScroll</a><br>
+<li class="toc1"><a href="#ilink66">SliderParameterChange</a><br>
 
 <br><br><br><h1>Properties</h1><br><a name="ilink2" /><h2><p class"section">AxialParameter Property</p></h2></a>
-<p>Type: <b><a href="constants.html#ilink4">CDSliderParameterConstants</a></b> (Read only)</p>
+<p>Type: <b><a href="constants.html#ilink5">CDSliderParameterConstants</a></b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns a value indicating the axial parameter.</p><br>
 <a name="ilink3" /><h2><p class"section">B Property</p></h2></a>
@@ -92,152 +111,194 @@
 <p>Type: <b>Boolean</b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines if the user is able to change the color system.</p><br>
-<a name="ilink9" /><h2><p class"section">FixedPalette Property</p></h2></a>
+<a name="ilink9" /><h2><p class"section">Container Property</p></h2></a>
+<p>Type: <b>Object</b></p>
+<a name="ilink10" /><h2><p class"section">DragIcon Property</p></h2></a>
+<p>Type: <b>Picture</b></p>
+<a name="ilink11" /><h2><p class"section">DragMode Property</p></h2></a>
+<p>Type: <b>Integer</b></p>
+<a name="ilink12" /><h2><p class"section">FixedPalette Property</p></h2></a>
 <p>Type: <b>Boolean</b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines if the color palette (or the slidder in some configurations) colors change with the setting of the third partameter.</p><br>
-<a name="ilink10" /><h2><p class"section">FixedPaletteControlVisible Property</p></h2></a>
+<a name="ilink13" /><h2><p class"section">FixedPaletteControlVisible Property</p></h2></a>
 <p>Type: <b>Boolean</b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines if the control for changing the fixed setting of the palette is available.</p><br>
-<a name="ilink11" /><h2><p class"section">G Property</p></h2></a>
+<a name="ilink14" /><h2><p class"section">G Property</p></h2></a>
 <p>Type: <b>Integer</b></p>
 <h3>Description:</h3>
 <p>Returns/sets the 'Green' component of the color.</p><br>
-<a name="ilink12" /><h2><p class"section">H Property</p></h2></a>
+<a name="ilink15" /><h2><p class"section">H Property</p></h2></a>
 <p>Type: <b>Integer</b></p>
 <h3>Description:</h3>
 <p>Returns/sets the 'Hue' component of the color.</p><br>
-<a name="ilink13" /><h2><p class"section">HideLabels Property</p></h2></a>
+<a name="ilink16" /><h2><p class"section">Height Property</p></h2></a>
+<p>Type: <b>Single</b></p>
+<a name="ilink17" /><h2><p class"section">HelpContextID Property</p></h2></a>
+<p>Type: <b>Long</b></p>
+<a name="ilink18" /><h2><p class"section">HideLabels Property</p></h2></a>
 <p>Type: <b>Boolean</b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines if the labels are visible.</p><br>
-<a name="ilink14" /><h2><p class"section">HMax Property</p></h2></a>
+<a name="ilink19" /><h2><p class"section">HMax Property</p></h2></a>
 <p>Type: <b>Long</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the maximum value that the 'Hue' can have.</p><br>
-<a name="ilink15" /><h2><p class"section">hWnd Property</p></h2></a>
+<a name="ilink20" /><h2><p class"section">hWnd Property</p></h2></a>
 <p>Type: <b>Long</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the hWnd of the dialog window.</p><br>
-<a name="ilink16" /><h2><p class"section">L Property</p></h2></a>
+<a name="ilink21" /><h2><p class"section">L Property</p></h2></a>
 <p>Type: <b>Integer</b></p>
 <h3>Description:</h3>
 <p>Returns/sets the 'Luminance' or 'Value' (depending on the color system , HSL or HSV) component of the color.</p><br>
-<a name="ilink17" /><h2><p class"section">LMax Property</p></h2></a>
+<a name="ilink22" /><h2><p class"section">Left Property</p></h2></a>
+<p>Type: <b>Single</b></p>
+<a name="ilink23" /><h2><p class"section">LMax Property</p></h2></a>
 <p>Type: <b>Long</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the maximum value that the Luminance (or Value) can have.</p><br>
-<a name="ilink18" /><h2><p class"section">PaletteCenterX Property</p></h2></a>
+<a name="ilink24" /><h2><p class"section">Name Property</p></h2></a>
+<p>Type: <b>String</b> (Read only)</p>
+<a name="ilink25" /><h2><p class"section">PaletteCenterX Property</p></h2></a>
 <p>Type: <b>Single</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the horizontal position of the palette center in units of the container.</p><br>
-<a name="ilink19" /><h2><p class"section">PaletteCenterY Property</p></h2></a>
+<a name="ilink26" /><h2><p class"section">PaletteCenterY Property</p></h2></a>
 <p>Type: <b>Single</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the vertical position of the palette center in units of the container.</p><br>
-<a name="ilink20" /><h2><p class"section">R Property</p></h2></a>
+<a name="ilink27" /><h2><p class"section">Parent Property</p></h2></a>
+<p>Type: <b>Object</b> (Read only)</p>
+<a name="ilink28" /><h2><p class"section">PointerType Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink3">CDPointerTypeConstants</a></b></p>
+<h3>Description:</h3>
+<p>Returns/sets the pointer type that will indicate the selected color in the palette.</p><br>
+<a name="ilink29" /><h2><p class"section">R Property</p></h2></a>
 <p>Type: <b>Integer</b></p>
 <h3>Description:</h3>
 <p>Returns/sets the 'Red' component of the color.</p><br>
-<a name="ilink21" /><h2><p class"section">RadialParameter Property</p></h2></a>
-<p>Type: <b><a href="constants.html#ilink4">CDSliderParameterConstants</a></b> (Read only)</p>
+<a name="ilink30" /><h2><p class"section">RadialParameter Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink5">CDSliderParameterConstants</a></b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns a value indicating the radial parameter.</p><br>
-<a name="ilink22" /><h2><p class"section">Redraw Property</p></h2></a>
+<a name="ilink31" /><h2><p class"section">Redraw Property</p></h2></a>
 <p>Type: <b>Boolean</b> (Not available at design time)</p>
-<a name="ilink23" /><h2><p class"section">RoundedBoxes Property</p></h2></a>
+<a name="ilink32" /><h2><p class"section">RoundedBoxes Property</p></h2></a>
 <p>Type: <b>Boolean</b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines if some control borders are rounded.</p><br>
-<a name="ilink24" /><h2><p class"section">S Property</p></h2></a>
+<a name="ilink33" /><h2><p class"section">S Property</p></h2></a>
 <p>Type: <b>Integer</b></p>
 <h3>Description:</h3>
 <p>Returns/sets the 'Saturation' component of the color.</p><br>
-<a name="ilink25" /><h2><p class"section">SliderControlLeft Property</p></h2></a>
+<a name="ilink34" /><h2><p class"section">SliderControlLeft Property</p></h2></a>
 <p>Type: <b>Single</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the Left position of the slider control in units of the container.</p><br>
-<a name="ilink26" /><h2><p class"section">SliderControlWidth Property</p></h2></a>
+<a name="ilink35" /><h2><p class"section">SliderControlWidth Property</p></h2></a>
 <p>Type: <b>Single</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the Width of the slider control in units of the container.</p><br>
-<a name="ilink27" /><h2><p class"section">SliderOptionsAvailable Property</p></h2></a>
-<p>Type: <b><a href="constants.html#ilink3">CDSliderOptionsAvailableConstants</a></b></p>
+<a name="ilink36" /><h2><p class"section">SliderOptionsAvailable Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink4">CDSliderOptionsAvailableConstants</a></b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines which parameters for the slider the user will have available to choose from.</p><br>
-<a name="ilink28" /><h2><p class"section">SliderParameter Property</p></h2></a>
-<p>Type: <b><a href="constants.html#ilink4">CDSliderParameterConstants</a></b></p>
+<a name="ilink37" /><h2><p class"section">SliderParameter Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink5">CDSliderParameterConstants</a></b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines the slidder parameter.</p><br>
-<a name="ilink29" /><h2><p class"section">SliderParameterControlLeft Property</p></h2></a>
+<a name="ilink38" /><h2><p class"section">SliderParameterComboWidth Property</p></h2></a>
+<p>Type: <b>Long</b></p>
+<a name="ilink39" /><h2><p class"section">SliderParameterControlLeft Property</p></h2></a>
 <p>Type: <b>Single</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the Left position of the control for changing the slider parameter, in units of the container.</p><br>
-<a name="ilink30" /><h2><p class"section">SliderParameterControlWidth Property</p></h2></a>
+<a name="ilink40" /><h2><p class"section">SliderParameterControlWidth Property</p></h2></a>
 <p>Type: <b>Single</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the Width of the control for changing the slider parameter, in units of the container.</p><br>
-<a name="ilink31" /><h2><p class"section">SliderWide Property</p></h2></a>
-<p>Type: <b><a href="constants.html#ilink6">CDYesNoAutoConstants</a></b></p>
+<a name="ilink41" /><h2><p class"section">SliderWide Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink7">CDYesNoAutoConstants</a></b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines the width of the slider control between wide or narrow.</p><br>
-<a name="ilink32" /><h2><p class"section">SMax Property</p></h2></a>
+<a name="ilink42" /><h2><p class"section">SMax Property</p></h2></a>
 <p>Type: <b>Long</b> (Read only)</p>
 <h3>Description:</h3>
 <p>Returns the maximum value that the 'Saturation' can have.</p><br>
-<a name="ilink33" /><h2><p class"section">Style Property</p></h2></a>
-<p>Type: <b><a href="constants.html#ilink5">CDStyleConstants</a></b></p>
+<a name="ilink43" /><h2><p class"section">Style Property</p></h2></a>
+<p>Type: <b><a href="constants.html#ilink6">CDStyleConstants</a></b></p>
 <h3>Description:</h3>
 <p>Returns/sets a value that determines the color palette style, between wheel or box.</p><br>
-<a name="ilink34" /><h2><p class"section">V Property</p></h2></a>
+<a name="ilink44" /><h2><p class"section">Tag Property</p></h2></a>
+<p>Type: <b>String</b></p>
+<h3>Description:</h3>
+<p>Stores any extra data needed for your program.</p><br>
+<a name="ilink45" /><h2><p class"section">ToolTipText Property</p></h2></a>
+<p>Type: <b>String</b></p>
+<a name="ilink46" /><h2><p class"section">Top Property</p></h2></a>
+<p>Type: <b>Single</b></p>
+<a name="ilink47" /><h2><p class"section">V Property</p></h2></a>
 <p>Type: <b>Integer</b></p>
 <h3>Description:</h3>
 <p>Alias for 'L' property.</p><br>
+<a name="ilink48" /><h2><p class"section">Visible Property</p></h2></a>
+<p>Type: <b>Boolean</b></p>
+<a name="ilink49" /><h2><p class"section">WhatsThisHelpID Property</p></h2></a>
+<p>Type: <b>Long</b></p>
+<a name="ilink50" /><h2><p class"section">Width Property</p></h2></a>
+<p>Type: <b>Single</b></p>
 
-<br><br><br><h1>Methods</h1><br><a name="ilink36" /><h2><p class"section">GetCaption Method</p></h2></a>
+<br><br><br><h1>Methods</h1><br><a name="ilink52" /><h2><p class"section">Drag Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbspNone.&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Action</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspVariant&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
+<a name="ilink53" /><h2><p class"section">GetCaption Method</p></h2></a>
 <p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>String</b>&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspRequired&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>nCaptionID</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
 <h3>Description:</h3>
 <p>Returns the caption pointed by the parameter.</p><br>
+<a name="ilink54" /><h2><p class"section">SetFocus Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbspNone.&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspNo parameters.&nbsp&nbsp</td>    </tr>  </tbody></table></p>
+<a name="ilink55" /><h2><p class"section">ZOrder Method</p></h2></a>
+<p><table><tbody>    <tr>    <td>&nbsp&nbspReturn Type:&nbsp&nbsp</td>    <td>&nbsp&nbspNone.&nbsp&nbsp</td>    </tr><tr><td>&nbsp</td></tr>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    In/Out&nbsp&nbsp</td>    <td>&nbsp&nbspOptional&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Position</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspVariant&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
 
-<br><br><br><h1>Events</h1><br><a name="ilink38" /><h2><p class"section">Change Event</p></h2></a>
+<br><br><br><h1>Events</h1><br><a name="ilink57" /><h2><p class"section">Change Event</p></h2></a>
 <p>No parameters.</p>
 <h3>Description:</h3>
 <p>Occurs when the selected color changes.</p><br>
-<a name="ilink39" /><h2><p class"section">ColorSystemChange Event</p></h2></a>
+<a name="ilink58" /><h2><p class"section">ColorSystemChange Event</p></h2></a>
 <p>No parameters.</p>
 <h3>Description:</h3>
 <p>Ocurrs when the color system changes.</p><br>
-<a name="ilink40" /><h2><p class"section">DblClick Event</p></h2></a>
+<a name="ilink59" /><h2><p class"section">DblClick Event</p></h2></a>
 <p>No parameters.</p>
 <h3>Description:</h3>
 <p>Occurs when the user presses and releases a mouse button and then presses and releases it again over the control.</p><br>
-<a name="ilink41" /><h2><p class"section">DblClickOnColor Event</p></h2></a>
+<a name="ilink60" /><h2><p class"section">DblClickOnColor Event</p></h2></a>
 <p>No parameters.</p>
 <h3>Description:</h3>
 <p>Occurs when the user performs a double click on a color.</p><br>
-<a name="ilink42" /><h2><p class"section">FixedPaletteChange Event</p></h2></a>
+<a name="ilink61" /><h2><p class"section">FixedPaletteChange Event</p></h2></a>
 <p>No parameters.</p>
 <h3>Description:</h3>
 <p>Occurs when the user changes the palette from fixed/dynamic.</p><br>
-<a name="ilink43" /><h2><p class"section">GetLocalizedText Event</p></h2></a>
+<a name="ilink62" /><h2><p class"section">GetLocalizedText Event</p></h2></a>
 <p><table><tbody>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Info&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>LanguageID</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Info&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>SubLanguageID</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Info&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>TextID</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspLong&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Text</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspString&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
 <h3>Description:</h3>
 <p>Occurs when setting a text for the IU. It allows to customize captions and texts.</p><br>
-<a name="ilink44" /><h2><p class"section">MouseDown Event</p></h2></a>
+<a name="ilink63" /><h2><p class"section">MouseDown Event</p></h2></a>
 <p><table><tbody>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Button</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspInteger&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Shift</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspInteger&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>X</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspSingle&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Y</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspSingle&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
 <h3>Description:</h3>
 <p>Occurs when the user presses the mouse button while the control has the focus.</p><br>
-<a name="ilink45" /><h2><p class"section">MouseUp Event</p></h2></a>
+<a name="ilink64" /><h2><p class"section">MouseUp Event</p></h2></a>
 <p><table><tbody>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Button</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspInteger&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Shift</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspInteger&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>X</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspSingle&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Y</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbspSingle&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
 <h3>Description:</h3>
 <p>Occurs when the user releases the mouse button while the control has the focus.
 </p><br>
-<a name="ilink46" /><h2><p class"section">MouseWheelScroll Event</p></h2></a>
+<a name="ilink65" /><h2><p class"section">MouseWheelScroll Event</p></h2></a>
 <p><table><tbody>    <tr>    <td>&nbsp&nbspParameter(s):&nbsp&nbsp</td>    </tr>    <tr>    <td>&nbsp&nbsp    Returns value&nbsp&nbsp</td>    <td>&nbsp&nbsp<b>Axis</b>&nbsp&nbsp</td>    <td>&nbsp&nbspAs&nbsp&nbsp</td>    <td>&nbsp&nbsp<a href="constants.html#ilink2">CDMouseWheelScrollConstants</a>&nbsp&nbsp</td>    </tr>    <tr>    </tr>  </tbody></table></p>
 <h3>Description:</h3>
 <p>Occurs when the user scrolls the control using the mouse wheel. The parameter indicates what is being scrolled.</p><br>
-<a name="ilink47" /><h2><p class"section">SliderParameterChange Event</p></h2></a>
+<a name="ilink66" /><h2><p class"section">SliderParameterChange Event</p></h2></a>
 <p>No parameters.</p>
 <h3>Description:</h3>
 <p>Ocurs when the parameter that is controlled by the slider cotnrol changes.</p><br>

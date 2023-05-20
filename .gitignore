@@ -3,3 +3,4 @@
 *.exp
 *.log
 *.vbw
+/docs/Documenter

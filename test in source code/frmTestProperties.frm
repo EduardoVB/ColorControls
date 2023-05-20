@@ -3,7 +3,7 @@ Object = "*\A..\control-source\ClrDlg.vbp"
 Begin VB.Form frmTestProperties 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Test properties"
-   ClientHeight    =   10716
+   ClientHeight    =   11136
    ClientLeft      =   2460
    ClientTop       =   504
    ClientWidth     =   11976
@@ -20,15 +20,25 @@ Begin VB.Form frmTestProperties
    LockControls    =   -1  'True
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   10716
+   ScaleHeight     =   11136
    ScaleWidth      =   11976
    ShowInTaskbar   =   0   'False
+   Begin VB.ComboBox cboPointerType 
+      Height          =   336
+      ItemData        =   "frmTestProperties.frx":0000
+      Left            =   2760
+      List            =   "frmTestProperties.frx":000D
+      Style           =   2  'Dropdown List
+      TabIndex        =   41
+      Top             =   9912
+      Width           =   1752
+   End
    Begin VB.CommandButton cmdDocs 
       Caption         =   "Documentation"
       Height          =   492
       Left            =   5580
-      TabIndex        =   47
-      Top             =   10020
+      TabIndex        =   49
+      Top             =   10440
       Width           =   1512
    End
    Begin VB.CheckBox chkHexFormatVB 
@@ -57,7 +67,7 @@ Begin VB.Form frmTestProperties
       Caption         =   "Pick a color from the screen"
       Height          =   492
       Left            =   9180
-      TabIndex        =   44
+      TabIndex        =   46
       Top             =   5100
       Width           =   2592
    End
@@ -68,7 +78,7 @@ Begin VB.Form frmTestProperties
       Left            =   8400
       ScaleHeight     =   372
       ScaleWidth      =   552
-      TabIndex        =   43
+      TabIndex        =   45
       TabStop         =   0   'False
       Top             =   5160
       Width           =   552
@@ -104,9 +114,9 @@ Begin VB.Form frmTestProperties
    End
    Begin VB.ComboBox cboSliderWide 
       Height          =   336
-      ItemData        =   "frmTestProperties.frx":0000
+      ItemData        =   "frmTestProperties.frx":002A
       Left            =   2760
-      List            =   "frmTestProperties.frx":000D
+      List            =   "frmTestProperties.frx":0037
       Style           =   2  'Dropdown List
       TabIndex        =   37
       Top             =   9072
@@ -115,7 +125,7 @@ Begin VB.Form frmTestProperties
    Begin ColorControls.ColorSelector ColorSelector1 
       Height          =   3696
       Left            =   6840
-      TabIndex        =   41
+      TabIndex        =   43
       Top             =   480
       Width           =   4524
       _ExtentX        =   7535
@@ -125,15 +135,15 @@ Begin VB.Form frmTestProperties
       Caption         =   "Set..."
       Height          =   492
       Left            =   2220
-      TabIndex        =   45
-      Top             =   10032
+      TabIndex        =   47
+      Top             =   10452
       Width           =   1512
    End
    Begin VB.ComboBox cboStyle 
       Height          =   336
-      ItemData        =   "frmTestProperties.frx":0020
+      ItemData        =   "frmTestProperties.frx":004A
       Left            =   2760
-      List            =   "frmTestProperties.frx":002A
+      List            =   "frmTestProperties.frx":0054
       Style           =   2  'Dropdown List
       TabIndex        =   39
       Top             =   9492
@@ -149,9 +159,9 @@ Begin VB.Form frmTestProperties
    End
    Begin VB.ComboBox cboSliderOptionsAvailable 
       Height          =   336
-      ItemData        =   "frmTestProperties.frx":003A
+      ItemData        =   "frmTestProperties.frx":0064
       Left            =   2760
-      List            =   "frmTestProperties.frx":004A
+      List            =   "frmTestProperties.frx":0074
       Style           =   2  'Dropdown List
       TabIndex        =   35
       Top             =   8652
@@ -159,9 +169,9 @@ Begin VB.Form frmTestProperties
    End
    Begin VB.ComboBox cboSliderParameter 
       Height          =   336
-      ItemData        =   "frmTestProperties.frx":0072
+      ItemData        =   "frmTestProperties.frx":009C
       Left            =   2760
-      List            =   "frmTestProperties.frx":0088
+      List            =   "frmTestProperties.frx":00B2
       Style           =   2  'Dropdown List
       TabIndex        =   33
       Top             =   8232
@@ -193,9 +203,9 @@ Begin VB.Form frmTestProperties
    End
    Begin VB.ComboBox cboRecentColorsColumns 
       Height          =   336
-      ItemData        =   "frmTestProperties.frx":00B6
+      ItemData        =   "frmTestProperties.frx":00E0
       Left            =   2760
-      List            =   "frmTestProperties.frx":00B8
+      List            =   "frmTestProperties.frx":00E2
       Style           =   2  'Dropdown List
       TabIndex        =   28
       Top             =   6828
@@ -291,9 +301,9 @@ Begin VB.Form frmTestProperties
    End
    Begin VB.ComboBox cboColorSystem 
       Height          =   336
-      ItemData        =   "frmTestProperties.frx":00BA
+      ItemData        =   "frmTestProperties.frx":00E4
       Left            =   2760
-      List            =   "frmTestProperties.frx":00C4
+      List            =   "frmTestProperties.frx":00EE
       Style           =   2  'Dropdown List
       TabIndex        =   9
       Top             =   1572
@@ -325,8 +335,8 @@ Begin VB.Form frmTestProperties
       Caption         =   "Show dialog"
       Height          =   492
       Left            =   3900
-      TabIndex        =   46
-      Top             =   10032
+      TabIndex        =   48
+      Top             =   10452
       Width           =   1512
    End
    Begin VB.CommandButton cmdChangeBackColor 
@@ -358,13 +368,22 @@ Begin VB.Form frmTestProperties
       Top             =   420
       Width           =   552
    End
+   Begin VB.Label Label14 
+      Alignment       =   1  'Right Justify
+      Caption         =   "PointerType(*):"
+      Height          =   252
+      Left            =   1260
+      TabIndex        =   40
+      Top             =   9972
+      Width           =   1392
+   End
    Begin VB.Label Label13 
       Alignment       =   2  'Center
       Caption         =   "Test ColorEyeDropper control:"
       ForeColor       =   &H00008000&
       Height          =   252
       Left            =   6540
-      TabIndex        =   42
+      TabIndex        =   44
       Top             =   4560
       Width           =   5196
    End
@@ -392,7 +411,7 @@ Begin VB.Form frmTestProperties
       ForeColor       =   &H00008000&
       Height          =   252
       Left            =   6480
-      TabIndex        =   40
+      TabIndex        =   42
       Top             =   120
       Width           =   5196
    End
@@ -508,6 +527,10 @@ Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Lon
 
 Private Sub cboColorSystem_Click()
     ColorSelector1.ColorSystem = cboColorSystem.ListIndex
+End Sub
+
+Private Sub cboPointerType_Click()
+    ColorSelector1.PointerType = cboPointerType.ListIndex
 End Sub
 
 Private Sub cboSliderOptionsAvailable_Click()
@@ -641,6 +664,7 @@ Private Sub cmdShow_Click()
     ColorDlg1.HexControlVisible = (chkHexControlVisible.Value = 1)
     ColorDlg1.HexFormatVB = (chkHexFormatVB.Value = 1)
     ColorDlg1.HideLabels = (chkHideLabels.Value = 1)
+    ColorDlg1.PointerType = cboPointerType.ListIndex
     ColorDlg1.Modeless = (chkModeless.Value = 1)
     ColorDlg1.PaletteTypeControlVisible = (chkPaletteTypeControlVisible.Value = 1)
     If txtPositionLeft.Text <> "[Default]" Then
@@ -726,6 +750,7 @@ Private Sub SetConrolsFromProperties()
     cboSliderOptionsAvailable.ListIndex = ColorDlg1.SliderOptionsAvailable
     cboSliderWide.ListIndex = ColorDlg1.SliderWide
     cboStyle.ListIndex = ColorDlg1.Style
+    cboPointerType.ListIndex = ColorDlg1.PointerType
 End Sub
 
 Private Sub picEyeDropper_Paint()
