@@ -1,7 +1,7 @@
 Type=Exe
 Form=frmTestMain.frm
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Object={1E12B506-B2AA-40BC-A8FB-B6EF1CE3990F}#3.0#0; ClrCtrl2.ocx
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWow64\stdole2.tlb#OLE Automation
+Object={1E12B506-B2AA-40BC-A8FB-B6EF1CE3990F}#4.0#0; ClrCtrl2.ocx
 Form=frmTestProperties.frm
 Form=frmTestConfigurations.frm
 Form=frmDropDown.frm
